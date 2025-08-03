@@ -1,32 +1,32 @@
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+// src/App.jsx
+import { Routes, Route } from "react-router-dom"
+import Navbar from "./components/Navbar"
+import Footer from "./components/Footer"
 
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Services from "./pages/Services";
-import Contact from "./pages/Contact";
-import FAQ from "./pages/FAQ";
-import Insurance from "./pages/Insurance";
-import Blog from "./pages/Blog";
+import Home from "./pages/Home"
+import About from "./pages/About"
+import Services from "./pages/Services"
+import Contact from "./pages/Contact"
+import FAQ from "./pages/FAQ"
+import Insurance from "./pages/Insurance"
+import Blog from "./pages/Blog"
 
 export default function App() {
   return (
-    <>
+    <div className="flex flex-col min-h-screen bg-cream text-gray-800">
       <Navbar />
-      <main className="pt-16">
+      <main className="flex-grow pt-16">
         <Routes>
-          <Route path="/"        element={<Home />} />
-          <Route path="/about"   element={<About />} />
-          <Route path="/services"element={<Services />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/faq"     element={<FAQ />} />
-          <Route path="/insurance" element={<Insurance />} />
-          <Route path="/blog"    element={<Blog />} />
-          {/* you can add dynamic post route: /blog/:slug */}
+          <Route path="/"           element={<Home />} />
+          <Route path="/about"      element={<About />} />
+          <Route path="/services"   element={<Services />} />
+          <Route path="/contact"    element={<Contact />} />
+          <Route path="/faq"        element={<FAQ />} />
+          <Route path="/insurance"  element={<Insurance />} />
+          <Route path="/blog"       element={<Blog />} />
         </Routes>
       </main>
       <Footer />
-    </>
-  );
+    </div>
+  )
 }
