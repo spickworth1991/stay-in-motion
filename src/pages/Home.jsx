@@ -9,16 +9,14 @@ export default function Home() {
       <section
         className="
           relative
-          w-full
-          bg-gradient-to-r
-          dark:bg-gray-900 
-          dark:text-gray-200
+          w-full 
           min-h-[60vh]
           md:min-h-[70vh]
           flex
           flex-col
           items-center
           justify-center
+          bg-gradient-to-r
           from-primary
           to-accent
           overflow-hidden
