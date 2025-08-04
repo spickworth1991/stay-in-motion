@@ -25,7 +25,7 @@ export default function Home() {
       >
         <div className="relative z-10 text-center space-y-6 max-w-2xl w-full">
           <motion.h1
-            className="text-5xl md:text-6xl font-bold text-white dark:text-gray-200"
+            className="text-5xl md:text-6xl font-bold text-white"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -34,7 +34,7 @@ export default function Home() {
           </motion.h1>
 
           <motion.p
-            className="text-lg md:text-xl text-white/90 dark:text-gray-200" 
+            className="text-lg md:text-xl text-white/90" 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -85,7 +85,7 @@ export default function Home() {
       {/* Brief Intro + Explore Services */}
       <section className="py-16 bg-cream dark:bg-gray-900 px-4">
         <div className="max-w-3xl mx-auto text-center space-y-6">
-          <h2 className="text-3xl font-bold text-primary dark:text-gray-200">
+          <h2 className="text-3xl font-bold text-primary">
             Why Choose Us?
           </h2>
           <p className="text-gray-700 leading-relaxed">
@@ -105,7 +105,7 @@ export default function Home() {
                 inline-block
                 px-8 py-4
                 bg-gradient-to-r from-primary to-accent
-                text-white dark:bg-black font-semibold rounded-full
+                text-white font-semibold rounded-full
                 shadow-lg transform transition-transform duration-300
                 hover:from-accent hover:to-primary hover:-translate-y-1
               "
