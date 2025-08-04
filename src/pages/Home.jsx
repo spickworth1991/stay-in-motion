@@ -85,7 +85,8 @@ export default function Home() {
           >
             <Link
               to="/contact"
-              className="inline-block px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition"
+              className="inline-block px-6 py-3 bg-gradient-to-r from-primary to-accent 
+           text-white font-medium rounded-full shadow-lg hover:from-accent hover:to-primary transition">
             >
               Book a Consultation
             </Link>
