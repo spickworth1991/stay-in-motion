@@ -20,6 +20,7 @@ export default function Home() {
           from-primary
           to-accent
           overflow-hidden
+          dark:bg-gray-900
           px-4
         "
       >
