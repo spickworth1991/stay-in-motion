@@ -1,5 +1,5 @@
 // src/components/Navbar.jsx
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { FiMenu, FiX } from 'react-icons/fi'
 
@@ -15,32 +15,59 @@ const NAV = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const { pathname } = useLocation()
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <>
-      <nav className="fixed w-full z-50 bg-white/30 backdrop-blur-md shadow-md">
-        <div className="max-w-7xl mx-auto flex h-full items-center justify-between px-4 md:px-8">
+      <nav
+        className={`
+          fixed w-full z-50 bg-white/20 backdrop-blur-lg shadow-md
+          transition-all duration-300
+          ${scrolled ? 'h-12' : 'h-16'}
+        `}
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between h-full px-4 md:px-8">
           <Link to="/" className="flex items-center">
-            <img src="/logo_navbar.png" alt="" className="h-8 w-8" />
-            <span className="ml-2 text-xl font-bold text-primary">
+            <img
+              src="/logo_navbar.png"
+              alt="Logo"
+              className={`
+                object-contain transition-all duration-300
+                ${scrolled ? 'h-6 w-6' : 'h-8 w-8'}
+              `}
+            />
+            <span
+              className={`
+                ml-2 font-bold transition-colors duration-300
+                ${scrolled ? 'text-lg' : 'text-xl'}
+                text-primary
+              `}
+            >
               Stay in Motion
             </span>
           </Link>
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex space-x-8">
-            {NAV.map((item) => (
+            {NAV.map(item => (
               <li key={item.to}>
                 <Link
                   to={item.to}
-                  className={`transition hover:text-accent ${
-                    pathname === item.to
-                      ? 'text-accent font-semibold'
-                      : 'text-gray-700'
-                  }`}
+                  className={`
+                    relative transition-colors duration-200
+                    ${pathname === item.to ? 'text-accent font-semibold' : 'text-gray-700 hover:text-accent'}
+                  `}
                 >
-                  {item.name}
+                  <span className="after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-gradient-to-r after:from-accent after:to-primary after:w-0 hover:after:w-full after:transition-all after:duration-300">
+                    {item.name}
+                  </span>
                 </Link>
               </li>
             ))}
@@ -50,6 +77,7 @@ export default function Navbar() {
           <button
             className="md:hidden p-2 text-2xl text-primary"
             onClick={() => setOpen(true)}
+            aria-label="Open menu"
           >
             <FiMenu />
           </button>
@@ -66,17 +94,23 @@ export default function Navbar() {
 
       {/* Off-canvas Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-3/4 max-w-sm bg-white shadow-lg transform transition-transform duration-300 ${
-          open ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`
+          fixed inset-y-0 left-0 z-50 w-3/4 max-w-sm bg-white shadow-lg
+          transform transition-transform duration-300
+          ${open ? 'translate-x-0' : '-translate-x-full'}
+        `}
       >
         <div className="flex justify-end p-4">
-          <button onClick={() => setOpen(false)} className="text-2xl">
+          <button
+            onClick={() => setOpen(false)}
+            className="text-2xl"
+            aria-label="Close menu"
+          >
             <FiX />
           </button>
         </div>
         <nav className="flex flex-col space-y-4 px-6">
-          {NAV.map((item) => (
+          {NAV.map(item => (
             <Link
               key={item.to}
               to={item.to}
@@ -88,7 +122,6 @@ export default function Navbar() {
           ))}
         </nav>
       </aside>
-
     </>
   )
 }
