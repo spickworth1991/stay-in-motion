@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { FiMenu, FiX } from 'react-icons/fi'
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa'
 
 const NAV = [
   { name: 'Home',       to: '/' },
@@ -45,7 +46,7 @@ export default function Navbar() {
             />
             <span
               className={`
-                ml-2 font-bold transition-colors duration-300
+                ml-2 font-bold transition-all duration-300
                 ${scrolled ? 'text-lg' : 'text-xl'}
                 text-primary
               `}
@@ -87,7 +88,7 @@ export default function Navbar() {
       {/* Overlay */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/50 z-40"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
           onClick={() => setOpen(false)}
         />
       )}
@@ -95,32 +96,47 @@ export default function Navbar() {
       {/* Off-canvas Sidebar */}
       <aside
         className={`
-          fixed inset-y-0 left-0 z-50 w-3/4 max-w-sm bg-white shadow-lg
-          transform transition-transform duration-300
+          fixed inset-y-0 left-0 z-50 w-3/4 max-w-xs
+          bg-white/90 backdrop-blur-lg shadow-xl
+          transform transition-transform duration-300 ease-out
           ${open ? 'translate-x-0' : '-translate-x-full'}
         `}
       >
         <div className="flex justify-end p-4">
           <button
             onClick={() => setOpen(false)}
-            className="text-2xl"
+            className="text-2xl text-gray-600 hover:text-primary transition"
             aria-label="Close menu"
           >
             <FiX />
           </button>
         </div>
-        <nav className="flex flex-col space-y-4 px-6">
+        <nav className="flex flex-col items-start justify-center h-full px-6 space-y-6">
           {NAV.map(item => (
             <Link
               key={item.to}
               to={item.to}
-              className="text-lg font-medium text-gray-700 hover:text-primary"
+              className={`
+                text-xl font-medium transition-colors duration-200
+                ${pathname === item.to ? 'text-accent' : 'text-gray-700 hover:text-primary'}
+              `}
               onClick={() => setOpen(false)}
             >
               {item.name}
             </Link>
           ))}
         </nav>
+        <div className="absolute bottom-8 left-6 flex space-x-4">
+          <a href="#" className="text-gray-600 hover:text-accent transition">
+            <FaFacebookF />
+          </a>
+          <a href="#" className="text-gray-600 hover:text-accent transition">
+            <FaInstagram />
+          </a>
+          <a href="#" className="text-gray-600 hover:text-accent transition">
+            <FaLinkedinIn />
+          </a>
+        </div>
       </aside>
     </>
   )
