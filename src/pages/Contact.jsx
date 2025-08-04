@@ -37,7 +37,7 @@ export default function Contact() {
   return (
     <section className="py-16 px-4 md:px-8 max-w-4xl mx-auto">
       <motion.h1
-        className="text-4xl font-bold text-primary text-center mb-8"
+        className="text-4xl font-bold text-primary dark:text-gray-200 text-center mb-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
@@ -71,11 +71,11 @@ export default function Contact() {
         ].map((info, i) => (
           <motion.div
             key={info.label}
-            className="flex items-start bg-white p-6 rounded-xl shadow-lg"
+            className="flex items-start bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg"
             custom={i}
             variants={fieldVariants}
           >
-            <info.icon className="text-accent text-2xl mr-4 mt-1" />
+            <info.icon className="text-accent dark:text-gray-200 text-2xl mr-4 mt-1" />
             <div>
               <h4 className="font-semibold text-lg">{info.label}</h4>
               <p className="text-gray-700">{info.value}</p>
@@ -87,7 +87,7 @@ export default function Contact() {
       {/* Contact Form */}
       <motion.form
         onSubmit={handleSubmit}
-        className="bg-cream p-8 rounded-2xl shadow-xl"
+        className="bg-cream dark:bg-gray-900 p-8 rounded-2xl shadow-xl"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -111,7 +111,7 @@ export default function Contact() {
               value={form[field.name]}
               onChange={handleChange}
               required
-              className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3
+              className="w-full bg-white dark:bg-gray-900 border border-gray-300 rounded-lg px-4 py-3
                          focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent
                          transition"
             />
@@ -131,7 +131,7 @@ export default function Contact() {
             value={form.message}
             onChange={handleChange}
             required
-            className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3
+            className="w-full bg-white dark:bg-gray-900 border border-gray-300 rounded-lg px-4 py-3
                        focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent
                        transition resize-none"
           />
@@ -140,7 +140,7 @@ export default function Contact() {
         <motion.div custom={4} variants={fieldVariants}>
           <button
             type="submit"
-            className="w-full py-3 bg-accent text-white font-semibold rounded-lg
+            className="w-full py-3 bg-accent dark:bg-gray-900 text-white dark:text-gray-200 font-semibold rounded-lg
                        hover:bg-accent/90 transition shadow-lg"
           >
             Send Message
