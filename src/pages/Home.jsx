@@ -10,7 +10,7 @@ export default function Home() {
         className="
           relative
           w-full
-          dark:bg-gray-900
+          dark:bg-gray-900 
           dark:text-gray-200
           min-h-[60vh]
           md:min-h-[70vh]
