@@ -105,7 +105,7 @@ export default function Home() {
                 inline-block
                 px-8 py-4
                 bg-gradient-to-r from-primary to-accent
-                text-white dark:bg-gray-900 font-semibold rounded-full
+                text-white dark:bg-gray-100 font-semibold rounded-full
                 shadow-lg transform transition-transform duration-300
                 hover:from-accent hover:to-primary hover:-translate-y-1
               "
