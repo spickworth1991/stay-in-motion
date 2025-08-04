@@ -88,7 +88,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-primary">
             Why Choose Us?
           </h2>
-          <p className="text-gray-700 leading-relaxed">
+          <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
             Our clinic blends cutting-edge techniques with compassionate care,
             tailoring every plan to your unique goals. From manual therapy to
             advanced modality treatments, we’re here to help you reclaim your
