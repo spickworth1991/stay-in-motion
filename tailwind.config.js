@@ -7,13 +7,10 @@ export default {
   ],
   theme: {
     extend: {
-      fontSize: {
-      'fluid-xl': 'clamp(2rem, 5vw, 4rem)',
       colors: {
         cream:   '#f9f5f2ff',
         primary: '#3cadbaff',
         accent:  '#f3d0a0ff',
-       },
       },
     },
   },
