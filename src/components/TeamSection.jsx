@@ -9,15 +9,14 @@ const therapists = [
     photo: "/photos/amanda.jpg",
     specialties: ["Orthopedics", "Manual Therapy", "Dry Needling"],
     linkedin: "https://www.linkedin.com/in/amanda-pickworth-chrusciel",
-    credentials:
-      "Doctor of Physical Therapy (DPT) from University of Findlay. Certified in Orthopedic Manual Therapy."
+    credentials: "Doctor of Physical Therapy (DPT) from University of Findlay. Certified in Orthopedic Manual Therapy."
   },
-  // add more…
+  // …more therapists
 ]
 
 export default function TeamSection() {
   return (
-    <section className="py-16 px-4 md:px-8 bg-cream/50">
+    <section className="py-16 px-4 md:px-8 bg-cream/20">
       <h2 className="text-3xl font-bold text-primary text-center mb-12">
         Meet Our Team
       </h2>
@@ -29,7 +28,6 @@ export default function TeamSection() {
     </section>
   )
 }
-
 function TeamCard({ therapist, delay }) {
   const [expanded, setExpanded] = useState(false)
 
