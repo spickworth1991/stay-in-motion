@@ -69,11 +69,11 @@ export default function Home() {
               to="/contact"
               className="
                 inline-block
-                mt-6
                 px-8 py-4
-                bg-white text-primary font-semibold rounded-full
+                bg-gradient-to-r from-primary to-accent
+                text-white font-semibold rounded-full
                 shadow-lg transform transition-transform duration-300
-                hover:shadow-xl hover:-translate-y-0.5
+                hover:from-accent hover:to-primary hover:-translate-y-1
               "
             >
               Book a Consultation
