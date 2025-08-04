@@ -30,8 +30,7 @@ export default function Navbar() {
       <nav
         className={`
           fixed w-full z-50 bg-white/20 backdrop-blur-lg shadow-md
-          transition-all duration-300
-          ${scrolled ? 'h-12' : 'h-16'}
+          transition-all duration-300 ${scrolled ? 'h-12' : 'h-16'}
         `}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between h-full px-4 md:px-8">
@@ -39,17 +38,10 @@ export default function Navbar() {
             <img
               src="/logo_navbar.png"
               alt="Logo"
-              className={`
-                object-contain transition-all duration-300
-                ${scrolled ? 'h-6 w-6' : 'h-8 w-8'}
-              `}
+              className={`${scrolled ? 'h-6 w-6' : 'h-8 w-8'} transition-all duration-300`}
             />
             <span
-              className={`
-                ml-2 font-bold transition-all duration-300
-                ${scrolled ? 'text-lg' : 'text-xl'}
-                text-primary
-              `}
+              className={`ml-2 font-bold transition-all duration-300 ${scrolled ? 'text-lg' : 'text-xl'} text-primary`}
             >
               Stay in Motion
             </span>
@@ -61,17 +53,13 @@ export default function Navbar() {
               <li key={item.to}>
                 <Link
                   to={item.to}
-                  className={`
-                    relative transition-colors duration-200
-                    ${pathname === item.to
+                  className={`relative transition-colors duration-200 ${
+                    pathname === item.to
                       ? 'text-accent font-semibold'
-                      : 'text-gray-700 hover:text-accent'}
-                  `}
+                      : 'text-gray-700 hover:text-accent'
+                  }`}
                 >
-                  <span className="after:content-[''] after:absolute after:bottom-0 after:left-0
-                                   after:h-0.5 after:bg-gradient-to-r after:from-accent after:to-primary
-                                   after:w-0 hover:after:w-full
-                                   after:transition-all after:duration-300">
+                  <span className="after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-gradient-to-r after:from-accent after:to-primary after:w-0 hover:after:w-full after:transition-all after:duration-300">
                     {item.name}
                   </span>
                 </Link>
@@ -101,50 +89,46 @@ export default function Navbar() {
       {/* Off-canvas Sidebar */}
       <aside
         className={`
-          fixed inset-y-0 left-0 z-50 w-3/4 max-w-xs
+          fixed inset-y-0 left-0 h-full z-50 w-3/4 max-w-xs
           bg-white/90 backdrop-blur-lg shadow-xl
           transform transition-transform duration-300 ease-out
           ${open ? 'translate-x-0' : '-translate-x-full'}
+          flex flex-col justify-between
         `}
       >
-        <div className="flex justify-end p-4">
-          <button
-            onClick={() => setOpen(false)}
-            className="text-2xl text-gray-600 hover:text-primary transition"
-            aria-label="Close menu"
-          >
-            <FiX />
-          </button>
-        </div>
-        <nav className="flex flex-col items-start justify-center h-full px-6 space-y-6">
-          {NAV.map(item => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className={`
-                text-xl font-medium transition-colors duration-200
-                ${pathname === item.to
-                  ? 'text-accent'
-                  : 'text-gray-700 hover:text-primary'}
-              `}
+        <div>
+          <div className="flex justify-end p-4">
+            <button
               onClick={() => setOpen(false)}
+              className="text-2xl text-gray-600 hover:text-primary transition"
+              aria-label="Close menu"
             >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
+              <FiX />
+            </button>
+          </div>
+          <nav className="px-6 space-y-6">
+            {NAV.map(item => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`block text-xl font-medium transition-colors duration-200 ${
+                  pathname === item.to
+                    ? 'text-accent'
+                    : 'text-gray-700 hover:text-primary'
+                }`}
+                onClick={() => setOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
 
-        {/* Social Icons */}
-        <div className="absolute bottom-8 left-6 flex space-x-4">
-          <a href="#" className="text-accent hover:text-primary transition text-2xl">
-            <FaFacebookF />
-          </a>
-          <a href="#" className="text-accent hover:text-primary transition text-2xl">
-            <FaInstagram />
-          </a>
-          <a href="#" className="text-accent hover:text-primary transition text-2xl">
-            <FaLinkedinIn />
-          </a>
+        {/* Social Icons at bottom */}
+        <div className="px-6 pb-8 flex space-x-4">
+          <FaFacebookF size={20} className="text-accent hover:text-primary transition" />
+          <FaInstagram size={20} className="text-accent hover:text-primary transition" />
+          <FaLinkedinIn size={20} className="text-accent hover:text-primary transition" />
         </div>
       </aside>
     </>
