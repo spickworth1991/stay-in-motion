@@ -83,7 +83,7 @@ export default function Home() {
       </section>
 
       {/* Brief Intro + Explore Services */}
-      <section className="py-16 bg-cream px-4">
+      <section className="py-16 bg-cream dark:bg-gray-900 px-4">
         <div className="max-w-3xl mx-auto text-center space-y-6">
           <h2 className="text-3xl font-bold text-primary">
             Why Choose Us?
