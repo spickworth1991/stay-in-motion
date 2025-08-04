@@ -63,7 +63,7 @@ export default function Navbar() {
       <nav
         className={`
           fixed top-0 left-0 right-0 z-50
-          bg-white/20 dark:bg-gray-500/30 backdrop-blur-lg
+          bg-white/20 dark:bg-gray-900/30 backdrop-blur-lg
           shadow-md transition-all duration-300
           ${scrolled ? 'h-12' : 'h-16'}
         `}
