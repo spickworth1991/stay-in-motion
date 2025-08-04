@@ -29,19 +29,18 @@ const NAV = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
+  // ✅ Always start light mode unless user saved "dark" before
   const [dark, setDark] = useState(() => {
-    // Initialize from localStorage or system preference
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') === 'dark' ||
-        (!localStorage.getItem('theme') &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches)
+      return localStorage.getItem('theme') === 'dark'
     }
     return false
   })
 
   const { pathname } = useLocation()
 
-  // Apply dark class to <html>
+  // ✅ Apply dark class based on user toggle only
   useEffect(() => {
     if (dark) {
       document.documentElement.classList.add('dark')
@@ -63,7 +62,7 @@ export default function Navbar() {
       <nav
         className={`
           fixed top-0 left-0 right-0 z-50
-          bg-white/20 dark:bg-gray-900 backdrop-blur-lg
+          bg-white/20 dark:bg-gray-900/30 backdrop-blur-lg
           shadow-md transition-all duration-300
           ${scrolled ? 'h-12' : 'h-16'}
         `}

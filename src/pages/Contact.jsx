@@ -71,7 +71,7 @@ export default function Contact() {
         ].map((info, i) => (
           <motion.div
             key={info.label}
-            className="flex items-start bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg"
+            className="flex items-start bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg"
             custom={i}
             variants={fieldVariants}
           >
@@ -87,7 +87,7 @@ export default function Contact() {
       {/* Contact Form */}
       <motion.form
         onSubmit={handleSubmit}
-        className="bg-cream dark:bg-gray-900 p-8 rounded-2xl shadow-xl"
+        className="bg-cream dark:bg-gray-800 p-8 rounded-2xl shadow-xl"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -140,7 +140,7 @@ export default function Contact() {
         <motion.div custom={4} variants={fieldVariants}>
           <button
             type="submit"
-            className="w-full py-3 bg-accent dark:bg-gray-900 text-white dark:text-gray-200 font-semibold rounded-lg
+            className="w-full py-3 bg-accent dark:bg-gray-500 text-white dark:text-gray-200 font-semibold rounded-lg
                        hover:bg-accent/90 transition shadow-lg"
           >
             Send Message

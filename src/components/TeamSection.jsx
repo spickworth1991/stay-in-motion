@@ -37,7 +37,7 @@ function TeamCard({ therapist, delay }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
-      className="relative bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer"
+      className="relative bg-white dark:bg-gray-800  rounded-xl shadow-lg overflow-hidden cursor-pointer"
       onClick={() => setExpanded(!expanded)}
     >
       <img
@@ -46,8 +46,8 @@ function TeamCard({ therapist, delay }) {
         className="w-full h-64 object-cover"
       />
       <div className="p-6">
-        <h3 className="text-xl font-semibold">{therapist.name}</h3>
-        <p className="text-gray-600 mb-2">
+        <h3 className="text-xl dark:text-gray-500 font-semibold">{therapist.name}</h3>
+        <p className="text-gray-600 dark:text-gray-200 mb-2">
           {therapist.specialties.join(", ")}
         </p>
       </div>

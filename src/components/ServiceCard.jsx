@@ -6,7 +6,7 @@ export default function ServiceCard({ icon: Icon, title, description }) {
   const [show, setShow] = useState(false)
   return (
     <div
-      className="bg-white p-6 rounded-xl shadow-lg transition-transform hover:scale-105 hover:shadow-2xl relative"
+      className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transition-transform hover:scale-105 hover:shadow-2xl relative"
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
       style={{ zIndex: show ? 20 : "auto" }}
