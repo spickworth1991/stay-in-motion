@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 export default function Home() {
   return (
     <>
-      {/* Hero (video inside gradient background) */}
+      {/* Hero */}
       <section
         className="
           relative
@@ -16,27 +16,14 @@ export default function Home() {
           flex-col
           items-center
           justify-center
-          overflow-hidden
           bg-gradient-to-r
           from-primary
           to-accent
+          overflow-hidden
+          px-4
         "
       >
-        {/* background video */}
-        <div className="absolute inset-0 z-0">
-          <iframe
-            src="https://www.youtube.com/embed/u31qwQUeGuM?autoplay=1&mute=1&loop=1&playlist=u31qwQUeGuM&controls=0&modestbranding=1"
-            title="Clinic Tour"
-            frameBorder="0"
-            allow="autoplay; encrypted-media; picture-in-picture"
-            allowFullScreen
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-primary/60" /> {/* dark overlay */}
-        </div>
-
-        {/* foreground content */}
-        <div className="relative z-10 text-center px-4 space-y-6">
+        <div className="relative z-10 text-center space-y-6 max-w-2xl w-full">
           <motion.h1
             className="text-5xl md:text-6xl font-bold text-white"
             initial={{ opacity: 0, y: 20 }}
@@ -47,7 +34,7 @@ export default function Home() {
           </motion.h1>
 
           <motion.p
-            className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-white/90"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -55,20 +42,38 @@ export default function Home() {
             Personalized physical therapy to keep you moving pain-free.
           </motion.p>
 
+          {/* Small Clinic Tour Video */}
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            className="mx-auto w-full max-w-md rounded-2xl overflow-hidden shadow-2xl"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <iframe
+              src="https://www.youtube.com/embed/u31qwQUeGuM?autoplay=1&mute=1&loop=1&playlist=u31qwQUeGuM&controls=0&modestbranding=1"
+              title="Clinic Tour"
+              frameBorder="0"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+              className="w-full aspect-video bg-transparent"
+            />
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
           >
             <Link
               to="/contact"
               className="
                 inline-block
+                mt-6
                 px-8 py-4
-                bg-gradient-to-r from-primary to-accent
-                text-white font-semibold rounded-full
+                bg-white text-primary font-semibold rounded-full
                 shadow-lg transform transition-transform duration-300
-                hover:from-accent hover:to-primary hover:-translate-y-1
+                hover:shadow-xl hover:-translate-y-0.5
               "
             >
               Book a Consultation
@@ -78,8 +83,8 @@ export default function Home() {
       </section>
 
       {/* Brief Intro + Explore Services */}
-      <section className="py-16 bg-cream">
-        <div className="max-w-3xl mx-auto text-center px-4 space-y-6">
+      <section className="py-16 bg-cream px-4">
+        <div className="max-w-3xl mx-auto text-center space-y-6">
           <h2 className="text-3xl font-bold text-primary">
             Why Choose Us?
           </h2>
