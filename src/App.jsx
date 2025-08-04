@@ -13,7 +13,7 @@ import Resources from './pages/Resources'
 
 export default function App() {
   return (
-    <div className="flex flex-col min-h-screen bg-cream text-gray-800">
+    <div className="flex flex-col min-h-screen bg-cream dark:bg-gray-900 dark:text-gray-200 text-gray-800">
       <Navbar />
       <main className="flex-grow pt-16 ">
         <Routes>
