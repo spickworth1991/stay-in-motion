@@ -10,7 +10,7 @@ export default function Home() {
         className="
           relative
           w-full
-          min-h-[60vh] 
+          min-h-[60vh]
           md:min-h-[70vh]
           flex
           flex-col
