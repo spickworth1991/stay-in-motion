@@ -37,7 +37,7 @@ export default function Contact() {
   return (
     <section className="py-16 px-4 md:px-8 max-w-4xl mx-auto">
       <motion.h1
-        className="text-4xl font-bold text-primary dark:text-gray-200 text-center mb-8"
+        className="text-4xl font-bold text-primary text-center mb-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
@@ -75,10 +75,10 @@ export default function Contact() {
             custom={i}
             variants={fieldVariants}
           >
-            <info.icon className="text-accent dark:text-gray-200 text-2xl mr-4 mt-1" />
+            <info.icon className="text-accent dark:text-primary text-2xl mr-4 mt-1" />
             <div>
-              <h4 className="font-semibold text-lg">{info.label}</h4>
-              <p className="text-gray-700">{info.value}</p>
+              <h4 className="font-semibold dark:text-gray-500 text-lg">{info.label}</h4>
+              <p className="text-gray-700 dark:text-gray-200">{info.value}</p>
             </div>
           </motion.div>
         ))}

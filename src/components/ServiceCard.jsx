@@ -14,12 +14,12 @@ export default function ServiceCard({ icon: Icon, title, description }) {
       <IconContext.Provider value={{ className: "text-accent text-4xl mb-4" }}>
         <Icon />
       </IconContext.Provider>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <h3 className="text-xl dark:text-gray-500 font-semibold mb-2">{title}</h3>
       {!show && (
-        <p className="text-gray-600">{description.split(".")[0]}.</p>
+        <p className="text-gray-600 dark:text-gray-200">{description.split(".")[0]}.</p>
       )}
       {show && (
-        <div className="mt-4 text-gray-700">
+        <div className="mt-4 text-gray-700 dark:text-gray-200">
           {description}
         </div>
       )}

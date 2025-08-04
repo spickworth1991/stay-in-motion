@@ -1,8 +1,8 @@
 export default function InsuranceGuideCard({ title, description, pdfUrl }) {
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-2xl transition">
-      <h3 className="text-xl dark:text-white font-semibold mb-2">{title}</h3>
-      <p className="text-gray-700 dark:text-gray-400 mb-4">{description}</p>
+      <h3 className="text-xl dark:text-gray-500 font-semibold mb-2">{title}</h3>
+      <p className="text-gray-700 dark:text-gray-200 mb-4">{description}</p>
       <a
         href={pdfUrl}
         target="_blank"
