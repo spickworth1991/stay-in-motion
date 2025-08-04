@@ -7,20 +7,13 @@ export default function Home() {
     <>
       {/* Hero */}
       <section
-        className="
-          relative
-          w-full
-          min-h-[60vh]
-          md:min-h-[70vh]
-          flex
-          flex-col
-          items-center
-          justify-center
-          bg-gradient-to-r
-          from-primary
-          to-accent
-          overflow-hidden
-          px-4
+         className="
+          relative w-full
+          min-h-[50vh] md:min-h-[70vh]
+          flex flex-col items-center justify-center
+          bg-gradient-to-r from-primary to-accent
+          dark:from-gray-800 dark:to-gray-900
+          text-center px-4
         "
       >
         <div className="relative z-10 text-center space-y-6 max-w-2xl w-full">
@@ -44,7 +37,7 @@ export default function Home() {
 
           {/* Small Clinic Tour Video */}
           <motion.div
-            className="mx-auto w-full max-w-md rounded-2xl overflow-hidden shadow-2xl"
+            className="relative w-full max-w-lg pb-[56.25%] shadow-lg rounded-lg overflow-hidden border-4 border-white/50 dark:border-gray-700"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
