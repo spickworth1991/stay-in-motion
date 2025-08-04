@@ -25,7 +25,7 @@ export default function Home() {
       >
         <div className="relative z-10 text-center space-y-6 max-w-2xl w-full">
           <motion.h1
-            className="text-5xl md:text-6xl font-bold text-white dark:text-gray-400"
+            className="text-5xl md:text-6xl font-bold text-white dark:text-gray-300"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
