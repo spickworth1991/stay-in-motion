@@ -5,13 +5,13 @@ import { FiMenu, FiX } from 'react-icons/fi'
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa'
 
 const NAV = [
-  { name: 'Home',       to: '/' },
-  { name: 'About',      to: '/about' },
-  { name: 'Services',   to: '/services' },
-  { name: 'FAQ',        to: '/faq' },
-  { name: 'Insurance',  to: '/insurance' },
-  { name: 'Resources',  to: '/resources' },
-  { name: 'Contact',    to: '/contact' },
+  { name: 'Home',      to: '/' },
+  { name: 'About',     to: '/about' },
+  { name: 'Services',  to: '/services' },
+  { name: 'FAQ',       to: '/faq' },
+  { name: 'Insurance', to: '/insurance' },
+  { name: 'Resources', to: '/resources' },
+  { name: 'Contact',   to: '/contact' },
 ]
 
 export default function Navbar() {
@@ -68,7 +68,10 @@ export default function Navbar() {
                       : 'text-gray-700 hover:text-accent'}
                   `}
                 >
-                  <span className="after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-gradient-to-r after:from-accent after:to-primary after:w-0 hover:after:w-full after:transition-all after:duration-300">
+                  <span className="after:content-[''] after:absolute after:bottom-0 after:left-0
+                                   after:h-0.5 after:bg-gradient-to-r after:from-accent after:to-primary
+                                   after:w-0 hover:after:w-full
+                                   after:transition-all after:duration-300">
                     {item.name}
                   </span>
                 </Link>
@@ -133,16 +136,15 @@ export default function Navbar() {
 
         {/* Social Icons */}
         <div className="absolute bottom-8 left-6 flex space-x-4">
-          <a href="#" className="text-gray-600 hover:text-accent transition">
-            <FaFacebookF className="w-5 h-5" />
+          <a href="#" className="text-accent hover:text-primary transition text-2xl">
+            <FaFacebookF />
           </a>
-          <a href="#" className="text-gray-600 hover:text-accent transition">
-            <FaInstagram className="w-5 h-5" />
+          <a href="#" className="text-accent hover:text-primary transition text-2xl">
+            <FaInstagram />
           </a>
-          <a href="#" className="text-gray-600 hover:text-accent transition">
-            <FaLinkedinIn className="w-5 h-5" />
+          <a href="#" className="text-accent hover:text-primary transition text-2xl">
+            <FaLinkedinIn />
           </a>
-          
         </div>
       </aside>
     </>
