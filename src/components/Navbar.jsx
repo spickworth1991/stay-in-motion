@@ -63,7 +63,9 @@ export default function Navbar() {
                   to={item.to}
                   className={`
                     relative transition-colors duration-200
-                    ${pathname === item.to ? 'text-accent font-semibold' : 'text-gray-700 hover:text-accent'}
+                    ${pathname === item.to
+                      ? 'text-accent font-semibold'
+                      : 'text-gray-700 hover:text-accent'}
                   `}
                 >
                   <span className="after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-gradient-to-r after:from-accent after:to-primary after:w-0 hover:after:w-full after:transition-all after:duration-300">
@@ -118,7 +120,9 @@ export default function Navbar() {
               to={item.to}
               className={`
                 text-xl font-medium transition-colors duration-200
-                ${pathname === item.to ? 'text-accent' : 'text-gray-700 hover:text-primary'}
+                ${pathname === item.to
+                  ? 'text-accent'
+                  : 'text-gray-700 hover:text-primary'}
               `}
               onClick={() => setOpen(false)}
             >
@@ -126,15 +130,17 @@ export default function Navbar() {
             </Link>
           ))}
         </nav>
+
+        {/* Social Icons */}
         <div className="absolute bottom-8 left-6 flex space-x-4">
           <a href="#" className="text-gray-600 hover:text-accent transition">
-            <FaFacebookF />
+            <FaFacebookF className="w-5 h-5" />
           </a>
           <a href="#" className="text-gray-600 hover:text-accent transition">
-            <FaInstagram />
+            <FaInstagram className="w-5 h-5" />
           </a>
           <a href="#" className="text-gray-600 hover:text-accent transition">
-            <FaLinkedinIn />
+            <FaLinkedinIn className="w-5 h-5" />
           </a>
         </div>
       </aside>
