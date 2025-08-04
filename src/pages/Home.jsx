@@ -23,7 +23,7 @@ export default function Home() {
           px-4
         "
       >
-        <div className="relative z-10 text-center space-y-6 max-w-2xl w-full">
+        <div className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 relative z-10 text-center space-y-6 max-w-2xl w-full">
           <motion.h1
             className="text-5xl md:text-6xl font-bold text-white"
             initial={{ opacity: 0, y: 20 }}
