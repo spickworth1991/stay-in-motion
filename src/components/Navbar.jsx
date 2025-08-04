@@ -19,7 +19,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav class="fixed w-full z-50 bg-white/30 backdrop-blur-md shadow-md">
+      <nav className="fixed w-full z-50 bg-white/30 backdrop-blur-md shadow-md">
         <div className="max-w-7xl mx-auto flex h-full items-center justify-between px-4 md:px-8">
           <Link to="/" className="flex items-center">
             <img src="/logo_navbar.png" alt="" className="h-8 w-8" />
