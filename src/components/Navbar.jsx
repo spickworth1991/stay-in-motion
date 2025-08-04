@@ -133,15 +133,9 @@ export default function Navbar() {
 
         {/* Social Icons */}
         <div className="absolute bottom-8 left-6 flex space-x-4">
-          <a href="#" className="text-gray-600 hover:text-accent transition">
-            <FaFacebookF className="w-5 h-5" />
-          </a>
-          <a href="#" className="text-gray-600 hover:text-accent transition">
-            <FaInstagram className="w-5 h-5" />
-          </a>
-          <a href="#" className="text-gray-600 hover:text-accent transition">
-            <FaLinkedinIn className="w-5 h-5" />
-          </a>
+          <a href="#"><FaFacebookF className="hover:text-accent" /></a>
+              <a href="#"><FaInstagram className="hover:text-accent" /></a>
+              <a href="#"><FaLinkedinIn className="hover:text-accent" /></a>
         </div>
       </aside>
     </>
