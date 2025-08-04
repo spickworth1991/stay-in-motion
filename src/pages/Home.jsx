@@ -1,5 +1,5 @@
 // src/pages/Home.jsx
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom' 
 import { motion } from 'framer-motion'
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
       <section
         className="
           relative
-          w-full 
+          w-full
           min-h-[60vh]
           md:min-h-[70vh]
           flex
@@ -34,7 +34,7 @@ export default function Home() {
           </motion.h1>
 
           <motion.p
-            className="text-lg md:text-xl text-white/90" 
+            className="text-lg md:text-xl text-white/90"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -83,7 +83,7 @@ export default function Home() {
       </section>
 
       {/* Brief Intro + Explore Services */}
-      <section className="py-16 bg-cream dark:bg-gray-900 px-4">
+      <section className="py-16 bg-cream px-4">
         <div className="max-w-3xl mx-auto text-center space-y-6">
           <h2 className="text-3xl font-bold text-primary">
             Why Choose Us?
