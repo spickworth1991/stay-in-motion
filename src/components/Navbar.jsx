@@ -29,24 +29,41 @@ const NAV = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [dark, setDark] = useState(false)
+  const [dark, setDark] = useState(() => {
+    // Initialize from localStorage or system preference
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark' ||
+        (!localStorage.getItem('theme') &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)
+    }
+    return false
+  })
+
   const { pathname } = useLocation()
 
+  // Apply dark class to <html>
   useEffect(() => {
-    window.addEventListener('scroll', () => setScrolled(window.scrollY > 50))
-    return () => window.removeEventListener('scroll', () => {})
-  }, [])
+    if (dark) {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('theme', 'light')
+    }
+  }, [dark])
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', dark)
-  }, [dark])
+    const onScroll = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <>
       <nav
         className={`
           fixed top-0 left-0 right-0 z-50
-          bg-white/20 dark:bg-gray-900/20 backdrop-blur-lg
+          bg-white/20 dark:bg-gray-900/30 backdrop-blur-lg
           shadow-md transition-all duration-300
           ${scrolled ? 'h-12' : 'h-16'}
         `}
@@ -69,7 +86,7 @@ export default function Navbar() {
             </span>
           </Link>
 
-          <ul className="hidden md:flex space-x-6">
+          <ul className="hidden md:flex space-x-6 items-center">
             {NAV.map(item => (
               <li key={item.to}>
                 <Link
@@ -87,10 +104,10 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
-            {/* Dark mode toggle */}
+            {/* Dark Mode Toggle */}
             <li>
               <button
-                onClick={() => setDark(d => !d)}
+                onClick={() => setDark(prev => !prev)}
                 className="p-2 text-xl text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-primary transition"
                 aria-label="Toggle dark mode"
               >
@@ -118,7 +135,7 @@ export default function Navbar() {
         />
       )}
 
-      {/* Off-canvas Sidebar */}
+      {/* Sidebar */}
       <aside
         className={`
           fixed inset-y-0 left-0 z-50 w-3/4 max-w-xs
@@ -156,10 +173,10 @@ export default function Navbar() {
                 <span>{item.name}</span>
               </Link>
             ))}
-            {/* Dark mode toggle */}
+            {/* Dark Mode Toggle in Sidebar */}
             <button
-              onClick={() => setDark(d => !d)}
-              className="flex items-center space-x-2 text-xl p-2 mt-4 text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-primary transition"
+              onClick={() => setDark(prev => !prev)}
+              className="flex items-center space-x-2 text-xl p-2 mt-6 text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-primary transition"
             >
               {dark ? <FiSun className="w-6 h-6"/> : <FiMoon className="w-6 h-6"/>}
               <span>{dark ? 'Light Mode' : 'Dark Mode'}</span>
@@ -167,7 +184,7 @@ export default function Navbar() {
           </nav>
         </div>
 
-        {/* Social Icons at bottom */}
+        {/* Social Icons */}
         <div className="px-6 pb-8 flex space-x-4">
           <a href="#" className="text-accent hover:text-primary transition text-2xl">
             <FaFacebookF />
