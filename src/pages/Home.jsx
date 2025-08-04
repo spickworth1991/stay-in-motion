@@ -34,7 +34,7 @@ export default function Home() {
           </motion.h1>
 
           <motion.p
-            className="text-lg md:text-xl text-white/90"
+            className="text-lg md:text-xl text-white/90 dark:text-gray-200"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
