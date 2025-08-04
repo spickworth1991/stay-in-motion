@@ -7,13 +7,20 @@ export default function Home() {
     <>
       {/* Hero */}
       <section
-         className="
-          relative w-full
-          min-h-[50vh] md:min-h-[70vh]
-          flex flex-col items-center justify-center
-          bg-gradient-to-r from-primary to-accent
-          dark:from-gray-800 dark:to-gray-900
-          text-center px-4
+        className="
+          relative
+          w-full
+          min-h-[60vh] 
+          md:min-h-[70vh]
+          flex
+          flex-col
+          items-center
+          justify-center
+          bg-gradient-to-r
+          from-primary
+          to-accent
+          overflow-hidden
+          px-4
         "
       >
         <div className="relative z-10 text-center space-y-6 max-w-2xl w-full">
@@ -27,7 +34,7 @@ export default function Home() {
           </motion.h1>
 
           <motion.p
-            className="text-lg md:text-xl text-white/90"
+            className="text-lg md:text-xl text-white/90" 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -37,7 +44,7 @@ export default function Home() {
 
           {/* Small Clinic Tour Video */}
           <motion.div
-            className="relative w-full max-w-lg pb-[56.25%] shadow-lg rounded-lg overflow-hidden border-4 border-white/50 dark:border-gray-700"
+            className="mx-auto w-full max-w-md rounded-2xl overflow-hidden shadow-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -61,10 +68,13 @@ export default function Home() {
             <Link
               to="/contact"
               className="
-              inline-block px-8 py-4 bg-white text-primary font-semibold rounded-lg
-              hover:bg-gray-100 transition
-              dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700
-            "
+                inline-block
+                px-8 py-4
+                bg-gradient-to-r from-primary to-accent
+                text-white font-semibold rounded-full
+                shadow-lg transform transition-transform duration-300
+                hover:from-accent hover:to-primary hover:-translate-y-1
+              "
             >
               Book a Consultation
             </Link>
