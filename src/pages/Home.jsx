@@ -19,6 +19,7 @@ export default function Home() {
           bg-gradient-to-r
           from-primary
           to-accent
+          dark:bg-gray-900
           overflow-hidden
           px-4
         "
