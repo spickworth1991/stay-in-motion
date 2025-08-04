@@ -10,6 +10,7 @@ export default function Home() {
         className="
           relative
           w-full
+          bg-gradient-to-r
           dark:bg-gray-900 
           dark:text-gray-200
           min-h-[60vh]
@@ -18,7 +19,6 @@ export default function Home() {
           flex-col
           items-center
           justify-center
-          bg-gradient-to-r
           from-primary
           to-accent
           overflow-hidden
