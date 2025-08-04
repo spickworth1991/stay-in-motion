@@ -82,11 +82,11 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-          >
+          />
             <Link
               to="/contact"
               className="inline-block px-6 py-3 bg-gradient-to-r from-primary to-accent-white font-medium rounded-full shadow-lg hover:from-accent hover:to-primary transition">
-            >
+            />
               Book a Consultation
             </Link>
           </motion.div>
