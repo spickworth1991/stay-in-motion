@@ -4,35 +4,15 @@ import ServiceCard from "./ServiceCard"
 import { FaHands, FaHeartbeat, FaDumbbell, FaRegLightbulb } from "react-icons/fa"
 
 const services = [
-  {
-    icon: FaHands,
-    title: "Manual Therapy",
-    description:
-      "Our therapists use proven manual techniques—joint mobilization, soft-tissue release, myofascial stretches—to relieve pain and improve function."
-  },
-  {
-    icon: FaHeartbeat,
-    title: "Dry Needling",
-    description:
-      "Fine-gauge needles penetrate tense muscle bands to reduce pain, improve blood flow, and restore muscle function rapidly."
-  },
-  {
-    icon: FaDumbbell,
-    title: "Strength Training",
-    description:
-      "Customized resistance and functional exercise plans designed to rebuild muscle, protect joints, and enhance performance."
-  },
-  {
-    icon: FaRegLightbulb,
-    title: "Education & Prevention",
-    description:
-      "Learn posture correction, ergonomic strategies, and home-program exercises tailored to your lifestyle."
-  },
+  { icon: FaHands,       title: "Manual Therapy",     description: "Our therapists use proven manual techniques—joint mobilization, soft-tissue release, myofascial stretches—to relieve pain and improve function." },
+  { icon: FaHeartbeat,   title: "Dry Needling",       description: "Fine-gauge needles penetrate tense muscle bands to reduce pain, improve blood flow, and restore muscle function rapidly." },
+  { icon: FaDumbbell,    title: "Strength Training",  description: "Customized resistance and functional exercise plans designed to rebuild muscle, protect joints, and enhance performance." },
+  { icon: FaRegLightbulb, title: "Education & Prevention", description: "Learn posture correction, ergonomic strategies, and home-program exercises tailored to your lifestyle." },
 ]
 
 export default function ServicesSection() {
   return (
-    <section className="py-16 px-4 md:px-8">
+    <section className="py-16 px-4 md:px-8 bg-white">
       <h2 className="text-3xl font-bold text-primary text-center mb-12">
         Our Services
       </h2>
@@ -46,11 +26,7 @@ export default function ServicesSection() {
             transition={{ duration: 0.6, delay: i * 0.1 }}
             className="relative"
           >
-            <ServiceCard
-              icon={s.icon}
-              title={s.title}
-              description={s.description}
-            />
+            <ServiceCard icon={s.icon} title={s.title} description={s.description} />
           </motion.div>
         ))}
       </div>
