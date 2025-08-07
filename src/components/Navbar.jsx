@@ -1,5 +1,5 @@
 // src/components/Navbar.jsx
-import { useState, useEffect } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import {
   FiMenu,
@@ -16,117 +16,168 @@ import {
 } from 'react-icons/fi'
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa'
 
-const NAV = [
-  { name: 'Home',      to: '/',           icon: FiHome },
-  { name: 'About',     to: '/about',      icon: FiUsers },
-  { name: 'Services',  to: '/services',   icon: FiBriefcase },
-  { name: 'FAQ',       to: '/faq',        icon: FiHelpCircle },
-  { name: 'Insurance', to: '/insurance',  icon: FiCreditCard },
-  { name: 'Resources', to: '/resources',  icon: FiBookOpen },
-  { name: 'Contact',   to: '/contact',    icon: FiPhone },
+const NAV_ITEMS = [
+  { name: 'Home', to: '/', icon: FiHome },
+  { name: 'About', to: '/about', icon: FiUsers },
+  { name: 'Services', to: '/services', icon: FiBriefcase },
+  { name: 'FAQ', to: '/faq', icon: FiHelpCircle },
+  { name: 'Insurance', to: '/insurance', icon: FiCreditCard },
+  { name: 'Resources', to: '/resources', icon: FiBookOpen },
+  { name: 'Careers', to: '/careers', icon: FiBriefcase },
+  { name: 'Contact', to: '/contact', icon: FiPhone }
 ]
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
+  const [dark, setDark] = useState(() => localStorage.getItem('theme') === 'dark')
   const [scrolled, setScrolled] = useState(false)
-
-  // ✅ Always start light mode unless user saved "dark" before
-  const [dark, setDark] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') === 'dark'
-    }
-    return false
-  })
-
+  const [open, setOpen] = useState(false)
+  const [visibleLinks, setVisibleLinks] = useState(NAV_ITEMS.length)
+  const containerRef = useRef(null)
+  const linksRef = useRef([])
   const { pathname } = useLocation()
-
-  // ✅ Apply dark class based on user toggle only
+  const visible = NAV_ITEMS.slice(0, visibleLinks)
+  const overflow = NAV_ITEMS.slice(visibleLinks)
   useEffect(() => {
     if (dark) {
       document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
     } else {
       document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
     }
+    localStorage.setItem('theme', dark ? 'dark' : 'light')
   }, [dark])
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
+  useLayoutEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useLayoutEffect(() => {
+    const observer = new ResizeObserver(() => {
+      updateVisibleLinks()
+    })
+    if (containerRef.current) {
+      updateVisibleLinks() // ✅ immediate run on mount
+      observer.observe(containerRef.current)
+    }
+    return () => observer.disconnect()
+  }, [])
+
+
+
+  useEffect(() => {
+    document.body.classList.toggle('overflow-hidden', open)
+
+    if (open && overflow.length === 0) {
+      setOpen(false)
+    }
+  }, [open, overflow])
+
+  useLayoutEffect(() => {
+    const onResize = () => updateVisibleLinks()
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+
+  const updateVisibleLinks = () => {
+    if (!containerRef.current) return
+    const containerWidth = containerRef.current.offsetWidth
+    const buffer = 320 // safe space for dark mode + menu button (locked)
+    let used = buffer
+
+    let count = 0
+    for (let i = 0; i < NAV_ITEMS.length; i++) {
+      const el = linksRef.current[i]
+      if (!el) break
+      used += el.offsetWidth + 20
+      if (used > containerWidth) break
+      count++
+    }
+
+    setVisibleLinks(count)
+  }
+
 
   return (
     <>
       <nav
-        className={`
-          fixed top-0 left-0 right-0 z-50
-          bg-white/20 dark:bg-gray-900/30 backdrop-blur-lg
-          shadow-md transition-all duration-300
-          ${scrolled ? 'h-12' : 'h-16'}
-        `}
+        className={`fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/60 backdrop-blur shadow-md transition-all duration-300 ${
+          scrolled ? 'h-12' : 'h-16'
+        }`}
+        ref={containerRef}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between h-full px-4 md:px-8">
-          <Link to="/" className="flex items-center">
-            <img
-              src="/logo_navbar.png"
-              alt="Logo"
-              className={`${scrolled ? 'h-6 w-6' : 'h-8 w-8'} transition-all`}
-            />
-            <span
-              className={`
-                ml-2 font-bold transition-all
-                ${scrolled ? 'text-lg' : 'text-xl'}
-                text-primary dark:text-white
-              `}
-            >
-              Stay in Motion
-            </span>
-          </Link>
-
-          <ul className="hidden md:flex space-x-6 items-center">
-            {NAV.map(item => (
-              <li key={item.to}>
-                <Link
-                  to={item.to}
-                  className={`
-                    flex items-center space-x-1
-                    transition-colors duration-200
-                    ${pathname === item.to
-                      ? 'text-accent font-semibold'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-primary'}
-                  `}
-                >
-                  <item.icon className="w-5 h-5" />
-                  <span>{item.name}</span>
-                </Link>
-              </li>
-            ))}
-            {/* Dark Mode Toggle */}
-            <li>
-              <button
-                onClick={() => setDark(prev => !prev)}
-                className="p-2 text-xl text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-primary transition"
-                aria-label="Toggle dark mode"
+        <div className="max-w-7xl mx-auto flex items-center justify-between h-full px-4 md:px-8 overflow-hidden">
+          {/* Left section: logo + links */}
+          <div className="flex items-center flex-1 min-w-0">
+            <Link to="/" className="flex items-center flex-shrink-0">
+              <img
+                src="/logo_navbar.png"
+                alt="Logo"
+                className={`${scrolled ? 'h-6 w-6' : 'h-8 w-8'} transition-all`}
+              />
+              <span
+                className={`ml-2 font-bold transition-all ${
+                  scrolled ? 'text-lg' : 'text-xl'
+                } text-primary dark:text-white`}
               >
-                {dark ? <FiSun /> : <FiMoon />}
-              </button>
-            </li>
-          </ul>
+                Stay in Motion
+              </span>
+            </Link>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 text-2xl text-primary"
-            onClick={() => setOpen(true)}
-            aria-label="Open menu"
-          >
-            <FiMenu />
-          </button>
+            <ul className="flex items-center space-x-4 ml-6 overflow-hidden flex-nowrap relative">
+              {NAV_ITEMS.map((item, i) => (
+                <li
+                  key={item.to}
+                  ref={el => (linksRef.current[i] = el)}
+                  className={`transition-all duration-300 ease-in-out ${
+                    i < visibleLinks
+                      ? 'opacity-100 static pointer-events-auto'
+                      : 'opacity-0 absolute -z-10 pointer-events-none'
+                  }`}
+                >
+
+                  <Link
+                    to={item.to}
+                    className={`flex items-center space-x-1 transition-colors duration-200 ${
+                      pathname === item.to
+                        ? 'text-accent font-semibold'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-primary'
+                    }`}
+                  >
+                    <item.icon className="w-5 h-5" />
+                    <span className="whitespace-nowrap">{item.name}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Right section: controls */}
+          <div className="flex items-center flex-shrink-0 space-x-2 pl-4">
+            <button
+              onClick={() => setDark(prev => !prev)}
+              className="p-2 text-xl text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-primary transition"
+              aria-label="Toggle dark mode"
+            >
+              {dark ? <FiSun /> : <FiMoon />}
+            </button>
+
+            {overflow.length > 0 && (
+              <button
+                className="p-2 text-2xl text-primary"
+                onClick={() => setOpen(true)}
+                aria-label="Open menu"
+              >
+                <FiMenu />
+              </button>
+            )}
+          </div>
         </div>
       </nav>
 
-      {/* Overlay */}
+
+      {/* Sidebar Overlay */}
       {open && (
         <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
@@ -134,16 +185,13 @@ export default function Navbar() {
         />
       )}
 
-      {/* Sidebar */}
+      {/* Animated Sidebar */}
       <aside
-        className={`
-          fixed inset-y-0 left-0 z-50 w-3/4 max-w-xs
-          bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg shadow-xl
-          transform transition-transform duration-300 ease-out
-          ${open ? 'translate-x-0' : '-translate-x-full'}
-          flex flex-col justify-between
-        `}
+        className={`fixed top-0 left-0 h-full w-3/4 max-w-xs z-50 transform transition-transform duration-300 ease-in-out bg-white dark:bg-gray-900 shadow-lg ${
+          open ? 'translate-x-0' : '-translate-x-full'
+        } flex flex-col justify-between touch-none`}
       >
+
         <div>
           <div className="flex justify-end p-4">
             <button
@@ -155,35 +203,32 @@ export default function Navbar() {
             </button>
           </div>
           <nav className="px-6 space-y-6">
-            {NAV.map(item => (
+            {overflow.map(item => (
               <Link
                 key={item.to}
                 to={item.to}
-                className={`
-                  flex items-center space-x-2 text-xl font-medium
-                  transition-colors duration-200
-                  ${pathname === item.to
+                className={`flex items-center space-x-2 text-xl font-medium transition-colors duration-200 ${
+                  pathname === item.to
                     ? 'text-accent'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent'}
-                `}
+                    : 'text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent'
+                }`}
                 onClick={() => setOpen(false)}
               >
                 <item.icon className="w-6 h-6" />
                 <span>{item.name}</span>
               </Link>
             ))}
-            {/* Dark Mode Toggle in Sidebar */}
+
             <button
               onClick={() => setDark(prev => !prev)}
               className="flex items-center space-x-2 text-xl p-2 mt-6 text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-primary transition"
             >
-              {dark ? <FiSun className="w-6 h-6"/> : <FiMoon className="w-6 h-6"/>}
+              {dark ? <FiSun className="w-6 h-6" /> : <FiMoon className="w-6 h-6" />}
               <span>{dark ? 'Light Mode' : 'Dark Mode'}</span>
             </button>
           </nav>
         </div>
 
-        {/* Social Icons */}
         <div className="px-6 pb-8 flex space-x-4">
           <a href="#" className="text-accent hover:text-primary transition text-2xl">
             <FaFacebookF />
