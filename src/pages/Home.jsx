@@ -22,6 +22,7 @@ export default function Home() {
             "priceRange": "$$",
             "address": {
               "@type": "PostalAddress",
+              "streetAddress": "123 Main St Suite 100",
               "addressLocality": "Livonia",
               "addressRegion": "MI",
               "postalCode": "48150",
@@ -31,6 +32,7 @@ export default function Home() {
           }
           `}
         </script>
+
 
       </Helmet>
 
