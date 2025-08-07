@@ -18,17 +18,20 @@ export default function Home() {
             "@type": "LocalBusiness",
             "name": "Stay in Motion PT",
             "url": "https://stayinmotionpt.com",
+            "image": "https://stayinmotionpt.com/logo.png",
+            "priceRange": "$$",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Livonia",
-              "addressRegion": "Michigan",
+              "addressRegion": "MI",
               "postalCode": "48150",
               "addressCountry": "US"
             },
-            "telephone": "+1-555-555-5555"
+            "telephone": "+1-734-555-1234"
           }
           `}
         </script>
+
       </Helmet>
 
       {/* Hero */}
