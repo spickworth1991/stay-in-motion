@@ -1,15 +1,17 @@
+// src/pages/Home.jsx
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
+import LiteYouTube from '../components/LiteYouTube';
 
 export default function Home() {
   return (
     <>
       <Helmet>
-        <title>Stay in Motion PT | Physical Therapy in [Your City]</title>
+        <title>Stay in Motion PT | Physical Therapy in Livonia, MI</title>
         <meta
           name="description"
-          content="Stay in Motion Physical Therapy offers personalized rehab, injury recovery, and mobility solutions in Livonia, Michigan. Book your session today!"
+          content="Stay in Motion Physical Therapy in Livonia, MI offers personalized rehab, injury recovery, and mobility solutions. Book your session today!"
         />
         <script type="application/ld+json">
           {`
@@ -18,7 +20,7 @@ export default function Home() {
             "@type": "LocalBusiness",
             "name": "Stay in Motion PT",
             "url": "https://stayinmotionpt.com",
-            "image": "https://stayinmotionpt.com/logo.png",
+            "image": "https://stayinmotionpt.com/PT-Logo.png",
             "priceRange": "$$",
             "address": {
               "@type": "PostalAddress",
@@ -32,12 +34,17 @@ export default function Home() {
           }
           `}
         </script>
-
-
       </Helmet>
 
       {/* Hero */}
-      <section className="relative w-full min-h-[60vh] md:min-h-[70vh] flex flex-col items-center justify-center bg-gradient-to-r from-primary to-accent overflow-hidden dark:bg-gray-900 px-4">
+      <section
+        className="
+          relative w-full min-h-[60vh] md:min-h-[70vh]
+          flex flex-col items-center justify-center
+          bg-gradient-to-r from-primary to-accent
+          overflow-hidden dark:bg-gray-900 px-4
+        "
+      >
         <div className="relative z-10 text-center space-y-6 max-w-2xl w-full">
           <motion.h1
             className="text-5xl md:text-6xl font-bold text-white dark:text-gray-300"
@@ -57,21 +64,14 @@ export default function Home() {
             Personalized physical therapy to keep you moving pain-free.
           </motion.p>
 
-          {/* Small Clinic Tour Video */}
+          {/* Lightweight click-to-play video (no heavy iframe on first paint) */}
           <motion.div
             className="mx-auto w-full max-w-md rounded-2xl overflow-hidden shadow-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <iframe
-              src="https://www.youtube.com/embed/u31qwQUeGuM?autoplay=1&mute=1&loop=1&playlist=u31qwQUeGuM&controls=0&modestbranding=1"
-              title="Clinic Tour"
-              frameBorder="0"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-              className="w-full aspect-video bg-transparent"
-            />
+            <LiteYouTube id="u31qwQUeGuM" title="Clinic Tour" />
           </motion.div>
 
           {/* CTA */}
@@ -93,12 +93,15 @@ export default function Home() {
       {/* SEO Keyword Section */}
       <section className="bg-white dark:bg-gray-800 px-4 py-12 text-center border-t border-gray-200 dark:border-gray-700">
         <div className="max-w-3xl mx-auto space-y-6">
-          <h2 className="text-3xl font-bold text-primary">Physical Therapy in Livonia</h2>
+          <h2 className="text-3xl font-bold text-primary">Physical Therapy in Livonia, MI</h2>
           <p className="text-gray-700 dark:text-gray-200 text-lg">
-            At Stay in Motion PT, we specialize in helping patients regain mobility, reduce pain, and return to the activities they love. Whether you’re recovering from surgery, managing a chronic condition, or seeking performance-based rehab, we offer personalized treatment plans tailored to your needs.
+            At Stay in Motion PT, we help patients regain mobility, reduce pain, and return to the activities they love.
+            Whether you’re recovering from surgery, managing a chronic condition, or seeking performance-based rehab,
+            we offer personalized treatment plans tailored to your needs.
           </p>
           <p className="text-gray-700 dark:text-gray-200">
-            Our clinic proudly serves clients across Livonia and the surrounding areas. We use a combination of manual therapy, targeted exercise, and patient education to ensure long-term results.
+            Our clinic proudly serves Livonia and surrounding areas. We use a combination of manual therapy, targeted
+            exercise, and patient education to ensure long-term results.
           </p>
         </div>
       </section>
