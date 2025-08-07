@@ -168,6 +168,8 @@ export default function Navbar() {
                 className="p-2 text-2xl text-primary"
                 onClick={() => setOpen(true)}
                 aria-label="Open menu"
+                aria-controls="mobile-menu"
+                aria-expanded={open ? 'true' : 'false'}
               >
                 <FiMenu />
               </button>
@@ -230,13 +232,13 @@ export default function Navbar() {
         </div>
 
         <div className="px-6 pb-8 flex space-x-4">
-          <a href="#" className="text-accent hover:text-primary transition text-2xl">
+          <a href="#" aria-label="Facebook" className="text-accent hover:text-primary transition text-2xl">
             <FaFacebookF />
           </a>
-          <a href="#" className="text-accent hover:text-primary transition text-2xl">
+          <a href="#" aria-label="Instagram" className="text-accent hover:text-primary transition text-2xl">
             <FaInstagram />
           </a>
-          <a href="#" className="text-accent hover:text-primary transition text-2xl">
+          <a href="#" aria-label="LinkedIn" className="text-accent hover:text-primary transition text-2xl">
             <FaLinkedinIn />
           </a>
         </div>
