@@ -4,10 +4,10 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-
-/*    # apply only to HTML routes (no extension)
   X-Frame-Options: DENY
 
 /*.pdf
-  # Allow your pages to embed your own PDFs
+  X-Frame-Options: SAMEORIGIN
+
+/*.PDF
   X-Frame-Options: SAMEORIGIN
