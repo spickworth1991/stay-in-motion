@@ -5,6 +5,10 @@ import { Helmet } from 'react-helmet';
 import LiteYouTube from '../components/LiteYouTube';
 
 export default function Home() {
+  const videoId = "u31qwQUeGuM";
+  const videoTitle = "Clinic Tour";
+  const thumbnail = `https://i.ytimg.com/vi/${videoId}/sddefault.jpg`;
+
   return (
     <>
       <Helmet>
@@ -34,6 +38,15 @@ export default function Home() {
           }
           `}
         </script>
+        {/* Preload backup for LCP */}
+        <link
+          rel="preload"
+          as="image"
+          href={thumbnail}
+          fetchpriority="high"
+          imagesrcset={`${thumbnail} 1x, https://i.ytimg.com/vi/${videoId}/hqdefault.jpg 2x`}
+          imagesizes="(max-width: 768px) 100vw, 640px"
+        />
       </Helmet>
 
       {/* Hero */}
@@ -64,14 +77,14 @@ export default function Home() {
             Personalized physical therapy to keep you moving pain-free.
           </motion.p>
 
-          {/* Lightweight click-to-play video (no heavy iframe on first paint) */}
+          {/* Optimized LiteYouTube */}
           <motion.div
             className="mx-auto w-full max-w-md rounded-2xl overflow-hidden shadow-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <LiteYouTube id="u31qwQUeGuM" title="Clinic Tour" />
+            <LiteYouTube id={videoId} title={videoTitle} />
           </motion.div>
 
           {/* CTA */}
