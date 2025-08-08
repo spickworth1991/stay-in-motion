@@ -3,6 +3,9 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import CallNowBar from "./CallNowBar";
 
 export default function Footer() {
+  const staticMapURL =
+    "https://maps.googleapis.com/maps/api/staticmap?center=1550+Harrison+St,+Garden+City,+USA&zoom=15&size=600x200&maptype=roadmap&markers=color:red%7C1550+Harrison+St,+Garden+City,+USA&key=AIzaSyCADEnXt7DIWsv3UOtXQsIIaEldxJC-GuI";
+
   return (
     <>
       <footer className="bg-primary dark:bg-gray-900 text-white dark:text-gray-300 py-12 px-4 md:px-8 mb-16 md:mb-0">
@@ -21,13 +24,24 @@ export default function Footer() {
           {/* Map Embed */}
           <div>
             <h2 className="font-semibold mb-4">Our Location</h2>
-            <iframe
-              title="Clinic Map"
-              src="https://maps.google.com/maps?q=1550%20Harrison%20St%2C%20Garden%20City%2C%20USA&z=15&output=embed"
-              className="w-full h-40 rounded-lg border-0"
-              loading="lazy"
-              allowFullScreen
-            />
+            <div
+              className="w-full h-40 rounded-lg overflow-hidden cursor-pointer"
+              onClick={(e) => {
+                e.currentTarget.innerHTML = `<iframe
+                  title="Clinic Map"
+                  src="https://maps.google.com/maps?q=1550%20Harrison%20St%2C%20Garden%20City%2C%20USA&z=15&output=embed"
+                  class="w-full h-40 rounded-lg border-0"
+                  loading="lazy"
+                  allowfullscreen
+                ></iframe>`;
+              }}
+            >
+              <img
+                src={staticMapURL}
+                alt="Static map preview"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
 
           {/* Social & Contact */}

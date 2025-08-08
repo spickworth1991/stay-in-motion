@@ -145,7 +145,7 @@ export default function Navbar() {
                     to={item.to}
                     className={`flex items-center space-x-1 transition-colors duration-200 ${
                       pathname === item.to
-                        ? 'text-accent font-semibold'
+                        ? 'text-primary font-semibold'
                         : 'text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-primary'
                     }`}
                   >
