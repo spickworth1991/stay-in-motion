@@ -8,6 +8,8 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   # Your existing header (prevents others from iframing your site)
   X-Frame-Options: DENY
+  Access-Control-Allow-Origin: https://stayinmotionpt.com
+  Access-Control-Allow-Methods: GET, HEAD
 
 /*.pdf
   # Allow your own pages to embed your own PDFs
