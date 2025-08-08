@@ -28,9 +28,11 @@ export default function LiteYouTube({ id, title = "YouTube video" }) {
       <img
         src={thumb}
         alt={title}
-        className="w-full h-full object-cover"
-        loading="lazy"
+        width="1280"
+        height="720"
         decoding="async"
+        fetchpriority="high"
+        className="w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
       <div className="absolute inset-0 flex items-center justify-center">

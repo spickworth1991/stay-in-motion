@@ -113,9 +113,13 @@ export default function Navbar() {
             <Link to="/" className="flex items-center flex-shrink-0">
               <img
                 src="/logo_navbar.png"
-                alt="Logo"
+                srcSet="/logo_navbar@2x.png 2x, /logo_navbar@3x.png 3x"
+                alt="Stay in Motion Physical Therapy"
+                width={scrolled ? 24 : 32} // actual pixel dimensions
+                height={scrolled ? 24 : 32}
                 className={`${scrolled ? 'h-6 w-6' : 'h-8 w-8'} transition-all`}
               />
+
               <span
                 className={`ml-2 font-bold transition-all ${
                   scrolled ? 'text-lg' : 'text-xl'
