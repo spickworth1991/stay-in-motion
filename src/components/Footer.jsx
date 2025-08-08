@@ -59,11 +59,10 @@ export default function Footer() {
                 <picture>
                   <source
                     type="image/webp"
-                    srcSet="/photos/clinic-map-380.webp 380w, /photos/clinic-map-760.webp 760w"
-                    sizes="(max-width: 640px) 100vw, 380px"
+                    srcSet="/photos/clinic-map-380.webp 1x, /photos/clinic-map-760.webp 2x"
                   />
                   <img
-                    src="/photos/clinic-map-fallback-380.webp"
+                    src="/photos/clinic-map-380.webp"
                     alt="Static map preview: 1550 Harrison St, Garden City, USA"
                     className="w-full h-full object-cover"
                     width="380"
@@ -72,6 +71,7 @@ export default function Footer() {
                     decoding="async"
                   />
                 </picture>
+
 
               )}
             </div>
