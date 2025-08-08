@@ -17,7 +17,7 @@ export default function App() {
   return (
     <div className="flex flex-col min-h-screen bg-cream dark:bg-gray-900 dark:text-gray-200 text-gray-800">
       <Navbar />
-      <main className="flex-grow pt-16 ">
+      <main className="flex-grow pt-16 pb-16 md:pb-0">
         <Suspense fallback={<div className="p-8 text-center">Loading…</div>}>
           <Routes>
             <Route path="/"           element={<Home />} />

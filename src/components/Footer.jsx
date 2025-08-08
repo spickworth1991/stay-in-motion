@@ -6,7 +6,7 @@ export default function Footer() {
   const staticMapURL =
     "https://maps.googleapis.com/maps/api/staticmap?center=1550+Harrison+St,+Garden+City,+USA&zoom=15&size=600x200&maptype=roadmap&markers=color:red%7C1550+Harrison+St,+Garden+City,+USA&key=AIzaSyCADEnXt7DIWsv3UOtXQsIIaEldxJC-GuI";
 
-  return (
+   return (
     <>
       <footer className="bg-primary dark:bg-gray-900 text-white dark:text-gray-300 py-12 px-4 md:px-8 mb-16 md:mb-0">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -40,6 +40,10 @@ export default function Footer() {
                 src={staticMapURL}
                 alt="Static map preview"
                 className="w-full h-full object-cover"
+                width="600"
+                height="200"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -52,7 +56,7 @@ export default function Footer() {
               <a href="#"><FaInstagram aria-label="Instagram" className="hover:text-accent" /></a>
               <a href="#"><FaLinkedinIn aria-label="LinkedIn" className="hover:text-accent" /></a>
             </div>
-            <p>1550 Harrison St, Garden City, USA</p>
+            <p>123 Main St Suite 100, Livonia, USA</p>
             <p>(555) 123-4567</p>
             <p>Mon – Fri: 8 am – 6 pm</p>
           </div>
