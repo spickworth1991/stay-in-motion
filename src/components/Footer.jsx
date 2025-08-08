@@ -1,12 +1,25 @@
 // src/components/Footer.jsx
+import { useState, useCallback } from "react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import CallNowBar from "./CallNowBar";
 
 export default function Footer() {
-  const staticMapURL =
-    "https://maps.googleapis.com/maps/api/staticmap?center=1550+Harrison+St,+Garden+City,+USA&zoom=15&size=600x200&maptype=roadmap&markers=color:red%7C1550+Harrison+St,+Garden+City,+USA&key=AIzaSyCADEnXt7DIWsv3UOtXQsIIaEldxJC-GuI";
+  const [showMap, setShowMap] = useState(false);
 
-   return (
+  const address = "1550 Harrison St, Garden City, USA";
+  const embedSrc =
+    "https://maps.google.com/maps" +
+    `?q=${encodeURIComponent(address)}&z=15&output=embed`;
+
+  const handleClick = useCallback(() => setShowMap(true), []);
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setShowMap(true);
+    }
+  }, []);
+
+  return (
     <>
       <footer className="bg-primary dark:bg-gray-900 text-white dark:text-gray-300 py-12 px-4 md:px-8 mb-16 md:mb-0">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -21,31 +34,58 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Map Embed */}
+          {/* Map */}
           <div>
             <h2 className="font-semibold mb-4">Our Location</h2>
+
             <div
               className="w-full h-40 rounded-lg overflow-hidden cursor-pointer"
-              onClick={(e) => {
-                e.currentTarget.innerHTML = `<iframe
-                  title="Clinic Map"
-                  src="https://maps.google.com/maps?q=1550%20Harrison%20St%2C%20Garden%20City%2C%20USA&z=15&output=embed"
-                  class="w-full h-40 rounded-lg border-0"
-                  loading="lazy"
-                  allowfullscreen
-                ></iframe>`;
-              }}
+              role="button"
+              tabIndex={0}
+              onClick={handleClick}
+              onKeyDown={handleKeyDown}
+              aria-label="Open interactive map"
             >
-              <img
-                src={staticMapURL}
-                alt="Static map preview"
-                className="w-full h-full object-cover"
-                width="600"
-                height="200"
-                loading="lazy"
-                decoding="async"
-              />
+              {showMap ? (
+                <iframe
+                  title="Clinic Map"
+                  src={embedSrc}
+                  className="w-full h-40 rounded-lg border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
+              ) : (
+                <picture>
+                  <source
+                    srcSet="/photos/clinic-map.webp"
+                    type="image/webp"
+                  />
+                  <img
+                    src="/photos/clinic-map.jpg"
+                    alt={`Static map preview: ${address}`}
+                    className="w-full h-full object-cover"
+                    width="600"
+                    height="200"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+              )}
             </div>
+
+            {/* No-JS fallback: link to Google Maps */}
+            <noscript>
+              <p className="mt-2">
+                <a
+                  href={`https://maps.google.com/?q=${encodeURIComponent(address)}`}
+                  target="_blank" rel="noopener"
+                  className="underline"
+                >
+                  Open in Google Maps
+                </a>
+              </p>
+            </noscript>
           </div>
 
           {/* Social & Contact */}
@@ -63,7 +103,6 @@ export default function Footer() {
         </div>
       </footer>
 
-      {/* Mobile “Call Now” bar */}
       <CallNowBar />
     </>
   );
