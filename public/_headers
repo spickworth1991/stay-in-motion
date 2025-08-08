@@ -1,5 +1,4 @@
 /*
-  # Content Security Policy — restricts where resources can load from
   Content-Security-Policy: default-src 'self';
     script-src 'self' https://www.youtube.com https://www.google.com https://maps.googleapis.com https://maps.gstatic.com;
     connect-src 'self' https://www.youtube.com https://maps.googleapis.com;
@@ -13,21 +12,31 @@
     frame-ancestors 'self';
     upgrade-insecure-requests
 
-  # Prevent MIME type sniffing
   X-Content-Type-Options: nosniff
-
-  # Referrer policy — only send origin unless same-origin navigation
   Referrer-Policy: strict-origin-when-cross-origin
-
-  # Disable features not in use
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-
-  # Force HTTPS everywhere (HSTS)
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-
-  # Prevent site from being embedded in iframes by others
   X-Frame-Options: DENY
 
-  # CORS 
+
   Access-Control-Allow-Origin: https://stayinmotionpt.com
   Access-Control-Allow-Methods: GET, HEAD
+
+
+/
+  Cache-Control: no-cache, no-store, must-revalidate
+/index.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+
+/*.pdf
+  X-Frame-Options: SAMEORIGIN
+  Cache-Control: public, max-age=604800
