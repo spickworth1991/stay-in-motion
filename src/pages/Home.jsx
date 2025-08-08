@@ -47,6 +47,10 @@ export default function Home() {
           imagesrcset={`${thumbnail} 1x, https://i.ytimg.com/vi/${videoId}/hqdefault.jpg 2x`}
           imagesizes="(max-width: 768px) 100vw, 640px"
         />
+        <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://i.ytimg.com" />
+        <link rel="preconnect" href="https://maps.googleapis.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://maps.googleapis.com" />
       </Helmet>
 
       {/* Hero */}
@@ -79,7 +83,11 @@ export default function Home() {
 
           {/* Optimized LiteYouTube */}
           <motion.div
-            className="mx-auto w-full max-w-md rounded-2xl overflow-hidden shadow-2xl"
+            className="
+              mx-auto w-full 
+              max-w-lg sm:max-w-2xl md:max-w-3xl lg:max-w-4xl
+              rounded-2xl overflow-hidden shadow-2xl
+            "
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
