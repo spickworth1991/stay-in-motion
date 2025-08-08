@@ -2,7 +2,8 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
-import LiteYouTube from '../components/LiteYouTube';
+import { lazy, Suspense } from 'react';
+const LiteYouTube = lazy(() => import('../components/LiteYouTube'));
 
 export default function Home() {
   const videoId = "u31qwQUeGuM";
@@ -84,21 +85,7 @@ export default function Home() {
           imagesizes="(max-width: 768px) 100vw, 640px"
         />
 
-        {/* Preconnects / DNS Prefetch */}
-        <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://i.ytimg.com" />
-
-        <link rel="preconnect" href="https://www.youtube.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://www.youtube.com" />
-
-        <link rel="preconnect" href="https://maps.googleapis.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://maps.googleapis.com" />
-
-        <link rel="preconnect" href="https://www.google.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://www.google.com" />
-
-        <link rel="preconnect" href="https://maps.gstatic.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://maps.gstatic.com" />
+      
       </Helmet>
 
       {/* Hero */}
@@ -133,12 +120,15 @@ export default function Home() {
               mx-auto w-full 
               max-w-lg sm:max-w-2xl md:max-w-3xl lg:max-w-4xl
               rounded-2xl overflow-hidden shadow-2xl
+              aspect-video   /* reserve space to prevent CLS */
             "
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <LiteYouTube id={videoId} title={videoTitle} />
+            <Suspense fallback={<div className="aspect-video rounded-2xl bg-black/20" />}>
+              <LiteYouTube id={videoId} title={videoTitle} />
+            </Suspense>
           </motion.div>
 
           {/* CTA */}
