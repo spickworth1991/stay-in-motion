@@ -44,6 +44,7 @@ export default function CareersPage() {
       <div
         className="w-full h-[300px] md:h-[400px] bg-cover bg-center text-primary flex flex-col items-center justify-center text-center"
         style={{ backgroundImage: "url('/photos/careers-hero.jpg')" }}  // ✅ served as-is by Cloudflare Pages
+        loading="lazy"
       >
         <h1 className="text-4xl md:text-5xl font-bold drop-shadow-lg">Join Our Team</h1>
         <p className="text-2xl font-bold md:text-xl mt-3 drop-shadow-md max-w-xl">
