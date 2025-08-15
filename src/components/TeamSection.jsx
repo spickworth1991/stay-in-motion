@@ -1,113 +1,146 @@
 // src/components/TeamSection.jsx
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { FaLinkedinIn } from 'react-icons/fa'
-
-const therapists = [
-  {
-    name: "Amanda Pickworth-Chrusciel, PT, DPT",
-    photo: "/photos/amanda.jpg",
-    specialties: ["Orthopedics", "Manual Therapy", "Dry Needling"],
-    linkedin: "https://www.linkedin.com/in/amanda-pickworth-chrusciel",
-    credentials: "Doctor of Physical Therapy (DPT) from University of Findlay. Certified in Orthopedic Manual Therapy."
-  },
-  {
-    name: "You could be here",
-    photo: "/photos/new_employee.jpg",
-    specialties: ["Your Specialties."],
-    linkedin: "/careers", 
-    credentials: "We're always looking for passionate therapists to join our team. Let's connect!"
-  }
-
-  // …more therapists
-]
+import React, { useState, useId } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function TeamSection() {
   return (
-    <section className="py-16 px-4 md:px-8 bg-cream/20">
-      <h2 className="text-3xl font-bold text-primary text-center mb-12">
-        Meet Our Team
+    <section aria-labelledby="team-heading" className="space-y-6">
+      <h2 id="team-heading" className="text-2xl font-semibold">
+        Our Team
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {therapists.map((t, i) => (
-          <TeamCard key={t.name} therapist={t} delay={i * 0.1} />
-        ))}
-      </div>
+
+      <FounderCard />
+      <HiringCard />
     </section>
-  )
+  );
 }
-function TeamCard({ therapist, delay }) {
-  const [expanded, setExpanded] = useState(false)
+
+function FounderCard() {
+  const [open, setOpen] = useState(false);
+  const contentId = useId();
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay }}
-      className={`relative bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden cursor-pointer 
-        ${therapist.name === "You could be here" ? "ring-2 ring-accent animate-pulse" : ""}`}
-      onClick={() => setExpanded(!expanded)}
+    <article
+      className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-md"
+      itemScope
+      itemType="https://schema.org/Person"
     >
-      {!expanded && (
-        <div className="absolute bottom-2 right-2 bg-white/90 text-xs px-2 py-1 rounded shadow text-gray-700">
-          Click to Learn More
+      {/* Header row */}
+      <div className="p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+        {/* Amanda's Photo */}
+        <img
+          src="/photos/amanda.jpg" // <-- replace with your actual path
+          alt="Dr. Amanda Pickworth-Chrusciel"
+          className="w-32 h-32 md:w-40 md:h-40 rounded-xl object-cover border border-gray-200 dark:border-gray-700"
+          loading="lazy"
+          itemProp="image"
+        />
+
+        <div className="flex-1">
+          <h3 className="text-xl md:text-2xl font-bold" itemProp="name">
+            Dr. Amanda Pickworth-Chrusciel, PT, DPT
+          </h3>
+          <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 mt-1">
+            <span className="font-medium" itemProp="jobTitle">
+              Founder
+            </span>{" "}
+            | Stay in Motion Physical Therapy
+          </p>
+
+          {/* Intro always visible */}
+          <p className="mt-4 leading-7">
+            I’m a proud graduate of the University of Findlay with over 12 years of hands-on
+            experience helping people move better, feel stronger, and live without limits.
+          </p>
+
+          {/* Skill chips */}
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {[
+              "Orthopedics",
+              "Chronic Pain",
+              "Sports Rehab",
+              "Dry Needling",
+              "IASTM",
+              "Cupping",
+              "BFR",
+              "McKenzie A",
+              "Barbell Rehab",
+            ].map((chip) => (
+              <li
+                key={chip}
+                className="text-xs px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-700/40"
+              >
+                {chip}
+              </li>
+            ))}
+          </ul>
         </div>
-      )}
 
-      <img
-        src={therapist.photo}
-        alt={therapist.name}
-        className="w-full h-64 object-cover"
-      />
-      <div className="p-6">
-        <h3 className="text-xl dark:text-gray-500 font-semibold">{therapist.name}</h3>
-        <p className="text-gray-600 dark:text-gray-200 mb-2">
-          {therapist.specialties.join(", ")}
-        </p>
+        {/* Read More */}
+        <div className="w-full md:w-auto">
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-controls={contentId}
+            onClick={() => setOpen((v) => !v)}
+            className="inline-block px-6 py-2 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-full shadow-lg transform transition-transform duration-300 hover:from-accent hover:to-primary"
+          >
+            {open ? "Show Less" : "Read More"}
+          </button>
+        </div>
       </div>
 
-      {/* Click-to-expand overlay */}
-      <div
-        className={`absolute inset-0 bg-white/95 p-6 flex flex-col justify-center transition-opacity duration-300 ${
-          expanded
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        }`}
-      >
-        <h4 className="text-lg font-semibold mb-2">Credentials</h4>
-        <p className="text-gray-700 mb-4">{therapist.credentials}</p>
-        {therapist.name === "You could be here" ? (
-          <a
-            href={therapist.linkedin}
-            className="inline-flex items-center text-accent hover:underline"
+      {/* Expandable content */}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="bio"
+            id={contentId}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="border-t border-gray-200 dark:border-gray-700"
           >
-            <svg
-              className="mr-2 w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              viewBox="0 0 24 24"
-            >
-              <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-              <circle cx={8.5} cy={7} r={4} />
-              <path d="M20 8v6M23 11h-6" />
-            </svg>
-            Submit Resume
-          </a>
-        ) : (
-          <a
-            href={therapist.linkedin}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center text-accent hover:underline"
-          >
-            <FaLinkedinIn className="mr-2" />
-            View LinkedIn
-          </a>
+            <div className="p-6 md:p-8 space-y-4">
+              <p className="leading-7">
+                My journey began in 2013 as a Physical Therapist Assistant, and over the years, I’ve
+                specialized in orthopedics, chronic pain, and sports rehabilitation.
+              </p>
+              <p className="leading-7">
+                I hold advanced certifications in dry needling, muscle energy techniques,
+                strain-counterstrain, instrument-assisted soft tissue mobilization, cupping, blood
+                flow restriction (BFR) training, McKenzie Part A, and the Barbell Rehab Method.
+                These tools allow me to tailor treatment to your unique needs—whether you’re an
+                athlete returning to sport, someone recovering from injury, or simply looking to move
+                with less pain.
+              </p>
+              <p className="leading-7">
+                A lifetime soccer player and former coach, I understand the importance of strength,
+                mobility, and injury prevention both on and off the field. At Stay in Motion, my
+                mission is to help you get moving, keep moving, and stay in motion for life.
+              </p>
+            </div>
+          </motion.div>
         )}
+      </AnimatePresence>
+    </article>
+  );
+}
 
-      </div>
-    </motion.div>
-  )
+function HiringCard() {
+  return (
+    <article className="bg-white dark:bg-gray-800 border border-dashed border-gray-300 dark:border-gray-600 rounded-2xl p-6 text-center shadow-sm">
+      <h3 className="text-xl font-semibold mb-2">We’re Hiring!</h3>
+      <p className="mb-4 text-gray-600 dark:text-gray-400">
+        Join our growing team at Stay in Motion Physical Therapy.
+      </p>
+      <a
+        href="/careers"
+        className="inline-block px-6 py-2 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-full shadow-lg transform transition-transform duration-300 hover:from-accent hover:to-primary"
+      >
+        View Careers
+      </a>
+    </article>
+  );
 }

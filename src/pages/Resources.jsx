@@ -1,7 +1,14 @@
 // src/pages/Resources.jsx
+import SEO from "../components/SEO";
 import { Link } from "react-router-dom";
 
 export default function Resources() {
+  const title = "Resources | Stay in Motion Physical Therapy";
+  const desc =
+    "Helpful guides, tips, and educational resources to support your movement, recovery, and performance.";
+  const canonical = "https://stayinmotionpt.com/resources";
+  const ogImage = "https://stayinmotionpt.com/og/resources.jpg";
+
   const docs = [
     {
       title: "Posture & Ergonomics Guide",
@@ -36,45 +43,49 @@ export default function Resources() {
   ];
 
   return (
-    <section className="py-16 px-4 md:px-8 max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold text-primary text-center mb-12">
-        Resources &amp; Tools
-      </h1>
+    <>
+      <SEO
+        title={title}
+        description={desc}
+        canonical={canonical}
+        ogImage={ogImage}
+      />
 
-      <div className="space-y-6">
-        {docs.map((d) => (
-          <article
-            key={d.href}
-            className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5 shadow-sm"
-          >
-            <h2 className="text-xl font-semibold text-primary mb-1">{d.title}</h2>
-            <p className="text-gray-700 dark:text-gray-200 mb-4">{d.blurb}</p>
+      <section className="py-16 px-4 md:px-8 max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold text-primary text-center mb-12">
+          Resources &amp; Tools
+        </h1>
 
-            <div className="flex gap-3">
-              {/* View (opens in new tab) */}
-              <a
-                href={d.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600 transition"
-              >
-                View PDF
-              </a>
+        <div className="space-y-6">
+          {docs.map((d) => (
+            <article
+              key={d.href}
+              className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5 shadow-sm"
+            >
+              <h2 className="text-xl font-semibold text-primary mb-1">{d.title}</h2>
+              <p className="text-gray-700 dark:text-gray-200 mb-4">{d.blurb}</p>
 
-              {/* Download (forces save when supported) */}
-              <a
-                href={d.href}
-                download
-                className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-primary to-accent text-white font-medium hover:from-accent hover:to-primary transition"
-              >
-                Download
-              </a>
-            </div>
-          </article>
-        ))}
-      </div>
-
-  
-    </section>
+              <div className="flex gap-3">
+                <a
+                  href={d.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+                >
+                  View PDF
+                </a>
+                <a
+                  href={d.href}
+                  download
+                  className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-primary to-accent text-white font-medium hover:from-accent hover:to-primary transition"
+                >
+                  Download
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
