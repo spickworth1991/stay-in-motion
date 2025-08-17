@@ -1,0 +1,47 @@
+// app/contact/page.jsx
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import ContactForm from "@/components/ContactForm";
+
+export const metadata = {
+  title: "Contact | Stay in Motion PT",
+  description: "Reach out to schedule physical therapy in Livonia, MI.",
+  alternates: { canonical: "https://stayinmotionpt.com/contact" },
+  openGraph: {
+    url: "https://stayinmotionpt.com/contact",
+    title: "Contact | Stay in Motion PT",
+    description: "Reach out to schedule physical therapy in Livonia, MI."
+  }
+};
+
+export default function ContactPage() {
+  return (
+    <section className="px-4 md:px-8 py-12">
+      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+        <div>
+          <h1 className="text-3xl font-bold text-primary">Contact Us</h1>
+          <p className="mt-4 text-gray-700 dark:text-gray-200">
+            We’d love to help you get back to moving your best.
+          </p>
+
+          <div className="mt-8 space-y-4">
+            <p className="flex items-center gap-3">
+              <FaPhoneAlt className="text-primary" />
+              <a href="tel:+1-555-555-5555" className="underline">(555) 555-5555</a>
+            </p>
+            <p className="flex items-center gap-3">
+              <FaEnvelope className="text-primary" />
+              <a href="mailto:info@stayinmotionpt.com" className="underline">info@stayinmotionpt.com</a>
+            </p>
+            <p className="flex items-center gap-3">
+              <FaMapMarkerAlt className="text-primary" />
+              123 Main St Suite 100, Livonia, USA
+            </p>
+          </div>
+        </div>
+
+        {/* Client island handles motion + state safely */}
+        <ContactForm />
+      </div>
+    </section>
+  );
+}
