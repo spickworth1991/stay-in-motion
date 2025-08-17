@@ -1,5 +1,5 @@
 // app/careers/page.jsx
-import CareersForm from "@/components/CareersForm";
+import CareersForm from "@/components/CareersForm"; 
 
 export const metadata = {
   title: "Careers | Stay in Motion PT",
