@@ -1,7 +1,17 @@
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.youtube.com https://www.google.com https://maps.googleapis.com https://maps.gstatic.com; connect-src 'self' https://www.youtube.com https://maps.googleapis.com; img-src 'self' data: https://i.ytimg.com https://maps.googleapis.com https://maps.gstatic.com https://maps.google.com https://lh3.googleusercontent.com https://lh5.googleusercontent.com https://lh6.googleusercontent.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-src 'self' https://www.youtube.com https://youtube.com https://www.google.com https://maps.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests;
-  script-src-elem 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.youtube.com https://www.google.com https://maps.googleapis.com https://maps.gstatic.com;
-  script-src-attr 'self' 'unsafe-inline';
+  Content-Security-Policy: default-src 'self';
+    script-src 'self' 'unsafe-inline' https://www.youtube.com https://www.google.com https://maps.googleapis.com https://maps.gstatic.com;
+    script-src-elem 'self' 'unsafe-inline' https://www.youtube.com https://www.google.com https://maps.googleapis.com https://maps.gstatic.com;
+    connect-src 'self' https://www.youtube.com https://maps.googleapis.com;
+    img-src 'self' data: https://i.ytimg.com https://maps.googleapis.com https://maps.gstatic.com https://maps.google.com https://lh3.googleusercontent.com https://lh5.googleusercontent.com https://lh6.googleusercontent.com;
+    style-src 'self' 'unsafe-inline';
+    font-src 'self' data:;
+    frame-src 'self' https://www.youtube.com https://youtube.com https://www.google.com https://maps.google.com;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'self';
+    upgrade-insecure-requests;
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
