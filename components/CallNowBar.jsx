@@ -3,7 +3,7 @@ export default function CallNowBar() {
   return (
     <div className="fixed bottom-0 inset-x-0 h-16 bg-primary dark:bg-gray-900 text-white dark:text-gray-200 md:hidden z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.2)]">
       <a
-        href="tel:5551234567"
+        href="tel:7342157546"
         className="h-full w-full px-5 flex items-center justify-center gap-2 font-semibold text-lg hover:text-accent transition-colors leading-none"
         role="button"
         aria-label="Call us now"

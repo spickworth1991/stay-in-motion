@@ -26,7 +26,7 @@ export default function ContactPage() {
           <div className="mt-8 space-y-4">
             <p className="flex items-center gap-3">
               <FaPhoneAlt className="text-primary" />
-              <a href="tel:+1-555-555-5555" className="underline">(555) 555-5555</a>
+              <a href="tel:+1-555-555-5555" className="underline">(734) 215-7546</a>
             </p>
             <p className="flex items-center gap-3">
               <FaEnvelope className="text-primary" />
@@ -34,7 +34,7 @@ export default function ContactPage() {
             </p>
             <p className="flex items-center gap-3">
               <FaMapMarkerAlt className="text-primary" />
-              123 Main St Suite 100, Livonia, USA
+              Working to get a location now!
             </p>
           </div>
         </div>

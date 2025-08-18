@@ -23,7 +23,7 @@ export default function Page() {
     "name": "Stay in Motion Physical Therapy",
     "url": "https://stayinmotionpt.com/",
     "image": "https://stayinmotionpt.com/logo.png",
-    "telephone": "+1-555-555-5555",
+    "telephone": "+1-734-215-7546",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "123 Main St Suite 100, Livonia, USA",
@@ -32,7 +32,7 @@ export default function Page() {
       "postalCode": "48135",
       "addressCountry": "US"
     },
-    "areaServed": ["Livonia","Northville","Canton","Novi","Westland"],
+    "areaServed": ["Livonia","Northville","Canton","Novi","Westland","Garden City"],
     "priceRange": "$$"
   };
 

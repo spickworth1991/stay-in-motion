@@ -97,8 +97,8 @@ export default function Footer() {
               <a href="#"><FaInstagram aria-label="Instagram" className="hover:text-accent" /></a>
               <a href="#"><FaLinkedinIn aria-label="LinkedIn" className="hover:text-accent" /></a>
             </div>
-            <p>123 Main St Suite 100, Livonia, USA</p>
-            <p>(555) 123-4567</p>
+            <p>Working on a location now!</p>
+            <p>(734) 215-7546</p>
             <p>Mon – Fri: 8 am – 6 pm</p>
           </div>
         </div>
