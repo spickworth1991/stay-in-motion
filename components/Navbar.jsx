@@ -25,7 +25,7 @@ const NAV_ITEMS = [
   { name: "FAQ", to: "/faq", icon: FiHelpCircle },
   { name: "Insurance", to: "/insurance", icon: FiCreditCard },
   { name: "Resources", to: "/resources", icon: FiBookOpen },
-  { name: "Careers", to: "/careers", icon: FiBriefcase },
+  // { name: "Careers", to: "/careers", icon: FiBriefcase },
   { name: "Contact", to: "/contact", icon: FiPhone }
 ];
 
