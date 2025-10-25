@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://stayinmotionpt.com/sitemap.xml
