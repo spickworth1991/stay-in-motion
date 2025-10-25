@@ -56,17 +56,17 @@ export default function Contact() {
           {
             icon: FaPhoneAlt,
             label: "Phone",
-            value: "(555) 123-4567",
+            value: "(734) 215-7546",
           },
           {
             icon: FaEnvelope,
             label: "Email",
-            value: "hello@stayinmotionpt.com",
+            value: "info@stayinmotionpt.com",
           },
           {
             icon: FaMapMarkerAlt,
             label: "Address",
-            value: "123 Main St, Hometown, USA",
+            value: "30990 S Wixom Rd, Wixom MI, USA",
           },
         ].map((info, i) => (
           <motion.div

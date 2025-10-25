@@ -13,10 +13,10 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>Stay in Motion PT | Physical Therapy in Livonia, MI</title>
+        <title>Stay in Motion PT | Physical Therapy in Wixom, MI</title>
         <meta
           name="description"
-          content="Stay in Motion Physical Therapy in Livonia, MI offers personalized rehab, injury recovery, and mobility solutions. Book your session today!"
+          content="Stay in Motion Physical Therapy in Wixom, MI offers personalized rehab, injury recovery, and mobility solutions. Book your session today!"
         />
 
         {/* Robots */}
@@ -26,7 +26,7 @@ export default function Home() {
         <link rel="canonical" href="https://stayinmotionpt.com/" />
 
         {/* Open Graph */}
-        <meta property="og:title" content="Stay in Motion PT | Physical Therapy in Livonia, MI" />
+        <meta property="og:title" content="Stay in Motion PT | Physical Therapy in Wixom, MI" />
         <meta property="og:description" content="Personalized rehab, injury recovery, and mobility solutions to keep you moving pain-free." />
         <meta property="og:url" content="https://stayinmotionpt.com/" />
         <meta property="og:image" content="https://stayinmotionpt.com/PT-Logo.png" />
@@ -45,9 +45,9 @@ export default function Home() {
         {/* Nice UI color on mobile browsers */}
         <meta name="theme-color" content="#0ea5e9" />
         <meta name="geo.region" content="US-MI" />
-        <meta name="geo.placename" content="Livonia" />
-        <meta name="geo.position" content="42.3684;-83.3527" />
-        <meta name="ICBM" content="42.3684, -83.3527" />
+        <meta name="geo.placename" content="Wixom" />
+        <meta name="geo.position" content="42.52;-83.54" />
+        <meta name="ICBM" content="42.52, -83.54" />
 
 
         {/* JSON-LD */}
@@ -62,14 +62,14 @@ export default function Home() {
           "priceRange": "$$",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "123 Main St Suite 100",
-            "addressLocality": "Livonia",
+            "streetAddress": "30990 S Wixom Rd",
+            "addressLocality": "Wixom",
             "addressRegion": "MI",
-            "postalCode": "48150",
+            "postalCode": "48393",
             "addressCountry": "US"
           },
-          "telephone": "+1-734-555-1234",
-          "areaServed": ["Livonia MI","Northville MI","Canton MI","Novi MI","Westland MI"]
+          "telephone": "+1-734-215-7546",
+          "areaServed": ["Wixom MI"."Livonia MI","Northville MI","Canton MI","Novi MI","Westland MI"]
         }
         `}
         </script>
@@ -151,13 +151,13 @@ export default function Home() {
       <section className="bg-white dark:bg-gray-800 px-4 py-12 border-t border-gray-200 dark:border-gray-700">
       <div className="max-w-4xl mx-auto space-y-6 text-center">
         <h2 className="text-3xl font-bold text-primary">
-          Physical Therapy in Livonia, MI
+          Physical Therapy in Wixom, MI
         </h2>
         <p className="text-lg text-gray-700 dark:text-gray-200">
           Welcome to <strong>Stay in Motion Physical Therapy</strong> — your trusted resource for
-          personalized, results-driven care in <strong>Livonia</strong> and surrounding communities
-          like <strong>Northville</strong>, <strong>Canton</strong>, <strong>Novi</strong>, and
-          <strong> Westland</strong>. We help active adults, athletes, and post-surgical patients
+          personalized, results-driven care in <strong>Wixom</strong> and surrounding communities
+          like <strong>Northville</strong>, <strong>Canton</strong>, <strong>Novi</strong>,
+          <strong>Livonia</strong>, and surrounding areas. We help active adults, athletes, and post-surgical patients
           recover faster and return to the activities they love.
         </p>
         <p className="text-gray-700 dark:text-gray-200">
@@ -231,7 +231,7 @@ export default function Home() {
       </ul>
     </div>
     <p className="text-lg font-semibold text-primary">
-      Serving patients throughout Livonia, Northville, Canton, Novi, and Westland.
+      Serving patients throughout Livonia, Northville, Canton, Novi, Wixom, and surrounding areas.
     </p>
   </div>
 </section>
