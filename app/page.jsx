@@ -15,7 +15,7 @@ export const metadata = {
 };
 
 export default function Page() {
-  const videoId = "u31qwQUeGuM";
+  const videoId = "8Bn8P3E8dHc";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -40,7 +40,6 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* === Paste your existing Home.jsx sections below (unchanged). Example hero: === */}
       <section className="bg-cream dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 grid md:grid-cols-2 gap-10 items-center">
           <div>
