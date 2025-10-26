@@ -1,20 +1,20 @@
 export const metadata = {
   metadataBase: new URL("https://stayinmotionpt.com"),
-  title: { default: "Stay in Motion PT | Physical Therapy in Livonia, MI", template: "%s | Stay in Motion PT" },
-  description: "Personalized physical therapy, dry needling, and sports rehab in Livonia, MI.",
+  title: { default: "Stay in Motion PT | Physical Therapy in Wixom, MI", template: "%s | Stay in Motion PT" },
+  description: "Personalized physical therapy, dry needling, and sports rehab in Wixom, MI.",
   robots: "index, follow",
   openGraph: {
     type: "website",
     siteName: "Stay in Motion Physical Therapy",
     url: "https://stayinmotionpt.com",
-    title: "Stay in Motion PT | Physical Therapy in Livonia, MI",
-    description: "Personalized physical therapy, dry needling, and sports rehab in Livonia, MI.",
+    title: "Stay in Motion PT | Physical Therapy in Wixom, MI",
+    description: "Personalized physical therapy, dry needling, and sports rehab in Wixom, MI.",
     images: [{ url: "/og/home.jpg", width: 1200, height: 630 }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Stay in Motion PT | Physical Therapy in Livonia, MI",
-    description: "Personalized physical therapy, dry needling, and sports rehab in Livonia, MI.",
+    title: "Stay in Motion PT | Physical Therapy in Wixom, MI",
+    description: "Personalized physical therapy, dry needling, and sports rehab in Wixom, MI.",
     images: ["/og/home.jpg"],
     site: "@yourhandle",    // <-- update or remove
     creator: "@yourhandle"  // <-- update or remove
@@ -43,10 +43,10 @@ export default function RootLayout({ children }) {
     "medicalSpecialty": "PhysicalTherapy",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "123 Main St Suite 100, Livonia, USA",
-      "addressLocality": "Livoniay",
+      "streetAddress": "30990 Wixom S Rd., Wixom, USA",
+      "addressLocality": "Wixom",
       "addressRegion": "MI",
-      "postalCode": "48135",
+      "postalCode": "48393",
       "addressCountry": "US"
     },
     "openingHoursSpecification": [
@@ -57,7 +57,7 @@ export default function RootLayout({ children }) {
       "https://www.instagram.com/yourpage",
       "https://www.linkedin.com/company/yourpage"
     ],
-    "contactPoint": [{ "@type": "ContactPoint", "telephone": "+1-555-555-5555", "contactType": "customer service" }]
+    "contactPoint": [{ "@type": "ContactPoint", "telephone": "+1-734-215-7546", "contactType": "customer service" }]
   };
 
   return (

@@ -3,13 +3,13 @@ import LiteYouTube from "@/components/LiteYouTube";
 
 
 export const metadata = {
-  title: "Stay in Motion PT | Physical Therapy in Livonia, MI",
-  description: "Personalized physical therapy, dry needling, and sports rehab in Livonia, MI.",
+  title: "Stay in Motion PT | Physical Therapy in Wixom, MI",
+  description: "Personalized physical therapy, dry needling, and sports rehab in Wixom, MI.",
   alternates: { canonical: "https://stayinmotionpt.com/" },
   openGraph: {
     url: "https://stayinmotionpt.com/",
-    title: "Stay in Motion PT | Physical Therapy in Livonia, MI",
-    description: "Personalized physical therapy, dry needling, and sports rehab in Livonia, MI.",
+    title: "Stay in Motion PT | Physical Therapy in Wixom, MI",
+    description: "Personalized physical therapy, dry needling, and sports rehab in Wixom, MI.",
     images: [{ url: "/logo.png" }]
   }
 };
@@ -26,13 +26,13 @@ export default function Page() {
     "telephone": "+1-734-215-7546",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "123 Main St Suite 100, Livonia, USA",
-      "addressLocality": "Livonia",
+      "streetAddress": "30990 S Wixom Rd, Wixom, USA",
+      "addressLocality": "Wixom",
       "addressRegion": "MI",
-      "postalCode": "48135",
+      "postalCode": "48393",
       "addressCountry": "US"
     },
-    "areaServed": ["Livonia","Northville","Canton","Novi","Westland","Garden City"],
+    "areaServed": ["Wixom","Livonia","Northville","Canton","Novi","Westland","Garden City"],
     "priceRange": "$$"
   };
 
@@ -69,10 +69,10 @@ export default function Page() {
        {/* PT / SEO Section */}
       <section className="bg-white dark:bg-gray-600 px-4 py-12 border-t border-gray-200 dark:border-gray-700">
         <div className="max-w-4xl mx-auto space-y-6 text-center">
-          <h2 className="text-3xl font-bold text-primary">Physical Therapy in Livonia, MI</h2>
+          <h2 className="text-3xl font-bold text-primary">Physical Therapy in Wixom, MI</h2>
           <p className="text-lg text-gray-700 dark:text-gray-200">
             Welcome to <strong>Stay in Motion Physical Therapy</strong> — your trusted resource for
-            personalized, results-driven care in <strong>Livonia</strong> and surrounding communities
+            personalized, results-driven care in <strong>Wixom</strong> and surrounding communities
             like <strong>Northville</strong>, <strong>Canton</strong>, <strong>Novi</strong>, and
             <strong> Westland</strong>. We help active adults, athletes, and post-surgical patients
             recover faster and return to the activities they love.
@@ -145,7 +145,7 @@ export default function Page() {
             </ul>
           </div>
           <p className="text-lg font-semibold text-primary">
-            Serving patients throughout Livonia, Northville, Canton, Novi, and Westland.
+            Serving patients throughout Wixom, Livonia, Northville, Canton, Novi, and Westland.
           </p>
         </div>
       </section>

@@ -4,12 +4,12 @@ import ContactForm from "@/components/ContactForm";
 
 export const metadata = {
   title: "Contact | Stay in Motion PT",
-  description: "Reach out to schedule physical therapy in Livonia, MI.",
+  description: "Reach out to schedule physical therapy in Wixom, MI.",
   alternates: { canonical: "https://stayinmotionpt.com/contact" },
   openGraph: {
     url: "https://stayinmotionpt.com/contact",
     title: "Contact | Stay in Motion PT",
-    description: "Reach out to schedule physical therapy in Livonia, MI."
+    description: "Reach out to schedule physical therapy in Wixom, MI."
   }
 };
 
@@ -34,7 +34,7 @@ export default function ContactPage() {
             </p>
             <p className="flex items-center gap-3">
               <FaMapMarkerAlt className="text-primary" />
-              Working to get a location now!
+              30990 S Wixom Rd, Wixom MI, 48393
             </p>
           </div>
         </div>

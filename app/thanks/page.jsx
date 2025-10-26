@@ -72,7 +72,7 @@ export default function Page() {
 
         {/* Subtle badge */}
         <p className="mt-10 text-sm text-gray-600 dark:text-gray-400">
-          Stay in Motion Physical Therapy • Livonia, MI
+          Stay in Motion Physical Therapy • Wixom, MI
         </p>
       </div>
     </section>

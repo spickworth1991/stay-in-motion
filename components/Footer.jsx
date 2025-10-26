@@ -7,7 +7,7 @@ import CallNowBar from "@/components/CallNowBar";
 export default function Footer() {
   const [showMap, setShowMap] = useState(false);
 
-  const address = "123 Main St Suite 100, Livonia, USA";
+  const address = "30990 S Wixom Rd, Wixom, USA";
   const embedSrc =
     "https://maps.google.com/maps" + `?q=${encodeURIComponent(address)}&z=15&output=embed`;
 
@@ -64,7 +64,7 @@ export default function Footer() {
                   />
                   <img
                     src="/photos/clinic-map-380.webp"
-                    alt="Static map preview: 123 Main St Suite 100, Livonia, USA"
+                    alt="Static map preview: 30990 S Wixom Rd, Wixom, USA"
                     className="w-full h-full object-cover"
                     width="380"
                     height="228"
@@ -93,11 +93,41 @@ export default function Footer() {
           <div>
             <h2 className="font-semibold mb-4">Connect With Us</h2>
             <div className="flex space-x-4 mb-4 text-xl">
-              <a href="#"><FaFacebookF aria-label="Facebook" className="hover:text-accent" /></a>
-              <a href="#"><FaInstagram aria-label="Instagram" className="hover:text-accent" /></a>
-              <a href="#"><FaLinkedinIn aria-label="LinkedIn" className="hover:text-accent" /></a>
+              {/* <a
+                href="https://www.facebook.com/stayinmotionpt"       // <-- YOUR PAGE
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook — opens in a new tab"
+                className="hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded-full"
+              >
+                <FaFacebookF />
+                <span className="sr-only">Facebook</span>
+              </a>
+
+              <a
+                href="https://www.instagram.com/stayinmotionpt"      // <-- YOUR PROFILE
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram — opens in a new tab"
+                className="hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded-full"
+              >
+                <FaInstagram />
+                <span className="sr-only">Instagram</span>
+              </a> */}
+
+              <a
+                href="https://www.linkedin.com/in/amanda-pickworth-chrusciel/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn — opens in a new tab"
+                className="hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded-full"
+              >
+                <FaLinkedinIn />
+                <span className="sr-only">LinkedIn</span>
+              </a>
             </div>
-            <p>Working on a location now!</p>
+            <p>30990 S Wixom Rd</p>
+            <p>Wixom MI, 48393</p>
             <p>(734) 215-7546</p>
             <p>Mon – Fri: 8 am – 6 pm</p>
           </div>

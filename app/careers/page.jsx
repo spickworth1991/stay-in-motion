@@ -17,13 +17,13 @@ export const metadata = {
 const positions = [
   {
     title: "Physical Therapist (DPT)",
-    location: "Livonia, MI — Full-time",
+    location: "Wixom, MI — Full-time",
     description:
       "Evaluate, treat, and progress diverse orthopedic and sports cases. Dry needling experience a plus."
   },
   {
     title: "Physical Therapist Assistant (PTA)",
-    location: "Livonia, MI — Part-time",
+    location: "Wixom, MI — Part-time",
     description:
       "Support plan of care execution, patient education, and progression of exercises under PT supervision."
   }
