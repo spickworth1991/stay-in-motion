@@ -60,10 +60,10 @@ export default function Footer() {
                 <picture>
                   <source
                     type="image/webp"
-                    srcSet="/photos/clinic-map-380.webp 1x, /photos/clinic-map-760.webp 2x"
+                    srcSet="/photos/clinic-map-380.webp?v=2 1x, /photos/clinic-map-760.webp?v=2 2x"
                   />
                   <img
-                    src="/photos/clinic-map-380.webp"
+                    src="/photos/clinic-map-380.webp?v=2"
                     alt="Static map preview: 30990 S Wixom Rd, Wixom, USA"
                     className="w-full h-full object-cover"
                     width="380"
