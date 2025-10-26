@@ -97,7 +97,8 @@ export default function Footer() {
               <a href="#"><FaInstagram aria-label="Instagram" className="hover:text-accent" /></a>
               <a href="#"><FaLinkedinIn aria-label="LinkedIn" className="hover:text-accent" /></a>
             </div>
-            <p>30990 S Wixom Rd, Wixom MI, 48393</p>
+            <p>30990 S Wixom Rd</p>
+            <p>Wixom MI, 48393</p>
             <p>(734) 215-7546</p>
             <p>Mon – Fri: 8 am – 6 pm</p>
           </div>
