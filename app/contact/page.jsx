@@ -34,8 +34,7 @@ export default function ContactPage() {
             </p>
             <p className="flex items-center gap-3">
               <FaMapMarkerAlt className="text-primary" />
-              30990 S Wixom Rd
-              Wixom MI, 48393
+              30990 S Wixom Rd, Wixom MI, 48393
             </p>
           </div>
         </div>

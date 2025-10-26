@@ -11,7 +11,7 @@ export default function TeamSection() {
       </h2>
 
       <FounderCard />
-      <HiringCard />
+      {/* <HiringCard /> */}
     </section>
   );
 }
