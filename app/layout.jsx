@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
     "url": "https://stayinmotionpt.com",
     "logo": "https://stayinmotionpt.com/logo_noBG.png",
     "image": "https://stayinmotionpt.com/logo_noBG.png",
-    "telephone": "+1-555-555-5555",
+    "telephone": "+1-734-251-3046",
     "priceRange": "$$",
     "medicalSpecialty": "PhysicalTherapy",
     "address": {
@@ -57,7 +57,7 @@ export default function RootLayout({ children }) {
       "https://www.instagram.com/yourpage",
       "https://www.linkedin.com/company/yourpage"
     ],
-    "contactPoint": [{ "@type": "ContactPoint", "telephone": "+1-734-215-7546", "contactType": "customer service" }]
+    "contactPoint": [{ "@type": "ContactPoint", "telephone": "+1-734-251-3046", "contactType": "customer service" }]
   };
 
   return (

@@ -23,7 +23,7 @@ export default function Page() {
     "name": "Stay in Motion Physical Therapy",
     "url": "https://stayinmotionpt.com/",
     "image": "https://stayinmotionpt.com/logo.png",
-    "telephone": "+1-734-215-7546",
+    "telephone": "+1-734-251-3046",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "30990 S Wixom Rd, Wixom, USA",

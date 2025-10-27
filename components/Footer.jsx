@@ -128,7 +128,7 @@ export default function Footer() {
             </div>
             <p>30990 S Wixom Rd</p>
             <p>Wixom MI, 48393</p>
-            <p>(734) 215-7546</p>
+            <p>(734) 251-3046</p>
             <p>Mon – Fri: 8 am – 6 pm</p>
           </div>
         </div>

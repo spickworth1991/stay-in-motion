@@ -46,8 +46,8 @@ export default function Page() {
         <p className="mt-4 text-base md:text-lg text-gray-700 dark:text-gray-200 leading-relaxed">
           We received your message and will get back to you shortly.
           If it’s urgent, feel free to call us at{" "}
-          <a href="tel:+1-734-215-7546" className="underline decoration-2 underline-offset-2">
-            (734) 215-7546
+          <a href="tel:+1-734-251-3046" className="underline decoration-2 underline-offset-2">
+            (734) 251-3046
           </a>.
         </p>
 
