@@ -133,8 +133,19 @@ export default function Footer() {
           </div>
         </div>
         <p className="mt-10 text-center text-white/80 text-sm">
-        © {new Date().getFullYear()} Stay in Motion Physical Therapy. All rights reserved.
-      </p>
+          © {new Date().getFullYear()} Stay in Motion Physical Therapy. All rights reserved.
+          <br />
+          <span className="text-white/60">
+            Developed by{" "}
+            <a
+              href="mailto:contact.stickypicky@gmail.com"
+              className="hover:text-accent underline decoration-accent/40 decoration-1 underline-offset-2"
+            >
+              StickyPicky
+            </a>
+          </span>
+        </p>
+
       </footer>
 
       <CallNowBar />
