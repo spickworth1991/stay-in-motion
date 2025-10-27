@@ -26,7 +26,7 @@ export default function ContactPage() {
           <div className="mt-8 space-y-4">
             <p className="flex items-center gap-3">
               <FaPhoneAlt className="text-primary" />
-              <a href="tel:+1-734-215-7546" className="underline">(734) 215-7546</a>
+              <a href="tel:+1-734-251-3046" className="underline">(734) 251-3046</a>
             </p>
             <p className="flex items-center gap-3">
               <FaEnvelope className="text-primary" />
