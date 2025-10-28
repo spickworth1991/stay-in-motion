@@ -14,7 +14,8 @@ import {
   FiBookOpen,
   FiPhone,
   FiSun,
-  FiMoon
+  FiMoon,
+  FiMapPin
 } from "react-icons/fi";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
@@ -25,6 +26,7 @@ const NAV_ITEMS = [
   { name: "FAQ", to: "/faq", icon: FiHelpCircle },
   { name: "Insurance", to: "/insurance", icon: FiCreditCard },
   { name: "Resources", to: "/resources", icon: FiBookOpen },
+  { name: "Location", to: "/location", icon: FiMapPin },
   // { name: "Careers", to: "/careers", icon: FiBriefcase },
   { name: "Contact", to: "/contact", icon: FiPhone }
 ];
@@ -251,7 +253,7 @@ export default function Navbar() {
         </div>
 
         <div className="px-6 pb-8 flex space-x-4">
-          <a
+          {/* <a
             href="#"
             aria-label="Facebook"
             className="text-accent hover:text-primary transition text-2xl"
@@ -264,9 +266,9 @@ export default function Navbar() {
             className="text-accent hover:text-primary transition text-2xl"
           >
             <FaInstagram />
-          </a>
+          </a> */}
           <a
-            href="#"
+            href="https://www.linkedin.com/in/amanda-pickworth-chrusciel/"
             aria-label="LinkedIn"
             className="text-accent hover:text-primary transition text-2xl"
           >

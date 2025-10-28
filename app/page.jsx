@@ -3,12 +3,13 @@ import LiteYouTube from "@/components/LiteYouTube";
 
 
 export const metadata = {
-  title: "Stay in Motion PT | Physical Therapy in Wixom, MI",
-  description: "Personalized physical therapy, dry needling, and sports rehab in Wixom, MI.",
+  title: "Physical Therapy in Wixom, MI | Stay in Motion PT",
+  description:
+    "Personalized physical therapy, dry needling, and sports rehab in Wixom, MI. Get back to pain-free movement with Stay in Motion PT.",
   alternates: { canonical: "https://stayinmotionpt.com/" },
   openGraph: {
     url: "https://stayinmotionpt.com/",
-    title: "Stay in Motion PT | Physical Therapy in Wixom, MI",
+    title: "Physical Therapy in Wixom, MI | Stay in Motion PT",
     description: "Personalized physical therapy, dry needling, and sports rehab in Wixom, MI.",
     images: [{ url: "/logo.png" }]
   }
@@ -19,21 +20,33 @@ export default function Page() {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "PhysicalTherapy",
     "name": "Stay in Motion Physical Therapy",
     "url": "https://stayinmotionpt.com/",
     "image": "https://stayinmotionpt.com/logo.png",
     "telephone": "+1-734-251-3046",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "30990 S Wixom Rd, Wixom, USA",
+      "streetAddress": "30990 S Wixom Rd",
       "addressLocality": "Wixom",
       "addressRegion": "MI",
       "postalCode": "48393",
       "addressCountry": "US"
     },
+    "geo": { "@type": "GeoCoordinates", "latitude": 42.524, "longitude": -83.536 },
     "areaServed": ["Wixom","Livonia","Northville","Canton","Novi","Westland","Garden City"],
-    "priceRange": "$$"
+    "priceRange": "$$",
+    "sameAs": [
+      "https://www.facebook.com/stayinmotionpt",
+      "https://www.instagram.com/stayinmotionpt",
+      "https://www.linkedin.com/company/stayinmotionpt"
+    ],
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    }]
   };
 
   return (
@@ -43,19 +56,27 @@ export default function Page() {
       <section className="bg-cream dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 grid md:grid-cols-2 gap-10 items-center">
           <div>
+            {/* SEO H1 */}
             <h1 className="text-4xl md:text-5xl font-extrabold text-primary leading-tight">
-              Get moving. Keep moving. <span className="text-accent">Stay in motion.</span>
+              Physical Therapy in <span className="text-accent">Wixom, MI</span>
             </h1>
-            <p className="mt-4 text-lg text-gray-700 dark:text-gray-200">
-              1-on-1 physical therapy that meets you where you are and gets you back to what you love.
+
+            {/* Brand slogan */}
+            <p className="mt-2 text-2xl md:text-3xl font-semibold text-primary/90 dark:text-accent/90">
+              Get moving. Keep moving. <span className="text-accent">Stay in Motion.</span>
             </p>
+
+            <p className="mt-4 text-lg text-gray-700 dark:text-gray-200">
+              1-on-1 physical therapy, dry needling, and sports rehab that gets you back to what you love.
+            </p>
+
             <div className="mt-8 flex gap-4">
-              <a href="/contact" className="px-6 py-3 rounded-xl bg-primary text-white hover:opacity-90 transition">
+              <Link href="/contact" className="px-6 py-3 rounded-xl bg-primary text-white hover:opacity-90 transition">
                 Book an Appointment
-              </a>
-              <a href="/services" className="px-6 py-3 rounded-xl border border-primary text-primary hover:bg-primary hover:text-white transition">
+              </Link>
+              <Link href="/services" className="px-6 py-3 rounded-xl border border-primary text-primary hover:bg-primary hover:text-white transition">
                 View Services
-              </a>
+              </Link>
             </div>
           </div>
 
