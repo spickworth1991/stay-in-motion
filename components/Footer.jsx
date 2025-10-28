@@ -29,7 +29,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li><a href="/" className="hover:text-accent">Home</a></li>
               <li><a href="/about" className="hover:text-accent">About</a></li>
-              <li><a href="/FAQ" className="hover:text-accent">FAQ</a></li>
+              <li><a href="/faq" className="hover:text-accent">FAQ</a></li>
               <li><a href="/services" className="hover:text-accent">Services</a></li>
               <li><a href="/contact" className="hover:text-accent">Contact</a></li>
             </ul>
@@ -37,7 +37,11 @@ export default function Footer() {
 
           {/* Map */}
           <div>
-            <h2 className="font-semibold mb-4">Our Location</h2>
+            <h2 className="font-semibold mb-4">
+              <a href="/location" className="hover:text-accent underline decoration-accent/40 underline-offset-4">
+                Our Location
+              </a>
+            </h2>
 
             <div
               className="w-full h-40 rounded-lg overflow-hidden cursor-pointer"
@@ -73,6 +77,11 @@ export default function Footer() {
                   />
                 </picture>
               )}
+               <p className="mt-2 text-sm">
+                  <a href="/location" className="underline decoration-accent/40 hover:text-accent">
+                    View directions & parking →
+                  </a>
+                </p>
             </div>
 
             {/* No-JS fallback: link to Google Maps */}
