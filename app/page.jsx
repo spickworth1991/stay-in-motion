@@ -57,8 +57,8 @@ export default function Page() {
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 grid md:grid-cols-2 gap-10 items-center">
           <div>
             {/* SEO H1 */}
-            <h1 className="text-4xl md:text-5xl font-extrabold text-primary leading-tight">
-              Physical Therapy in <span className="text-accent">Wixom, MI</span>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-primary/90 dark:text-accent/90 leading-tight">
+              Physical Therapy in <span className="text-accent dark:text-primary/90">Wixom, MI</span>
             </h1>
 
             {/* Brand slogan */}
