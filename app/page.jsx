@@ -63,7 +63,7 @@ export default function Page() {
 
             {/* Brand slogan */}
             <p className="mt-2 text-2xl md:text-3xl font-semibold text-primary/90 dark:text-accent/90">
-              Get moving. Keep moving. <span className="text-accent">Stay in Motion.</span>
+              Get moving. Keep moving. <span className="text-accent dark:text-primary/90">Stay in Motion.</span>
             </p>
 
             <p className="mt-4 text-lg text-gray-700 dark:text-gray-200">
