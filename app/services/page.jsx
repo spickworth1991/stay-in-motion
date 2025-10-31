@@ -1,3 +1,4 @@
+// app/services/page.jsx
 import ServicesSection from "@/components/ServicesSection";
 
 export const metadata = {
@@ -12,12 +13,6 @@ export const metadata = {
       "Personalized physical therapy, dry needling, and sports rehab in Wixom, MI.",
     images: [{ url: "https://stayinmotionpt.com/logo.png" }],
   },
-  // twitter: {
-  //   card: "summary",
-  //   title: "Physical Therapy & Dry Needling in Wixom, MI | Services",
-  //   description:
-  //     "PT, dry needling, strength training, and prevention in Wixom, MI.",
-  // },
 };
 
 export default function Page() {
@@ -36,9 +31,17 @@ export default function Page() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesLd) }} />
-      <section className="pt-10 px-4 md:px-8">
-        <h1 className="sr-only">Physical Therapy & Dry Needling in Wixom, MI</h1>
+      <section className="text-center pt-10 px-4 md:px-8">
+        <h1 className="text-2xl md:text-3xl font-bold text-primary mb-6">
+          Physical Therapy & Dry Needling in Wixom, MI
+        </h1>
+        <p className="max-w-3xl mx-auto text-center text-gray-700 dark:text-gray-200">
+          We provide one-on-one care tailored to your goals—manual therapy, dry needling, progressive strength,
+          and education that fits your life.
+        </p>
       </section>
+
+
       <ServicesSection />
     </>
   );

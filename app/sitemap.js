@@ -6,6 +6,11 @@ export default function sitemap() {
     "/",            // home
     "/about",
     "/services",
+    "/services/physical-therapy",
+    "/services/dry-needling",
+    "/services/manual-therapy",
+    "/services/strength-training",
+    "/services/education-injury-prevention",
     "/insurance",
     "/faq",
     "/resources",

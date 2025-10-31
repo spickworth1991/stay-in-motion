@@ -1,9 +1,11 @@
 // src/components/ServiceCard.jsx
-import { IconContext } from "react-icons"
-import { useState } from "react"
+import Link from "next/link";
+import { IconContext } from "react-icons";
+import { useState } from "react";
 
-export default function ServiceCard({ icon: Icon, title, description }) {
-  const [show, setShow] = useState(false)
+export default function ServiceCard({ icon: Icon, title, description, href }) {
+  const [show, setShow] = useState(false);
+
   return (
     <div
       className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transition-transform hover:scale-105 hover:shadow-2xl relative"
@@ -14,15 +16,23 @@ export default function ServiceCard({ icon: Icon, title, description }) {
       <IconContext.Provider value={{ className: "text-accent text-4xl mb-4" }}>
         <Icon />
       </IconContext.Provider>
-      <h3 className="text-xl dark:text-gray-500 font-semibold mb-2">{title}</h3>
-      {!show && (
-        <p className="text-gray-600 dark:text-gray-200">{description.split(".")[0]}.</p>
-      )}
-      {show && (
-        <div className="mt-4 text-gray-700 dark:text-gray-200">
-          {description}
+
+      <h3 className="text-xl text-gray-900 dark:text-gray-100 font-semibold mb-2">{title}</h3>
+
+      {!show && <p className="text-gray-600 dark:text-gray-200">{description.split(".")[0]}.</p>}
+
+      {show && <div className="mt-2 text-gray-700 dark:text-gray-200">{description}</div>}
+
+      {href && (
+        <div className="mt-4">
+          <Link
+            href={href}
+            className="text-primary underline underline-offset-4 hover:no-underline focus:outline-none focus:ring-2 focus:ring-primary/40 rounded"
+          >
+            Learn more
+          </Link>
         </div>
       )}
     </div>
-  )
+  );
 }

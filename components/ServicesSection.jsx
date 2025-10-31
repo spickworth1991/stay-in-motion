@@ -3,33 +3,38 @@
 // src/components/ServicesSection.jsx
 import { motion } from "framer-motion";
 import ServiceCard from "./ServiceCard";
-import { FaHands, FaHeartbeat, FaDumbbell, FaRegLightbulb } from "react-icons/fa";
+import { FaHands, FaDumbbell, FaRegLightbulb } from "react-icons/fa";
+import { FaSyringe } from "react-icons/fa6"; // Cleaner needle icon for Dry Needling
 
 const services = [
   {
     icon: FaHands,
     title: "Manual Therapy",
     description:
-      "Our therapists use proven manual techniques—joint mobilization, soft-tissue release, myofascial stretches—to relieve pain and improve function."
+      "Our therapists use proven manual techniques—joint mobilization, soft-tissue release, myofascial stretches—to relieve pain and improve function.",
+    href: "/services/manual-therapy",
   },
   {
-    icon: FaHeartbeat,
+    icon: FaSyringe,
     title: "Dry Needling",
     description:
-      "Fine-gauge needles penetrate tense muscle bands to reduce pain, improve blood flow, and restore muscle function rapidly."
+      "Fine-gauge needles penetrate tense muscle bands to reduce pain, improve blood flow, and restore muscle function rapidly.",
+    href: "/services/dry-needling",
   },
   {
     icon: FaDumbbell,
     title: "Strength Training",
     description:
-      "Customized resistance and functional exercise plans designed to rebuild muscle, protect joints, and enhance performance."
+      "Customized resistance and functional exercise plans designed to rebuild muscle, protect joints, and enhance performance.",
+    href: "/services/strength-training",
   },
   {
     icon: FaRegLightbulb,
     title: "Education & Prevention",
     description:
-      "Learn posture correction, ergonomic strategies, and home-program exercises tailored to your lifestyle."
-  }
+      "Learn posture correction, ergonomic strategies, and home-program exercises tailored to your lifestyle.",
+    href: "/services/education-injury-prevention",
+  },
 ];
 
 export default function ServicesSection() {
@@ -47,7 +52,7 @@ export default function ServicesSection() {
             transition={{ duration: 0.6, delay: i * 0.1 }}
             className="relative"
           >
-            <ServiceCard icon={s.icon} title={s.title} description={s.description} />
+            <ServiceCard icon={s.icon} title={s.title} description={s.description} href={s.href} />
           </motion.div>
         ))}
       </div>
