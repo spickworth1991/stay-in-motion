@@ -282,7 +282,7 @@ export default function AdminPostsPage() {
       </div>
 
       {/* Create / Edit form */}
-      <section className="rounded-xl border border-white/10 bg-white dark:bg-gray-900 p-5 mb-10">
+      <section className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-md">
         <h2 className="text-xl font-semibold mb-4">{editing ? "Edit Post" : "Create New"}</h2>
         <form onSubmit={editing ? handleUpdate : handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <label className="block">
