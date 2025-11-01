@@ -268,7 +268,7 @@ export default function AdminPostsPage() {
   return (
     <main className="max-w-5xl mx-auto px-4 py-10">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Posts / Coupons</h1>
+        <h1 className="text-2xl text-primary font-bold">Posts / Coupons</h1>
         <button
           className="btn btn-ghost"
           onClick={async () => {
@@ -282,13 +282,13 @@ export default function AdminPostsPage() {
       </div>
 
       {/* Create / Edit form */}
-      <section className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-md">
+      <section className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow space-y-4 mb-8">
         <h2 className="text-xl font-semibold mb-4">{editing ? "Edit Post" : "Create New"}</h2>
         <form onSubmit={editing ? handleUpdate : handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <label className="block">
-            <span className="text-sm">Title *</span>
+            <span className="text-gray-600 dark:text-gray-300 text-sm">Title *</span>
             <input
-              className="w-full border rounded px-3 py-2"
+              className="mt-1 w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent px-3 py-2"
               required
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
@@ -296,17 +296,18 @@ export default function AdminPostsPage() {
           </label>
 
           <label className="block md:col-span-2">
-            <span className="text-sm">Body</span>
+            <span className=" text-gray-600 dark:text-gray-300 text-sm">Body</span>
             <textarea
-              className="w-full border rounded px-3 py-2 h-28"
+              className="mt-1 w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent px-3 py-2"
               value={form.body}
               onChange={(e) => setForm({ ...form, body: e.target.value })}
             />
           </label>
 
           <label className="block">
-            <span className="text-sm">Image (optional)</span>
+            <span className="text-gray-600 dark:text-gray-300 text-sm">Image (optional)</span>
             <input
+              className="mt-1 w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent px-3 py-2"
               type="file"
               accept="image/*"
               onChange={(e) => setForm({ ...form, imageFile: e.target.files?.[0] || null })}
@@ -324,19 +325,19 @@ export default function AdminPostsPage() {
           </div>
 
           <label className="block">
-            <span className="text-sm">Expires At (optional)</span>
+            <span className="text-gray-600 dark:text-gray-300 text-sm">Expires At (optional)</span>
             <input
               type="datetime-local"
-              className="border rounded px-3 py-2 w-full"
+              className="mt-1 w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent px-3 py-2"
               value={form.expires_at}
               onChange={(e) => setForm({ ...form, expires_at: e.target.value })}
             />
           </label>
 
           <label className="block md:col-span-2">
-            <span className="text-sm">Tags (comma-separated)</span>
+            <span className="text-gray-600 dark:text-gray-300 text-sm">Tags (comma-separated)</span>
             <input
-              className="w-full border rounded px-3 py-2"
+              className="mt-1 w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent px-3 py-2"
               placeholder="Announcement, Event, Coupon"
               value={form.tags}
               onChange={(e) => setForm({ ...form, tags: e.target.value })}
@@ -360,7 +361,7 @@ export default function AdminPostsPage() {
       </section>
 
       {/* List */}
-      <section className="rounded-xl border border-white/10 bg-white dark:bg-gray-900 p-5">
+      <section className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow space-y-4">
         <h2 className="text-xl font-semibold mb-4">Recent Posts</h2>
         {loading ? (
           <p>Loading…</p>
@@ -369,12 +370,12 @@ export default function AdminPostsPage() {
             <table className="w-full text-left border-separate border-spacing-y-2">
               <thead className="text-sm text-gray-500">
                 <tr>
-                  <th className="px-3">Title</th>
-                  <th className="px-3">Type</th>
-                  <th className="px-3">Tags</th>
-                  <th className="px-3 whitespace-nowrap">Expires</th>
-                  <th className="px-3 whitespace-nowrap">Created</th>
-                  <th className="px-3">Actions</th>
+                  <th className="px-3 text-gray-600 dark:text-gray-300">Title</th>
+                  <th className="px-3 text-gray-600 dark:text-gray-300">Type</th>
+                  <th className="px-3 text-gray-600 dark:text-gray-300">Tags</th>
+                  <th className="px-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">Expires</th>
+                  <th className="px-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">Created</th>
+                  <th className="px-3 text-gray-600 dark:text-gray-300">Actions</th>
                 </tr>
               </thead>
               <tbody>

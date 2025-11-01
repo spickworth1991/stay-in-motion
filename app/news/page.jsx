@@ -3,6 +3,18 @@
 import { useEffect, useMemo, useState } from "react";
 import { getSupabase } from "@/lib/supabaseClient";
 
+// ---- shared styles: identical look to Login/Admin cards ----
+const cardCls =
+  "relative bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow p-6 transition hover:shadow-lg hover:-translate-y-[2px]";
+const pillCls =
+  "text-xs px-2 py-0.5 rounded-full bg-gray-200 dark:bg-gray-800";
+const chipBase =
+  "text-sm px-3 py-1 rounded-full border transition";
+const chipActive =
+  "bg-primary text-white border-primary";
+const chipIdle =
+  "bg-transparent text-primary border-primary hover:bg-primary/10";
+
 // helpers
 function splitAndSort(rows) {
   const now = new Date();
@@ -97,19 +109,20 @@ export default function NewsPage() {
   const display = [...activeCoupons, ...nonCoupons, ...expiredCoupons];
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold text-primary mb-2">News & Updates</h1>
-      <p className="text-gray-700 dark:text-gray-200 mb-6">
-        Latest announcements, events, and occasional promotions.
-      </p>
+    <main className="max-w-3xl mx-auto px-4 py-12">
+      {/* Consistent header block */}
+      <header className="mb-8">
+        <h1 className="text-3xl font-bold text-primary">News & Updates</h1>
+        <p className="mt-2 text-gray-700 dark:text-gray-200">
+          Latest announcements, events, and occasional promotions.
+        </p>
+      </header>
 
       {/* Tag filters */}
       <div className="flex flex-wrap items-center gap-2 mb-8">
         <button
           onClick={() => setActiveTag("")}
-          className={`text-sm px-3 py-1 rounded-full border ${
-            !activeTag ? "bg-primary text-white border-primary" : "bg-transparent text-primary border-primary"
-          }`}
+          className={`${chipBase} ${!activeTag ? chipActive : chipIdle}`}
         >
           All
         </button>
@@ -117,28 +130,32 @@ export default function NewsPage() {
           <button
             key={t}
             onClick={() => setActiveTag(t)}
-            className={`text-sm px-3 py-1 rounded-full border ${
-              activeTag === t ? "bg-primary text-white border-primary" : "bg-transparent text-primary border-primary"
-            }`}
+            className={`${chipBase} ${activeTag === t ? chipActive : chipIdle}`}
           >
             {t}
           </button>
         ))}
       </div>
 
-      {loading ? <p>Loading…</p> : (
+      {loading ? (
+        <p>Loading…</p>
+      ) : (
         <ul className="space-y-6">
           {display.map((p) => {
             const expired = isExpired(p);
             const tags = getDisplayTags(p);
 
-            const cardBase = "relative rounded-xl border shadow p-5 transition";
-            const cardStyle = expired
-              ? "border-gray-300 bg-gray-50 dark:bg-gray-800/40 opacity-80 grayscale"
-              : "border-white/10 bg-white dark:bg-gray-900";
-
             return (
-              <li key={p.id} className={`${cardBase} ${cardStyle}`}>
+              <li
+                key={p.id}
+                className={
+                  cardCls +
+                  (expired
+                    ? " border-gray-300 bg-gray-50 dark:bg-gray-800/40 opacity-85 grayscale"
+                    : "")
+                }
+              >
+                {/* Expired ribbon */}
                 {expired && (
                   <div className="absolute -top-2 -right-2">
                     <div className="rotate-12 rounded bg-gray-200 text-gray-700 text-[10px] font-semibold px-2 py-1 shadow">
@@ -151,12 +168,13 @@ export default function NewsPage() {
                   <div>
                     <h2 className="text-xl font-semibold">{p.title}</h2>
                     {!!tags.length && (
-                      <div className="mt-1 flex flex-wrap gap-2">
+                      <div className="mt-2 flex flex-wrap gap-2">
                         {tags.map((t) => (
                           <button
                             key={t}
                             onClick={() => setActiveTag(t)}
-                            className="text-xs px-2 py-0.5 rounded bg-gray-200 dark:bg-gray-800"
+                            className={pillCls}
+                            title={`Filter by ${t}`}
                           >
                             {t}
                           </button>
@@ -166,32 +184,55 @@ export default function NewsPage() {
                   </div>
 
                   {p.is_coupon && (
-                    <span className={`text-xs px-2 py-1 rounded ${expired ? "bg-gray-300 text-gray-700" : "bg-green-200 text-green-900"}`}>
+                    <span
+                      className={`text-xs px-2 py-1 rounded ${
+                        expired
+                          ? "bg-gray-300 text-gray-700"
+                          : "bg-green-200 text-green-900"
+                      }`}
+                    >
                       {expired ? "Coupon (Expired)" : "Coupon"}
                     </span>
                   )}
                 </div>
 
                 {p.image_url && (
-                  <div className={`mt-3 ${expired ? "opacity-80" : ""}`}>
-                    <img src={p.image_url} alt={p.title} className="rounded-lg w-full h-auto" />
+                  <div className={`mt-4 ${expired ? "opacity-80" : ""}`}>
+                    <img
+                      src={p.image_url}
+                      alt={p.title}
+                      className="rounded-lg w-full h-auto"
+                      loading="lazy"
+                    />
                   </div>
                 )}
 
                 {p.body && (
-                  <p className={`mt-3 whitespace-pre-line ${expired ? "text-gray-500 dark:text-gray-300" : "text-gray-700 dark:text-gray-200"}`}>
+                  <p
+                    className={`mt-4 whitespace-pre-line ${
+                      expired
+                        ? "text-gray-500 dark:text-gray-300"
+                        : "text-gray-700 dark:text-gray-200"
+                    }`}
+                  >
                     {p.body}
                   </p>
                 )}
 
-                <div className="mt-3 text-xs text-gray-500">
+                <div className="mt-4 text-xs text-gray-500">
                   Posted {new Date(p.created_at).toLocaleString()}
-                  {p.is_coupon && p.expires_at && <> • Expires {new Date(p.expires_at).toLocaleString()}</>}
+                  {p.is_coupon && p.expires_at && (
+                    <> • Expires {new Date(p.expires_at).toLocaleString()}</>
+                  )}
                 </div>
               </li>
             );
           })}
-          {!display.length && <p>No posts found.</p>}
+          {!display.length && (
+            <li className={cardCls}>
+              <p className="text-gray-600 dark:text-gray-300">No posts found.</p>
+            </li>
+          )}
         </ul>
       )}
     </main>
