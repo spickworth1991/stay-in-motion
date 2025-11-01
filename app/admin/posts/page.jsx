@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { getSupabase } from "@/lib/supabaseClient";
 
+// ------- helpers -------
 function sortForDisplay(rows) {
   const now = new Date();
   const activeCoupons = [];
@@ -24,45 +25,66 @@ function sortForDisplay(rows) {
     const bTime = b.expires_at ? new Date(b.expires_at).getTime() : Number.MAX_SAFE_INTEGER;
     return aTime - bTime || new Date(b.created_at) - new Date(a.created_at);
   });
-
   nonCoupons.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
   expiredCoupons.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
   return [...activeCoupons, ...nonCoupons, ...expiredCoupons];
 }
 
+function parseAdmins() {
+  return (process.env.NEXT_PUBLIC_ADMIN_EMAILS || "")
+    .split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean);
+}
+
 export default function AdminPostsPage() {
   const [user, setUser] = useState(null);
+  const [userChecked, setUserChecked] = useState(false); // we’ll wait for this before fetching
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const [editing, setEditing] = useState(null);
   const [form, setForm] = useState({
-    title: "", body: "", tags: "", is_coupon: false, expires_at: "", imageFile: null, image_url: ""
+    title: "",
+    body: "",
+    tags: "",
+    is_coupon: false,
+    expires_at: "",
+    imageFile: null,
+    image_url: ""
   });
 
+  const ADMIN_EMAILS = useMemo(parseAdmins, []);
+  const isAdmin = !!user && ADMIN_EMAILS.includes((user?.email || "").toLowerCase());
+
+  // Check user once on mount
   useEffect(() => {
     const supabase = getSupabase();
-    if (!supabase) return; // static export pass
-
-    supabase.auth.getUser().then(({ data }) => setUser(data.user || null));
+    if (!supabase) { setUserChecked(true); return; }
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user || null);
+      setUserChecked(true);
+    });
   }, []);
 
-  async function fetchPosts() {
-    setLoading(true);
-    const supabase = getSupabase();
-    if (!supabase) { setLoading(false); return; }
-
-    const { data, error } = await supabase
-      .from("posts")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(200);
-
-    if (!error) setPosts(data || []);
-    setLoading(false);
-  }
-  useEffect(() => { fetchPosts(); }, []);
+  // Fetch posts only if we have a user AND they’re allowed
+  useEffect(() => {
+    async function run() {
+      if (!userChecked || !isAdmin) return;
+      setLoading(true);
+      const supabase = getSupabase();
+      if (!supabase) { setLoading(false); return; }
+      const { data, error } = await supabase
+        .from("posts")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(200);
+      if (!error) setPosts(data || []);
+      setLoading(false);
+    }
+    run();
+  }, [userChecked, isAdmin]);
 
   function resetForm() {
     setEditing(null);
@@ -71,15 +93,14 @@ export default function AdminPostsPage() {
 
   async function handleUploadImage(file) {
     if (!file) return null;
-
     const supabase = getSupabase();
     if (!supabase) throw new Error("Please try again in the browser.");
-
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new Error("You are signed out. Please log in again.");
 
     const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
-    const key = `${(globalThis.crypto && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2))}.${ext}`;
+    const rand = (globalThis.crypto && crypto.randomUUID) ? crypto.randomUUID() : Math.random().toString(36).slice(2);
+    const key = `${rand}.${ext}`;
 
     const { error: upErr } = await supabase.storage.from("news").upload(key, file, {
       cacheControl: "3600",
@@ -95,7 +116,6 @@ export default function AdminPostsPage() {
   function buildTagsArray(raw, isCoupon) {
     const seen = new Set();
     const out = [];
-
     const push = (t) => {
       const key = (t || "").trim();
       if (!key) return;
@@ -105,7 +125,6 @@ export default function AdminPostsPage() {
         out.push(key[0].toUpperCase() + key.slice(1));
       }
     };
-
     (raw || "").split(",").forEach((t) => push(t));
     if (isCoupon) push("Coupon");
     return out;
@@ -113,7 +132,7 @@ export default function AdminPostsPage() {
 
   async function handleCreate(e) {
     e.preventDefault();
-
+    if (!isAdmin) return;
     const supabase = getSupabase();
     if (!supabase) return alert("Please open this page in a browser.");
     const { data: { user } } = await supabase.auth.getUser();
@@ -122,9 +141,7 @@ export default function AdminPostsPage() {
     try {
       let image_url = form.image_url || null;
       if (form.imageFile) image_url = await handleUploadImage(form.imageFile);
-
       const tags = buildTagsArray(form.tags, form.is_coupon);
-
       const { error } = await supabase.from("posts").insert({
         title: form.title.trim(),
         body: form.body.trim(),
@@ -134,9 +151,10 @@ export default function AdminPostsPage() {
         tags,
       });
       if (error) throw error;
-
       resetForm();
-      fetchPosts();
+      // refetch
+      const { data } = await supabase.from("posts").select("*").order("created_at", { ascending: false }).limit(200);
+      setPosts(data || []);
     } catch (err) {
       alert(err.message || "Failed to create");
     }
@@ -144,7 +162,7 @@ export default function AdminPostsPage() {
 
   async function handleUpdate(e) {
     e.preventDefault();
-
+    if (!isAdmin) return;
     const supabase = getSupabase();
     if (!supabase) return alert("Please open this page in a browser.");
     const { data: { user } } = await supabase.auth.getUser();
@@ -153,9 +171,7 @@ export default function AdminPostsPage() {
     try {
       let image_url = form.image_url || editing?.image_url || null;
       if (form.imageFile) image_url = await handleUploadImage(form.imageFile);
-
       const tags = buildTagsArray(form.tags, form.is_coupon);
-
       const { error } = await supabase
         .from("posts")
         .update({
@@ -168,22 +184,25 @@ export default function AdminPostsPage() {
         })
         .eq("id", editing.id);
       if (error) throw error;
-
       resetForm();
-      fetchPosts();
+      // refetch
+      const { data } = await supabase.from("posts").select("*").order("created_at", { ascending: false }).limit(200);
+      setPosts(data || []);
     } catch (err) {
       alert(err.message || "Failed to update");
     }
   }
 
   async function handleDelete(id) {
+    if (!isAdmin) return;
     if (!confirm("Delete this post?")) return;
-
     const supabase = getSupabase();
     if (!supabase) return;
-
     const { error } = await supabase.from("posts").delete().eq("id", id);
-    if (!error) fetchPosts();
+    if (!error) {
+      const { data } = await supabase.from("posts").select("*").order("created_at", { ascending: false }).limit(200);
+      setPosts(data || []);
+    }
   }
 
   function beginEdit(p) {
@@ -201,15 +220,51 @@ export default function AdminPostsPage() {
 
   const display = useMemo(() => sortForDisplay(posts), [posts]);
 
-  if (!user) {
+  // ---------- gated renders ----------
+  if (!userChecked) {
     return (
       <main className="max-w-xl mx-auto px-4 py-10">
-        <h1 className="text-2xl font-bold mb-4">Admin</h1>
-        <p>You must be signed in. <a href="/admin/login" className="text-primary underline">Go to login</a></p>
+        <p>Checking access…</p>
       </main>
     );
   }
 
+  if (!user) {
+    return (
+      <main className="max-w-xl mx-auto px-4 py-10 text-center">
+        <h1 className="text-2xl font-bold mb-2">Access required</h1>
+        <p className="text-gray-600 dark:text-gray-300">
+          Sorry, you do not have access to this page. Only admins have access here.
+          If this is a mistake, please contact the site developer.
+        </p>
+        <a href="/admin/login" className="inline-block mt-6 btn btn-primary">Go to Login</a>
+      </main>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <main className="max-w-xl mx-auto px-4 py-10 text-center">
+        <h1 className="text-2xl font-bold mb-2">No access</h1>
+        <p className="text-gray-600 dark:text-gray-300">
+          Sorry, you do not have access to this page. Only admins have access here.
+          If this is a mistake, please contact the site developer.
+        </p>
+        <button
+          className="inline-block mt-6 btn btn-ghost"
+          onClick={async () => {
+            const supabase = getSupabase();
+            if (supabase) await supabase.auth.signOut();
+            location.href = "/admin/login";
+          }}
+        >
+          Sign out
+        </button>
+      </main>
+    );
+  }
+
+  // ---------- admin UI ----------
   return (
     <main className="max-w-5xl mx-auto px-4 py-10">
       <div className="flex items-center justify-between mb-6">
@@ -229,7 +284,6 @@ export default function AdminPostsPage() {
       {/* Create / Edit form */}
       <section className="rounded-xl border border-white/10 bg-white dark:bg-gray-900 p-5 mb-10">
         <h2 className="text-xl font-semibold mb-4">{editing ? "Edit Post" : "Create New"}</h2>
-
         <form onSubmit={editing ? handleUpdate : handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <label className="block">
             <span className="text-sm">Title *</span>
