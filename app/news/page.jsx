@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
+import { getSupabase } from "@/lib/supabaseClient";
 
-// --- helpers ---
+// helpers
 function splitAndSort(rows) {
   const now = new Date();
   const activeCoupons = [];
@@ -20,17 +20,13 @@ function splitAndSort(rows) {
     }
   }
 
-  // Active coupons: soonest expiry first, tiebreak by newest
   activeCoupons.sort((a, b) => {
     const aTime = a.expires_at ? new Date(a.expires_at).getTime() : Number.MAX_SAFE_INTEGER;
     const bTime = b.expires_at ? new Date(b.expires_at).getTime() : Number.MAX_SAFE_INTEGER;
     return aTime - bTime || new Date(b.created_at) - new Date(a.created_at);
   });
 
-  // Non-coupons newest first
   nonCoupons.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-
-  // Expired coupons newest first (but shown at bottom)
   expiredCoupons.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
   return { activeCoupons, nonCoupons, expiredCoupons };
@@ -40,15 +36,10 @@ function isExpired(row) {
   return row.is_coupon && row.expires_at && new Date(row.expires_at) < new Date();
 }
 
-// Inject dynamic tags at render time so old rows still filter correctly
 function getDisplayTags(row) {
   const base = (row.tags || []).slice();
-  // ensure "Coupon" appears for active coupons
-  if (row.is_coupon && !isExpired(row) && !base.some(t => t.toLowerCase() === "coupon"))
-    base.push("Coupon");
-  // append "Coupon (Expired)" for expired coupons
-  if (isExpired(row) && !base.some(t => t.toLowerCase() === "coupon (expired)"))
-    base.push("Coupon (Expired)");
+  if (row.is_coupon && !isExpired(row) && !base.some(t => t.toLowerCase() === "coupon")) base.push("Coupon");
+  if (isExpired(row) && !base.some(t => t.toLowerCase() === "coupon (expired)")) base.push("Coupon (Expired)");
   return base;
 }
 
@@ -58,6 +49,9 @@ export default function NewsPage() {
   const [activeTag, setActiveTag] = useState("");
 
   useEffect(() => {
+    const supabase = getSupabase();
+    if (!supabase) { setLoading(false); return; }
+
     let mounted = true;
     (async () => {
       const { data, error } = await supabase
@@ -72,17 +66,14 @@ export default function NewsPage() {
     return () => { mounted = false; };
   }, []);
 
-  // Build tag list from data + dynamic coupon tags
   const allTags = useMemo(() => {
     const set = new Set();
-    let sawActive = false;
-    let sawExpired = false;
+    let sawActive = false, sawExpired = false;
 
     for (const r of rows) {
       (r.tags || []).forEach(t => set.add(t));
       if (r.is_coupon) {
-        if (isExpired(r)) sawExpired = true;
-        else sawActive = true;
+        if (isExpired(r)) sawExpired = true; else sawActive = true;
       }
     }
     if (sawActive) set.add("Coupon");
@@ -91,17 +82,11 @@ export default function NewsPage() {
     return Array.from(set).sort((a, b) => a.localeCompare(b));
   }, [rows]);
 
-  // Filter logic supports dynamic coupon tags
   const filtered = useMemo(() => {
     if (!activeTag) return rows;
-
     const tagLower = activeTag.toLowerCase();
-    if (tagLower === "coupon") {
-      return rows.filter(r => r.is_coupon && !isExpired(r));
-    }
-    if (tagLower === "coupon (expired)") {
-      return rows.filter(r => r.is_coupon && isExpired(r));
-    }
+    if (tagLower === "coupon") return rows.filter(r => r.is_coupon && !isExpired(r));
+    if (tagLower === "coupon (expired)") return rows.filter(r => r.is_coupon && isExpired(r));
     return rows.filter(r => (r.tags || []).some(t => t.toLowerCase() === tagLower));
   }, [rows, activeTag]);
 
@@ -109,7 +94,6 @@ export default function NewsPage() {
     () => splitAndSort(filtered),
     [filtered]
   );
-
   const display = [...activeCoupons, ...nonCoupons, ...expiredCoupons];
 
   return (
@@ -148,17 +132,13 @@ export default function NewsPage() {
             const expired = isExpired(p);
             const tags = getDisplayTags(p);
 
-            // premium-looking expired style:
-            // subtle grayscale, lower opacity, thin gray ring, diagonally-striped overlay ribbon
-            const cardBase =
-              "relative rounded-xl border shadow p-5 transition";
+            const cardBase = "relative rounded-xl border shadow p-5 transition";
             const cardStyle = expired
               ? "border-gray-300 bg-gray-50 dark:bg-gray-800/40 opacity-80 grayscale"
               : "border-white/10 bg-white dark:bg-gray-900";
 
             return (
               <li key={p.id} className={`${cardBase} ${cardStyle}`}>
-                {/* Expired ribbon */}
                 {expired && (
                   <div className="absolute -top-2 -right-2">
                     <div className="rotate-12 rounded bg-gray-200 text-gray-700 text-[10px] font-semibold px-2 py-1 shadow">
@@ -186,11 +166,7 @@ export default function NewsPage() {
                   </div>
 
                   {p.is_coupon && (
-                    <span
-                      className={`text-xs px-2 py-1 rounded ${
-                        expired ? "bg-gray-300 text-gray-700" : "bg-green-200 text-green-900"
-                      }`}
-                    >
+                    <span className={`text-xs px-2 py-1 rounded ${expired ? "bg-gray-300 text-gray-700" : "bg-green-200 text-green-900"}`}>
                       {expired ? "Coupon (Expired)" : "Coupon"}
                     </span>
                   )}

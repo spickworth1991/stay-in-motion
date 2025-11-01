@@ -1,6 +1,8 @@
 "use client";
+
+
 import { useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
+import { getSupabase } from "@/lib/supabaseClient";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
@@ -9,10 +11,23 @@ export default function AdminLogin() {
   async function onSubmit(e) {
     e.preventDefault();
     setMsg("Sending magic link…");
+
+    const supabase = getSupabase();
+    if (!supabase) {
+      setMsg("Please open this page in a browser.");
+      return;
+    }
+
+    const site =
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      process.env.SITE_URL ||
+      (typeof window !== "undefined" ? window.location.origin : "http://localhost:3000");
+
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "http://localhost:3000"}/admin/posts` }
+      options: { emailRedirectTo: `${site}/admin/posts` },
     });
+
     setMsg(error ? error.message : "Check your email for the magic link.");
   }
 
@@ -28,7 +43,9 @@ export default function AdminLogin() {
           className="w-full border rounded px-3 py-2"
           placeholder="you@yourdomain.com"
         />
-        <button className="btn btn-primary w-full" type="submit">Send Magic Link</button>
+        <button className="btn btn-primary w-full" type="submit">
+          Send Magic Link
+        </button>
         {msg && <p className="text-sm mt-2">{msg}</p>}
       </form>
     </main>

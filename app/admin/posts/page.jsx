@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
+import { getSupabase } from "@/lib/supabaseClient";
 
 function sortForDisplay(rows) {
   const now = new Date();
@@ -19,17 +19,13 @@ function sortForDisplay(rows) {
     }
   }
 
-  // Active coupons by soonest to expire, then newest created
   activeCoupons.sort((a, b) => {
     const aTime = a.expires_at ? new Date(a.expires_at).getTime() : Number.MAX_SAFE_INTEGER;
     const bTime = b.expires_at ? new Date(b.expires_at).getTime() : Number.MAX_SAFE_INTEGER;
     return aTime - bTime || new Date(b.created_at) - new Date(a.created_at);
   });
 
-  // Non-coupons newest first
   nonCoupons.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-
-  // Expired coupons at the very bottom, newest first among expired
   expiredCoupons.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
   return [...activeCoupons, ...nonCoupons, ...expiredCoupons];
@@ -40,23 +36,29 @@ export default function AdminPostsPage() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Create/edit form state
-  const [editing, setEditing] = useState(null); // post or null
+  const [editing, setEditing] = useState(null);
   const [form, setForm] = useState({
     title: "", body: "", tags: "", is_coupon: false, expires_at: "", imageFile: null, image_url: ""
   });
 
   useEffect(() => {
+    const supabase = getSupabase();
+    if (!supabase) return; // static export pass
+
     supabase.auth.getUser().then(({ data }) => setUser(data.user || null));
   }, []);
 
   async function fetchPosts() {
     setLoading(true);
+    const supabase = getSupabase();
+    if (!supabase) { setLoading(false); return; }
+
     const { data, error } = await supabase
       .from("posts")
       .select("*")
       .order("created_at", { ascending: false })
       .limit(200);
+
     if (!error) setPosts(data || []);
     setLoading(false);
   }
@@ -70,12 +72,14 @@ export default function AdminPostsPage() {
   async function handleUploadImage(file) {
     if (!file) return null;
 
-    // Ensure auth (required by storage RLS)
+    const supabase = getSupabase();
+    if (!supabase) throw new Error("Please try again in the browser.");
+
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new Error("You are signed out. Please log in again.");
 
     const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
-    const key = `${crypto.randomUUID()}.${ext}`; // inside 'news' bucket (no 'news/' prefix)
+    const key = `${crypto.randomUUID()}.${ext}`;
 
     const { error: upErr } = await supabase.storage.from("news").upload(key, file, {
       cacheControl: "3600",
@@ -88,42 +92,32 @@ export default function AdminPostsPage() {
     return pub?.publicUrl || null;
   }
 
-  // Helper to build tag array with auto-injected "Coupon"
   function buildTagsArray(raw, isCoupon) {
-    // split, trim, dedupe case-insensitive
     const seen = new Set();
     const out = [];
 
     const push = (t) => {
-        const key = t.trim();
-        if (!key) return;
-        const lower = key.toLowerCase();
-        if (!seen.has(lower)) {
+      const key = (t || "").trim();
+      if (!key) return;
+      const lower = key.toLowerCase();
+      if (!seen.has(lower)) {
         seen.add(lower);
-        // normalize to nice case for UI
         out.push(key[0].toUpperCase() + key.slice(1));
-        }
+      }
     };
 
-    (raw || "")
-        .split(",")
-        .forEach((t) => push(t));
-
+    (raw || "").split(",").forEach((t) => push(t));
     if (isCoupon) push("Coupon");
-
     return out;
-    }
-
+  }
 
   async function handleCreate(e) {
     e.preventDefault();
 
+    const supabase = getSupabase();
+    if (!supabase) return alert("Please open this page in a browser.");
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
-      alert("Please sign in again.");
-      location.href = "/admin/login";
-      return;
-    }
+    if (!user) { alert("Please sign in again."); location.href = "/admin/login"; return; }
 
     try {
       let image_url = form.image_url || null;
@@ -137,7 +131,7 @@ export default function AdminPostsPage() {
         image_url,
         is_coupon: !!form.is_coupon,
         expires_at: form.expires_at ? new Date(form.expires_at).toISOString() : null,
-        tags
+        tags,
       });
       if (error) throw error;
 
@@ -151,12 +145,10 @@ export default function AdminPostsPage() {
   async function handleUpdate(e) {
     e.preventDefault();
 
+    const supabase = getSupabase();
+    if (!supabase) return alert("Please open this page in a browser.");
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
-      alert("Please sign in again.");
-      location.href = "/admin/login";
-      return;
-    }
+    if (!user) { alert("Please sign in again."); location.href = "/admin/login"; return; }
 
     try {
       let image_url = form.image_url || editing?.image_url || null;
@@ -172,7 +164,7 @@ export default function AdminPostsPage() {
           image_url,
           is_coupon: !!form.is_coupon,
           expires_at: form.expires_at ? new Date(form.expires_at).toISOString() : null,
-          tags
+          tags,
         })
         .eq("id", editing.id);
       if (error) throw error;
@@ -186,6 +178,10 @@ export default function AdminPostsPage() {
 
   async function handleDelete(id) {
     if (!confirm("Delete this post?")) return;
+
+    const supabase = getSupabase();
+    if (!supabase) return;
+
     const { error } = await supabase.from("posts").delete().eq("id", id);
     if (!error) fetchPosts();
   }
@@ -198,8 +194,8 @@ export default function AdminPostsPage() {
       image_url: p.image_url || "",
       imageFile: null,
       is_coupon: !!p.is_coupon,
-      expires_at: p.expires_at ? new Date(p.expires_at).toISOString().slice(0,16) : "",
-      tags: (p.tags || []).join(", ")
+      expires_at: p.expires_at ? new Date(p.expires_at).toISOString().slice(0, 16) : "",
+      tags: (p.tags || []).join(", "),
     });
   }
 
@@ -220,7 +216,11 @@ export default function AdminPostsPage() {
         <h1 className="text-2xl font-bold">Posts / Coupons</h1>
         <button
           className="btn btn-ghost"
-          onClick={async () => { await supabase.auth.signOut(); location.href = "/admin/login"; }}
+          onClick={async () => {
+            const supabase = getSupabase();
+            if (supabase) await supabase.auth.signOut();
+            location.href = "/admin/login";
+          }}
         >
           Sign out
         </button>
@@ -293,9 +293,13 @@ export default function AdminPostsPage() {
           </label>
 
           <div className="md:col-span-2 flex gap-3">
-            <button className="btn btn-primary" type="submit">{editing ? "Save Changes" : "Publish"}</button>
+            <button className="btn btn-primary" type="submit">
+              {editing ? "Save Changes" : "Publish"}
+            </button>
             {editing && (
-              <button className="btn btn-ghost" type="button" onClick={resetForm}>Cancel</button>
+              <button className="btn btn-ghost" type="button" onClick={resetForm}>
+                Cancel
+              </button>
             )}
           </div>
         </form>
@@ -335,10 +339,7 @@ export default function AdminPostsPage() {
                         )}
                       </td>
                       <td className="px-3 text-sm">
-                        {[
-                          ...(p.tags || []),
-                          ...(isExpired ? ["Coupon (Expired)"] : []),
-                        ].join(", ") || "—"}
+                        {[...(p.tags || []), ...(isExpired ? ["Coupon (Expired)"] : [])].join(", ") || "—"}
                       </td>
                       <td className="px-3 text-sm">
                         {p.is_coupon && p.expires_at ? new Date(p.expires_at).toLocaleString() : "—"}
@@ -358,7 +359,9 @@ export default function AdminPostsPage() {
                   );
                 })}
                 {!posts.length && (
-                  <tr><td colSpan={6} className="px-3 py-6 text-center text-gray-500">No posts yet.</td></tr>
+                  <tr>
+                    <td colSpan={6} className="px-3 py-6 text-center text-gray-500">No posts yet.</td>
+                  </tr>
                 )}
               </tbody>
             </table>
