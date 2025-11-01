@@ -79,7 +79,7 @@ export default function AdminPostsPage() {
     if (!user) throw new Error("You are signed out. Please log in again.");
 
     const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
-    const key = `${crypto.randomUUID()}.${ext}`;
+    const key = `${(globalThis.crypto && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2))}.${ext}`;
 
     const { error: upErr } = await supabase.storage.from("news").upload(key, file, {
       cacheControl: "3600",
@@ -324,7 +324,7 @@ export default function AdminPostsPage() {
                 </tr>
               </thead>
               <tbody>
-                {useMemo(() => sortForDisplay(posts), [posts]).map((p) => {
+                {display.map((p) => {
                   const isExpired = p.is_coupon && p.expires_at && new Date(p.expires_at) < new Date();
                   return (
                     <tr key={p.id} className="align-top">
