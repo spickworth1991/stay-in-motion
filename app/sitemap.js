@@ -1,4 +1,8 @@
 // app/sitemap.js
+export const dynamic = 'force-static';
+export const revalidate = false;
+
+
 export default function sitemap() {
   const base = "https://stayinmotionpt.com";
 
@@ -16,7 +20,8 @@ export default function sitemap() {
     "/resources",
     "/careers",
     "/contact",
-    "/location",    // add this if you create the Location page
+    "/location",
+    "/news",   
   ];
 
   const today = new Date().toISOString().slice(0, 10);

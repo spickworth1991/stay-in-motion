@@ -9,7 +9,7 @@ export const metadata = {
     title: "Strength Training in Wixom, MI | Rehab & Performance",
     description:
       "Progressive, goal-based strength training to support recovery and performance.",
-    images: [{ url: "/og/home.jpg", width: 1200, height: 630 }],
+    images: [{ url: "https://stayinmotionpt.com/logo.png"}],
   },
 };
 
@@ -18,7 +18,7 @@ export default function Page() {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Strength Training",
-    "provider": { "@type": "MedicalClinic", "name": "Stay in Motion Physical Therapy", "url": "https://stayinmotionpt.com" }
+    "provider": { "@type": "PhysicalTherapy", "name": "Stay in Motion Physical Therapy", "url": "https://stayinmotionpt.com" }
   };
 
   return (

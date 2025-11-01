@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/247eb132b7f7b574.js"],"OutletBoundary"]
+3:"$Sreact.suspense"
+0:{"buildId":"iwoZRY192yQ6RD_euQCSe","rsc":["$","$1","c",{"children":[["$","main",null,{"className":"max-w-3xl md:max-w-4xl mx-auto px-4 py-10","children":[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"Service\",\"name\":\"Manual Therapy\",\"provider\":{\"@type\":\"MedicalClinic\",\"name\":\"Stay in Motion Physical Therapy\",\"url\":\"https://stayinmotionpt.com\"}}"}}],["$","h1",null,{"className":"text-3xl md:text-4xl font-bold text-primary mb-4","children":"Manual Therapy in Wixom, MI"}],["$","p",null,{"className":"text-lg text-gray-700 dark:text-gray-200","children":"Joint mobilization, soft-tissue release, and myofascial techniques to decrease pain, improve mobility, and prepare you for progressive loading."}]]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
+4:null
