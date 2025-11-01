@@ -1,8 +1,16 @@
 "use client";
 
-
 import { useState } from "react";
 import { getSupabase } from "@/lib/supabaseClient";
+
+function getSiteOrigin() {
+  // Prefer the current page’s origin (works for preview + custom domains)
+  if (typeof window !== "undefined") return window.location.origin;
+  // Fallbacks for SSR (shouldn’t run in this client component anyway)
+  return process.env.NEXT_PUBLIC_SITE_URL ||
+         process.env.SITE_URL ||
+         "http://localhost:3000";
+}
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
@@ -18,10 +26,7 @@ export default function AdminLogin() {
       return;
     }
 
-    const site =
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      process.env.SITE_URL ||
-      (typeof window !== "undefined" ? window.location.origin : "http://localhost:3000");
+    const site = getSiteOrigin(); // ← key line
 
     const { error } = await supabase.auth.signInWithOtp({
       email,
