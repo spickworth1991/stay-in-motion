@@ -116,9 +116,7 @@ export default function Navbar() {
     <>
       <nav
         ref={containerRef}
-        className={`fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/60 backdrop-blur shadow-md transition-all duration-300 ${
-          scrolled ? "h-12" : "h-16"
-        }`}
+        className={`navbar shadow-md transition-all duration-300 ${scrolled ? "h-12" : "h-16"}`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between h-full px-4 md:px-8 overflow-hidden">
           {/* Left: logo + links */}
@@ -134,7 +132,7 @@ export default function Navbar() {
               <span
                 className={`ml-2 font-bold transition-all ${
                   scrolled ? "text-lg" : "text-xl"
-                } text-primary dark:text-white`}
+                } text-primary dark:text-fg`}
               >
                 Stay in Motion
               </span>
@@ -156,7 +154,7 @@ export default function Navbar() {
                     className={`flex items-center space-x-1 transition-colors duration-200 ${
                       pathname === item.to
                         ? "text-primary font-semibold"
-                        : "text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-primary"
+                        : "text-fg dark:text-muted hover:text-accent dark:hover:text-primary"
                     }`}
                   >
                     <item.icon className="w-5 h-5" />
@@ -171,7 +169,7 @@ export default function Navbar() {
           <div className="flex items-center flex-shrink-0 space-x-2 pl-4">
             <button
               onClick={() => setDark((prev) => !prev)}
-              className="p-2 text-xl text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-primary transition"
+              className="p-2 text-xl text-fg dark:text-muted hover:text-accent dark:hover:text-primary transition"
               aria-label="Toggle dark mode"
               type="button"
             >
@@ -197,16 +195,15 @@ export default function Navbar() {
       {/* Sidebar Overlay */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+          className="fixed inset-0 scrim backdrop-blur-sm z-40"
           onClick={() => setOpen(false)}
           aria-hidden="true"
         />
       )}
-
       {/* Left Slide-in Sidebar (overflow links) */}
       <aside
         id="mobile-menu"
-        className={`fixed top-0 left-0 h-full w-3/4 max-w-xs z-50 transform transition-transform duration-300 ease-in-out bg-white dark:bg-gray-900 shadow-lg ${
+        className={`fixed top-0 left-0 h-full w-3/4 max-w-xs z-50 transform transition-transform duration-300 ease-in-out card ${
           open ? "translate-x-0" : "-translate-x-full"
         } flex flex-col justify-between touch-none`}
         role="dialog"
@@ -216,7 +213,7 @@ export default function Navbar() {
           <div className="flex justify-end p-4">
             <button
               onClick={() => setOpen(false)}
-              className="text-2xl text-gray-600 dark:text-gray-300 hover:text-primary transition"
+              className="text-2xl text-muted dark:text-muted hover:text-primary transition"
               aria-label="Close menu"
               type="button"
             >
@@ -232,7 +229,7 @@ export default function Navbar() {
                 className={`flex items-center space-x-2 text-xl font-medium transition-colors duration-200 ${
                   pathname === item.to
                     ? "text-accent"
-                    : "text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent"
+                    : "text-fg dark:text-muted hover:text-primary dark:hover:text-accent"
                 }`}
                 onClick={() => setOpen(false)}
               >
@@ -243,7 +240,7 @@ export default function Navbar() {
 
             <button
               onClick={() => setDark((prev) => !prev)}
-              className="flex items-center space-x-2 text-xl p-2 mt-6 text-gray-700 dark:text-gray-300 hover:text-accent dark:hover:text-primary transition"
+              className="flex items-center space-x-2 text-xl p-2 mt-6 text-fg dark:text-muted hover:text-accent dark:hover:text-primary transition"
               type="button"
             >
               {dark ? <FiSun className="w-6 h-6" /> : <FiMoon className="w-6 h-6" />}

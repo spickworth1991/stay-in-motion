@@ -9,7 +9,8 @@ export default function Footer() {
 
   const address = "30990 S Wixom Rd, Wixom, USA";
   const embedSrc =
-    "https://maps.google.com/maps" + `?q=${encodeURIComponent(address)}&z=15&output=embed`;
+    "https://maps.google.com/maps" +
+    `?q=${encodeURIComponent(address)}&z=15&output=embed`;
 
   const handleClick = useCallback(() => setShowMap(true), []);
   const handleKeyDown = useCallback((e) => {
@@ -21,30 +22,30 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-primary dark:bg-gray-900 text-white dark:text-gray-300 py-12 px-4 md:px-8 mb-16 md:mb-0">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <footer className="bg-bg text-fg border-t border-subtle py-12 px-4 md:px-8 mt-16 md:mt-0">
+        <div className="container-site grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Quick Links */}
           <div>
-            <h2 className="font-semibold mb-4">Quick Links</h2>
+            <h2 className="h3 mb-4">Quick Links</h2>
             <ul className="space-y-2">
-              <li><a href="/" className="hover:text-accent">Home</a></li>
-              <li><a href="/about" className="hover:text-accent">About</a></li>
-              <li><a href="/faq" className="hover:text-accent">FAQ</a></li>
-              <li><a href="/services" className="hover:text-accent">Services</a></li>
-              <li><a href="/contact" className="hover:text-accent">Contact</a></li>
+              <li><a href="/" className="hover:text-primary">Home</a></li>
+              <li><a href="/about" className="hover:text-primary">About</a></li>
+              <li><a href="/faq" className="hover:text-primary">FAQ</a></li>
+              <li><a href="/services" className="hover:text-primary">Services</a></li>
+              <li><a href="/contact" className="hover:text-primary">Contact</a></li>
             </ul>
           </div>
 
           {/* Map */}
           <div>
-            <h2 className="font-semibold mb-4">
-              <a href="/location" className="hover:text-accent underline decoration-accent/40 underline-offset-4">
+            <h2 className="h3 mb-4">
+              <a href="/location" className="hover:text-primary underline decoration-accent underline-offset-4">
                 Our Location
               </a>
             </h2>
 
             <div
-              className="w-full h-40 rounded-lg overflow-hidden cursor-pointer"
+              className="w-full h-40 rounded-lg overflow-hidden cursor-pointer card"
               role="button"
               tabIndex={0}
               onClick={handleClick}
@@ -77,19 +78,21 @@ export default function Footer() {
                   />
                 </picture>
               )}
-               <p className="mt-2 text-sm">
-                  <a href="/location" className="underline decoration-accent/40 hover:text-accent">
-                    View directions & parking →
-                  </a>
-                </p>
             </div>
+
+            <p className="mt-2 text-sm text-muted">
+              <a href="/location" className="underline decoration-accent hover:text-primary">
+                View directions &amp; parking →
+              </a>
+            </p>
 
             {/* No-JS fallback: link to Google Maps */}
             <noscript>
               <p className="mt-2">
                 <a
                   href={`https://maps.google.com/?q=${encodeURIComponent(address)}`}
-                  target="_blank" rel="noopener"
+                  target="_blank"
+                  rel="noopener"
                   className="underline"
                 >
                   Open in Google Maps
@@ -100,61 +103,67 @@ export default function Footer() {
 
           {/* Social & Contact */}
           <div>
-            <h2 className="font-semibold mb-4">Connect With Us</h2>
-            <div className="flex space-x-4 mb-4 text-xl">
-              {/* <a
-                href="https://www.facebook.com/stayinmotionpt"       // <-- YOUR PAGE
+            <h2 className="h3 mb-4">Connect With Us</h2>
+            <div className="flex gap-4 mb-4 text-xl">
+              {/* Enable these when your pages are ready
+              <a
+                href="https://www.facebook.com/stayinmotionpt"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook — opens in a new tab"
-                className="hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded-full"
+                className="hover:text-primary focus:outline-none ring-primary rounded-full"
               >
                 <FaFacebookF />
                 <span className="sr-only">Facebook</span>
               </a>
 
               <a
-                href="https://www.instagram.com/stayinmotionpt"      // <-- YOUR PROFILE
+                href="https://www.instagram.com/stayinmotionpt"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram — opens in a new tab"
-                className="hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded-full"
+                className="hover:text-primary focus:outline-none ring-primary rounded-full"
               >
                 <FaInstagram />
                 <span className="sr-only">Instagram</span>
-              </a> */}
-
+              </a>
+              */}
               <a
-                href="https://www.linkedin.com/in/amanda-pickworth-chrusciel/" 
+                href="https://www.linkedin.com/in/amanda-pickworth-chrusciel/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn — opens in a new tab"
-                className="hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded-full"
+                className="hover:text-primary focus:outline-none ring-primary rounded-full"
               >
                 <FaLinkedinIn />
                 <span className="sr-only">LinkedIn</span>
               </a>
             </div>
-            <p>30990 S Wixom Rd</p>
-            <p>Wixom MI, 48393</p>
-            <p>(734) 251-3046</p>
-            <p>Mon – Fri: 8 am – 6 pm</p>
+
+            <address className="not-italic space-y-0.5">
+              <p>30990 S Wixom Rd</p>
+              <p>Wixom MI, 48393</p>
+              <p>(734) 251-3046</p>
+              <p>Mon–Fri: 8am–6pm</p>
+            </address>
           </div>
         </div>
-        <p className="mt-10 text-center text-white/80 text-sm">
-          © {new Date().getFullYear()} Stay in Motion Physical Therapy. All rights reserved.
-          <br />
-          <span className="text-white/60">
-            Developed by{" "}
-            <a
-              href="mailto:contact.stickypicky@gmail.com"
-              className="hover:text-accent underline decoration-accent/40 decoration-1 underline-offset-2"
-            >
-              StickyPicky
-            </a>
-          </span>
-        </p>
 
+        <div className="container-site">
+          <p className="mt-10 text-center text-sm text-muted">
+            © {new Date().getFullYear()} Stay in Motion Physical Therapy. All rights reserved.
+            <br />
+            <span>
+              Developed by{" "}
+              <a
+                href="mailto:contact.stickypicky@gmail.com"
+                className="hover:text-primary underline decoration-accent decoration-1 underline-offset-2"
+              >
+                StickyPicky
+              </a>
+            </span>
+          </p>
+        </div>
       </footer>
 
       <CallNowBar />

@@ -70,13 +70,13 @@ export default function Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">Physical Therapy in Wixom, MI</h1>
-      <p className="text-lg text-gray-700 dark:text-gray-200 mb-6">
+      <p className="text-lg text-fg dark:text-gray-200 mb-6">
         We combine a thorough assessment, hands-on techniques, and progressive exercise to relieve pain,
         restore function, and build confidence.
       </p>
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">What We Help With</h2>
-      <ul className="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-200">
+      <ul className="list-disc pl-5 space-y-1 text-fg dark:text-gray-200">
         <li>Back and neck pain, headaches</li>
         <li>Shoulder, hip, knee, and ankle injuries</li>
         <li>Sports rehab and return-to-play</li>

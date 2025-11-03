@@ -1,3 +1,4 @@
+// src/components/TeamSection.jsx
 "use client";
 
 import { useState, useId } from "react";
@@ -6,10 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function TeamSection() {
   return (
     <section aria-labelledby="team-heading" className="space-y-6">
-      <h2 id="team-heading" className="text-2xl font-semibold">
-        Our Team
-      </h2>
-
+      <h2 id="team-heading" className="h3">Our Team</h2>
       <FounderCard />
       {/* <HiringCard /> */}
     </section>
@@ -22,7 +20,7 @@ function FounderCard() {
 
   return (
     <article
-      className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-md"
+      className="card overflow-hidden"
       itemScope
       itemType="https://schema.org/Person"
     >
@@ -31,7 +29,7 @@ function FounderCard() {
         <img
           src="/photos/amanda.jpg"
           alt="Dr. Amanda Pickworth-Chrusciel"
-          className="w-32 h-32 md:w-40 md:h-40 rounded-xl object-cover border border-gray-200 dark:border-gray-700"
+          className="w-32 h-32 md:w-40 md:h-40 rounded-xl object-cover border border-subtle"
           loading="lazy"
           itemProp="image"
         />
@@ -40,11 +38,8 @@ function FounderCard() {
           <h3 className="text-xl md:text-2xl font-bold" itemProp="name">
             Dr. Amanda Pickworth-Chrusciel, PT, DPT
           </h3>
-          <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 mt-1">
-            <span className="font-medium" itemProp="jobTitle">
-              Founder
-            </span>{" "}
-            | Stay in Motion Physical Therapy
+          <p className="text-sm md:text-base text-muted mt-1">
+            <span className="font-medium" itemProp="jobTitle">Founder</span> | Stay in Motion Physical Therapy
           </p>
 
           <p className="mt-4 leading-7">
@@ -62,11 +57,11 @@ function FounderCard() {
               "Cupping",
               "BFR",
               "McKenzie A",
-              "Barbell Rehab"
+              "Barbell Rehab",
             ].map((chip) => (
               <li
                 key={chip}
-                className="text-xs px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-700/40"
+                className="text-xs px-3 py-1 rounded-full border border-subtle"
               >
                 {chip}
               </li>
@@ -80,7 +75,7 @@ function FounderCard() {
             aria-expanded={open}
             aria-controls={contentId}
             onClick={() => setOpen((v) => !v)}
-            className="inline-block px-6 py-2 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-full shadow-lg transform transition-transform duration-300 hover:from-accent hover:to-primary"
+            className="btn btn-primary"
           >
             {open ? "Show Less" : "Read More"}
           </button>
@@ -96,7 +91,7 @@ function FounderCard() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="border-t border-gray-200 dark:border-gray-700"
+            className="border-t border-subtle"
           >
             <div className="p-6 md:p-8 space-y-4">
               <p className="leading-7">
@@ -107,7 +102,7 @@ function FounderCard() {
                 I hold advanced certifications in dry needling, muscle energy techniques,
                 strain-counterstrain, instrument-assisted soft tissue mobilization, cupping,
                 blood flow restriction (BFR) training, McKenzie Part A, and the Barbell Rehab
-                Method.These tools allow me to tailor treatment to your unique needs—whether you’re an athlete 
+                Method. These tools allow me to tailor treatment to your unique needs—whether you’re an athlete 
                 returning to sport, someone recovering from injury, or simply looking to move with less pain.
               </p>
               <p className="leading-7">
@@ -125,15 +120,12 @@ function FounderCard() {
 
 function HiringCard() {
   return (
-    <article className="bg-white dark:bg-gray-800 border border-dashed border-gray-300 dark:border-gray-600 rounded-2xl p-6 text-center shadow-sm">
+    <article className="card p-6 text-center">
       <h3 className="text-xl font-semibold mb-2">We’re Hiring!</h3>
-      <p className="mb-4 text-gray-600 dark:text-gray-400">
+      <p className="mb-4 text-muted">
         Join our growing team at Stay in Motion Physical Therapy.
       </p>
-      <a
-        href="/careers"
-        className="inline-block px-6 py-2 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-full shadow-lg transform transition-transform duration-300 hover:from-accent hover:to-primary"
-      >
+      <a href="/careers" className="btn btn-primary">
         View Careers
       </a>
     </article>
