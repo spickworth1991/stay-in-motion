@@ -55,13 +55,13 @@ export default function Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">Dry Needling in Wixom, MI</h1>
-      <p className="text-lg text-gray-700 dark:text-gray-200 mb-6">
+      <p className="text-lg text-fg dark:text-gray-200 mb-6">
         Dry needling is a precise technique used to release trigger points, reduce pain, and restore mobility.
         We combine it with exercise and manual therapy for lasting results.
       </p>
 
       <h2 className="text-2xl font-semibold mt-8 mb-3">What It Helps</h2>
-      <ul className="list-disc pl-5 space-y-1 text-gray-700 dark:text-gray-200">
+      <ul className="list-disc pl-5 space-y-1 text-fg dark:text-gray-200">
         <li>Neck, shoulder, back, hip, and knee pain</li>
         <li>Headaches related to muscle tension</li>
         <li>Stiffness and limited mobility</li>

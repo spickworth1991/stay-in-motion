@@ -11,7 +11,7 @@ export const metadata = {
     title: "Physical Therapy & Dry Needling in Wixom, MI | Services",
     description:
       "Personalized physical therapy, dry needling, and sports rehab in Wixom, MI.",
-    images: [{ url: "https://stayinmotionpt.com/logo.png" }],
+    images: [{ url: "/og/home.jpg", width: 1200, height: 630 }],
   },
 };
 
@@ -19,30 +19,36 @@ export default function Page() {
   const servicesLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": "Physical Therapy Services in Wixom, MI",
-    "itemListElement": [
-      { "@type": "Service", "name": "Manual Therapy" },
-      { "@type": "Service", "name": "Dry Needling" },
-      { "@type": "Service", "name": "Strength Training" },
-      { "@type": "Service", "name": "Education & Injury Prevention" }
-    ]
+    name: "Physical Therapy Services in Wixom, MI",
+    itemListElement: [
+      { "@type": "Service", name: "Manual Therapy" },
+      { "@type": "Service", name: "Dry Needling" },
+      { "@type": "Service", name: "Strength Training" },
+      { "@type": "Service", name: "Education & Injury Prevention" },
+    ],
   };
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesLd) }} />
-      <section className="text-center pt-10 px-4 md:px-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-primary mb-6">
-          Physical Therapy & Dry Needling in Wixom, MI
-        </h1>
-        <p className="max-w-3xl mx-auto text-center text-gray-700 dark:text-gray-200">
-          We provide one-on-one care tailored to your goals—manual therapy, dry needling, progressive strength,
-          and education that fits your life.
-        </p>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesLd) }}
+      />
+      <section className="section">
+        <div className="container-site">
+          {/* Hero */}
+          <div className="text-center mb-8">
+            <span className="badge">One-on-one care</span>
+            <h1 className="h1 mt-3">Physical Therapy &amp; Dry Needling</h1>
+            <p className="lead mt-3 max-w-3xl mx-auto">
+              Tailored treatment to your goals—manual therapy, dry needling, progressive
+              strength, and education that fits your life.
+            </p>
+          </div>
+
+          <ServicesSection />
+        </div>
       </section>
-
-
-      <ServicesSection />
     </>
   );
 }

@@ -41,7 +41,7 @@ export default function LiteYouTube({ id, title = "YouTube video" }) {
   }, [loaded]);
 
   return (
-    <div className="relative rounded-xl overflow-hidden shadow-lg aspect-video bg-black">
+    <div className="relative rounded-xl overflow-hidden shadow-lg aspect-video bg-fg">
       {!loaded && (
         <button
           onClick={loadIframe}
@@ -59,7 +59,7 @@ export default function LiteYouTube({ id, title = "YouTube video" }) {
             loading="lazy"
           />
           <span className="absolute inset-0 grid place-items-center">
-            <span className="rounded-full p-4 bg-white/80 backdrop-blur text-black text-xl">
+            <span className="rounded-full p-4 bg-card backdrop-blur text-fg text-xl">
               ▶
             </span>
           </span>

@@ -3,17 +3,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { getSupabase } from "@/lib/supabaseClient";
 
-// ---- shared styles: identical look to Login/Admin cards ----
+// token-driven UI bits
 const cardCls =
-  "relative bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow p-6 transition hover:shadow-lg hover:-translate-y-[2px]";
-const pillCls =
-  "text-xs px-2 py-0.5 rounded-full bg-gray-200 dark:bg-gray-800";
+  "card p-6 transition shadow-sm hover:shadow-md hover:-translate-y-[2px]";
 const chipBase =
   "text-sm px-3 py-1 rounded-full border transition";
 const chipActive =
-  "bg-primary text-white border-primary";
+  "bg-primary text-card border-primary";
 const chipIdle =
-  "bg-transparent text-primary border-primary hover:bg-primary/10";
+  "bg-transparent text-primary border-primary hover:bg-primary";
+const tagPill =
+  "text-xs px-2 py-0.5 rounded-full border border-subtle";
 
 // helpers
 function splitAndSort(rows) {
@@ -109,132 +109,134 @@ export default function NewsPage() {
   const display = [...activeCoupons, ...nonCoupons, ...expiredCoupons];
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-12">
-      {/* Consistent header block */}
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold text-primary">News & Updates</h1>
-        <p className="mt-2 text-gray-700 dark:text-gray-200">
-          Latest announcements, events, and occasional promotions.
-        </p>
-      </header>
+    <section className="section">
+      <div className="container-site max-w-3xl mx-auto">
+        {/* Header */}
+        <header className="text-center mb-8">
+          <span className="badge">Clinic news</span>
+          <h1 className="h1 mt-3">News &amp; Updates</h1>
+          <p className="lead mt-3">Announcements, events, and occasional promotions.</p>
+        </header>
 
-      {/* Tag filters */}
-      <div className="flex flex-wrap items-center gap-2 mb-8">
-        <button
-          onClick={() => setActiveTag("")}
-          className={`${chipBase} ${!activeTag ? chipActive : chipIdle}`}
-        >
-          All
-        </button>
-        {allTags.map((t) => (
+        {/* Tag filters */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
           <button
-            key={t}
-            onClick={() => setActiveTag(t)}
-            className={`${chipBase} ${activeTag === t ? chipActive : chipIdle}`}
+            onClick={() => setActiveTag("")}
+            className={`${chipBase} ${!activeTag ? chipActive : chipIdle}`}
           >
-            {t}
+            All
           </button>
-        ))}
-      </div>
+          {allTags.map((t) => (
+            <button
+              key={t}
+              onClick={() => setActiveTag(t)}
+              className={`${chipBase} ${activeTag === t ? chipActive : chipIdle}`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
 
-      {loading ? (
-        <p>Loading…</p>
-      ) : (
-        <ul className="space-y-6">
-          {display.map((p) => {
-            const expired = isExpired(p);
-            const tags = getDisplayTags(p);
+        {loading ? (
+          <div className="card p-6 text-center">Loading…</div>
+        ) : (
+          <ul className="space-y-6">
+            {display.map((p) => {
+              const expired = isExpired(p);
+              const tags = getDisplayTags(p);
 
-            return (
-              <li
-                key={p.id}
-                className={
-                  cardCls +
-                  (expired
-                    ? " border-gray-300 bg-gray-50 dark:bg-gray-800/40 opacity-85 grayscale"
-                    : "")
-                }
-              >
-                {/* Expired ribbon */}
-                {expired && (
-                  <div className="absolute -top-2 -right-2">
-                    <div className="rotate-12 rounded bg-gray-200 text-gray-700 text-[10px] font-semibold px-2 py-1 shadow">
-                      EXPIRED
-                    </div>
-                  </div>
-                )}
-
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h2 className="text-xl font-semibold">{p.title}</h2>
-                    {!!tags.length && (
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        {tags.map((t) => (
-                          <button
-                            key={t}
-                            onClick={() => setActiveTag(t)}
-                            className={pillCls}
-                            title={`Filter by ${t}`}
-                          >
-                            {t}
-                          </button>
-                        ))}
+              return (
+                <li
+                  key={p.id}
+                  className={`${cardCls} ${expired ? "grayscale" : ""}`}
+                  style={expired ? { opacity: 0.85 } : undefined}
+                >
+                  {/* Expired ribbon */}
+                  {expired && (
+                    <div className="absolute -top-2 -right-2">
+                      <div
+                        className="rotate-12 rounded px-2 py-1 text-[10px] font-semibold shadow"
+                        style={{
+                          background: "var(--color-card)",
+                          color: "var(--color-fg)",
+                        }}
+                      >
+                        EXPIRED
                       </div>
+                    </div>
+                  )}
+
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h2 className="text-xl font-semibold">{p.title}</h2>
+                      {!!tags.length && (
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {tags.map((t) => (
+                            <button
+                              key={t}
+                              onClick={() => setActiveTag(t)}
+                              className={tagPill}
+                              title={`Filter by ${t}`}
+                            >
+                              {t}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {p.is_coupon && (
+                      <span
+                        className="badge"
+                        style={
+                          expired
+                            ? undefined
+                            : {
+                                background:
+                                  "color-mix(in oklab, var(--color-success) 18%, transparent)",
+                                color: "var(--color-success)",
+                              }
+                        }
+                      >
+                        {expired ? "Coupon (Expired)" : "Coupon"}
+                      </span>
                     )}
                   </div>
 
-                  {p.is_coupon && (
-                    <span
-                      className={`text-xs px-2 py-1 rounded ${
-                        expired
-                          ? "bg-gray-300 text-gray-700"
-                          : "bg-green-200 text-green-900"
-                      }`}
-                    >
-                      {expired ? "Coupon (Expired)" : "Coupon"}
-                    </span>
+                  {p.image_url && (
+                    <div className="mt-4">
+                      <img
+                        src={p.image_url}
+                        alt={p.title}
+                        className="rounded-lg w-full h-auto"
+                        loading="lazy"
+                      />
+                    </div>
                   )}
-                </div>
 
-                {p.image_url && (
-                  <div className={`mt-4 ${expired ? "opacity-80" : ""}`}>
-                    <img
-                      src={p.image_url}
-                      alt={p.title}
-                      className="rounded-lg w-full h-auto"
-                      loading="lazy"
-                    />
+                  {p.body && (
+                    <p className="mt-4 whitespace-pre-line">
+                      {p.body}
+                    </p>
+                  )}
+
+                  <div className="mt-4 text-xs text-muted">
+                    Posted {new Date(p.created_at).toLocaleString()}
+                    {p.is_coupon && p.expires_at && (
+                      <> • Expires {new Date(p.expires_at).toLocaleString()}</>
+                    )}
                   </div>
-                )}
-
-                {p.body && (
-                  <p
-                    className={`mt-4 whitespace-pre-line ${
-                      expired
-                        ? "text-gray-500 dark:text-gray-300"
-                        : "text-gray-700 dark:text-gray-200"
-                    }`}
-                  >
-                    {p.body}
-                  </p>
-                )}
-
-                <div className="mt-4 text-xs text-gray-500">
-                  Posted {new Date(p.created_at).toLocaleString()}
-                  {p.is_coupon && p.expires_at && (
-                    <> • Expires {new Date(p.expires_at).toLocaleString()}</>
-                  )}
-                </div>
+                </li>
+              );
+            })}
+            {!display.length && (
+              <li className="card p-6 text-center">
+                <p className="text-muted">No posts found.</p>
               </li>
-            );
-          })}
-          {!display.length && (
-            <li className={cardCls}>
-              <p className="text-gray-600 dark:text-gray-300">No posts found.</p>
-            </li>
-          )}
-        </ul>
-      )}
-    </main>
+            )}
+          </ul>
+        )}
+      </div>
+    </section>
   );
 }

@@ -128,9 +128,9 @@ export default function RootLayout({ children }) {
         <meta name="supabase-anon" content={SUPABASE_ANON} />
       </head>
 
-      <body className="bg-cream dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <body className="bg-cream bg-bg text-fg dark:text-gray-100">
         <Navbar />
-        <main className="pt-16">{children}</main>
+        <main className="pt-0">{children}</main>
         <Footer />
       </body>
     </html>

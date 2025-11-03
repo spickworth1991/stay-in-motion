@@ -53,28 +53,28 @@ export default function Page() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <section className="bg-cream dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 grid md:grid-cols-2 gap-10 items-center">
+      <section className="bg-bg">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-6 grid md:grid-cols-2 gap-10 items-center">
           <div>
             {/* SEO H1 */}
-            <h1 className="text-4xl md:text-5xl font-extrabold text-primary/90 dark:text-accent/90 leading-tight">
-              Physical Therapy in <span className="text-accent dark:text-primary/90">Wixom, MI</span>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-primary dark:text-accent leading-tight">
+              Physical Therapy in <span className="text-accent dark:text-primary">Wixom, MI</span>
             </h1>
 
             {/* Brand slogan */}
-            <p className="mt-2 text-2xl md:text-3xl font-semibold text-primary/90 dark:text-accent/90">
-              Get moving. Keep moving. <span className="text-accent dark:text-primary/90">Stay in Motion.</span>
+            <p className="mt-2 text-2xl md:text-3xl font-semibold text-primary dark:text-accent">
+              Get moving. Keep moving. <span className="text-accent dark:text-primary">Stay in Motion.</span>
             </p>
 
-            <p className="mt-4 text-lg text-gray-700 dark:text-gray-200">
+            <p className="mt-4 text-lg text-fg dark:text-gray-200">
               1-on-1 physical therapy, dry needling, and sports rehab that gets you back to what you love.
             </p>
 
             <div className="mt-8 flex gap-4">
-              <Link href="/contact" className="px-6 py-3 rounded-xl bg-primary text-white hover:opacity-90 transition">
+              <Link href="/contact" className="px-6 py-3 rounded-xl bg-primary text-card hover:opacity-90 transition">
                 Book an Appointment
               </Link>
-              <Link href="/services" className="px-6 py-3 rounded-xl border border-primary text-primary hover:bg-primary hover:text-white transition">
+              <Link href="/services" className="px-6 py-3 rounded-xl border border-primary text-primary hover:bg-primary hover:text-card transition">
                 View Services
               </Link>
             </div>
@@ -87,24 +87,24 @@ export default function Page() {
       </section>
 
        {/* PT / SEO Section */}
-      <section className="bg-white dark:bg-gray-600 px-4 py-12 border-t border-gray-200 dark:border-gray-700">
+      <section className="bg-card bg-card px-4 py-12 border-t border-subtle border-subtle">
         <div className="max-w-4xl mx-auto space-y-6 text-center">
           <h2 className="text-3xl font-bold text-primary">Physical Therapy in Wixom, MI</h2>
-          <p className="text-lg text-gray-700 dark:text-gray-200">
+          <p className="text-lg text-fg dark:text-gray-200">
             Welcome to <strong>Stay in Motion Physical Therapy</strong> — your trusted resource for
             personalized, results-driven care in <strong>Wixom</strong> and surrounding communities
             like <strong>Northville</strong>, <strong>Canton</strong>, <strong>Novi</strong>, and
             <strong> Westland</strong>. We help active adults, athletes, and post-surgical patients
             recover faster and return to the activities they love.
           </p>
-          <p className="text-gray-700 dark:text-gray-200">
+          <p className="text-fg dark:text-gray-200">
             Our one-on-one sessions focus on restoring mobility, reducing pain, and building lasting
             strength. From <strong>sports rehab</strong> to <strong>injury prevention</strong>, every
             plan is tailored to your unique goals and lifestyle.
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-3 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-full shadow-lg transform transition-transform duration-300 hover:from-accent hover:to-primary hover:-translate-y-1"
+            className="inline-block px-8 py-3 bg-gradient-to-r from-primary to-accent text-card font-semibold rounded-full shadow-lg transform transition-transform duration-300 hover:from-accent hover:to-primary hover:-translate-y-1"
           >
             Schedule Your Appointment Today
           </Link>
@@ -112,21 +112,21 @@ export default function Page() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-16 bg-cream dark:bg-gray-800 px-4">
+      <section className="py-16 bg-cream bg-bg px-4">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h2 className="text-3xl font-bold text-primary">Why Choose Us?</h2>
-          <p className="text-lg text-gray-700 dark:text-gray-200 leading-relaxed">
+          <p className="text-lg text-fg dark:text-gray-200 leading-relaxed">
             We believe healing is most successful when treatment is personal. That’s why every patient
             at <strong>Stay in Motion Physical Therapy</strong> works directly with a licensed Doctor of
             Physical Therapy in a one-on-one setting — no assistants, no crowded gym floors.
           </p>
-          <p className="text-lg text-gray-700 dark:text-gray-200 leading-relaxed">
+          <p className="text-lg text-fg dark:text-gray-200 leading-relaxed">
             Our approach blends <strong>manual therapy</strong>, <strong>targeted exercise</strong>,
             and <strong>movement education</strong> to address the root cause of your pain, not just the
             symptoms. We take time to understand your goals so we can help you return to work, sport, and
             everyday life with confidence.
           </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-700 dark:text-gray-200">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-fg dark:text-gray-200">
             <li>✔ One-on-one care with a Doctor of Physical Therapy</li>
             <li>✔ Customized programs based on your needs</li>
             <li>✔ Evidence-based, results-driven treatment</li>
@@ -136,7 +136,7 @@ export default function Page() {
           </ul>
           <Link
             href="/services"
-            className="inline-block px-8 py-4 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-full shadow-lg transform transition-transform duration-300 hover:from-accent hover:to-primary"
+            className="inline-block px-8 py-4 bg-gradient-to-r from-primary to-accent text-card font-semibold rounded-full shadow-lg transform transition-transform duration-300 hover:from-accent hover:to-primary"
           >
             Explore Our Services
           </Link>
@@ -144,10 +144,10 @@ export default function Page() {
       </section>
 
       {/* Conditions We Treat */}
-      <section className="bg-white dark:bg-gray-600 px-4 py-12 border-t border-gray-200 dark:border-gray-700">
+      <section className="bg-card bg-card px-4 py-12 border-t border-subtle border-subtle">
         <div className="max-w-4xl mx-auto space-y-6 text-center">
           <h2 className="text-3xl font-bold text-primary">Conditions We Treat</h2>
-          <p className="text-gray-700 dark:text-gray-200 text-lg">
+          <p className="text-fg dark:text-gray-200 text-lg">
             We help patients overcome a wide range of injuries and physical challenges, from
             <strong> sports injuries</strong> and <strong>post-surgical rehab</strong> to
             <strong> chronic pain</strong> and <strong>balance issues</strong>. Whether you’re a
@@ -155,7 +155,7 @@ export default function Page() {
             get you there.
           </p>
           <div className="text-left max-w-2xl mx-auto">
-            <ul className="list-disc list-inside text-gray-700 dark:text-gray-200 space-y-1">
+            <ul className="list-disc list-inside text-fg dark:text-gray-200 space-y-1">
               <li>ACL, MCL, and ligament rehab</li>
               <li>Rotator cuff and shoulder injuries</li>
               <li>Hip, knee, and ankle pain</li>

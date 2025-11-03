@@ -25,7 +25,7 @@ export default function Page() {
     <main className="max-w-3xl md:max-w-4xl mx-auto px-4 py-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />
       <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">Manual Therapy in Wixom, MI</h1>
-      <p className="text-lg text-gray-700 dark:text-gray-200">
+      <p className="text-lg text-fg dark:text-gray-200">
         Joint mobilization, soft-tissue release, and myofascial techniques to decrease pain, improve
         mobility, and prepare you for progressive loading.
       </p>

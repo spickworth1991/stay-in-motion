@@ -1,58 +1,61 @@
+// src/components/ServicesSection.jsx
 "use client";
 
-// src/components/ServicesSection.jsx
 import { motion } from "framer-motion";
 import ServiceCard from "./ServiceCard";
 import { FaHands, FaDumbbell, FaRegLightbulb } from "react-icons/fa";
-import { FaSyringe } from "react-icons/fa6"; // Cleaner needle icon for Dry Needling
+import { FaSyringe } from "react-icons/fa6";
 
 const services = [
   {
     icon: FaHands,
     title: "Manual Therapy",
     description:
-      "Our therapists use proven manual techniques—joint mobilization, soft-tissue release, myofascial stretches—to relieve pain and improve function.",
+      "Joint mobilization, soft-tissue release, and myofascial techniques to relieve pain and restore motion.",
     href: "/services/manual-therapy",
+    badge: "Hands-on",
   },
   {
     icon: FaSyringe,
     title: "Dry Needling",
     description:
-      "Fine-gauge needles penetrate tense muscle bands to reduce pain, improve blood flow, and restore muscle function rapidly.",
+      "Fine-gauge needles target trigger points to reduce pain, improve blood flow, and restore muscle function.",
     href: "/services/dry-needling",
+    badge: "Rapid relief",
   },
   {
     icon: FaDumbbell,
     title: "Strength Training",
     description:
-      "Customized resistance and functional exercise plans designed to rebuild muscle, protect joints, and enhance performance.",
+      "Progressive, functional plans to rebuild muscle, protect joints, and enhance performance.",
     href: "/services/strength-training",
+    badge: "Performance",
   },
   {
     icon: FaRegLightbulb,
     title: "Education & Prevention",
     description:
-      "Learn posture correction, ergonomic strategies, and home-program exercises tailored to your lifestyle.",
+      "Posture, ergonomics, and home programming tailored to your lifestyle and goals.",
     href: "/services/education-injury-prevention",
+    badge: "Stay moving",
   },
 ];
 
 export default function ServicesSection() {
   return (
-    <section className="py-16 px-4 md:px-8">
-      <h2 className="text-3xl font-bold text-primary text-center mb-12">Our Services</h2>
+    <section>
+      <h2 className="h2 text-center mb-8">Our Services</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((s, i) => (
           <motion.div
             key={s.title}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
-            className="relative"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.45, delay: i * 0.06 }}
           >
-            <ServiceCard icon={s.icon} title={s.title} description={s.description} href={s.href} />
+            <ServiceCard {...s} />
           </motion.div>
         ))}
       </div>

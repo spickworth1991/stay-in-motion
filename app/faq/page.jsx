@@ -8,11 +8,11 @@ export const metadata = {
     url: "https://stayinmotionpt.com/faq",
     title: "FAQ | Stay in Motion PT",
     description: "FAQ - Stay in Motion Physical Therapy.",
-    images: [{ url: "/logo.png" }]
-  }
+    images: [{ url: "/og/home.jpg", width: 1200, height: 630 }],
+  },
 };
 
-// Copied from your old src/pages/FAQ.jsx (same Qs/wording as present there)
+// FAQs
 const faqs = [
   {
     question: "What should I bring to my first session?",
@@ -67,27 +67,72 @@ const faqs = [
 ];
 
 export default function Page() {
-  // Structured data like your original file
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map((f) => ({
+    mainEntity: faqs.map((f) => ({
       "@type": "Question",
-      "name": f.question,
-      "acceptedAnswer": { "@type": "Answer", "text": f.answer }
-    }))
+      name: f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
   };
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section className="py-16 px-4 md:px-8 max-w-3xl mx-auto">
-        <h1 className="text-4xl font-bold text-primary text-center mb-8">
-          Frequently Asked Questions
-        </h1>
-        {faqs.map((f) => (
-          <FAQItem key={f.question} {...f} />
-        ))}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      {/* Hero */}
+      <section className="section">
+        <div className="container-site">
+          <div className="text-center mb-8">
+            <span className="badge">Answers you can trust</span>
+            <h1 className="h1 mt-3">Frequently Asked Questions</h1>
+            <p className="lead mt-3">
+              Quick answers about visits, insurance, scheduling, and care.
+            </p>
+          </div>
+
+          {/* Layout: left info card, right accordion */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Left: contact/help card */}
+            <aside className="card p-6 lg:sticky lg:top-20 self-start">
+              <h2 className="h3 mb-2">Still have a question?</h2>
+              <p className="text-muted">
+                We’re happy to help you figure out what’s best for your goals.
+              </p>
+              <div className="mt-5 grid gap-3">
+                <a href="tel:7342513046" className="btn btn-primary">
+                  Call (734) 251-3046
+                </a>
+                <a href="/contact" className="btn btn-outline">
+                  Send a message
+                </a>
+                <a href="/services" className="btn btn-outline">
+                  Explore services
+                </a>
+              </div>
+
+              <div className="divider-subtle mt-6 pt-6">
+                <p className="text-sm text-muted">
+                  New patients: please arrive 10 minutes early to complete
+                  intake forms, or fill them out online before your visit.
+                </p>
+              </div>
+            </aside>
+
+            {/* Right: FAQ list */}
+            <div className="lg:col-span-2">
+              <div className="card p-2">
+                {faqs.map((f, idx) => (
+                  <FAQItem key={f.question} {...f} defaultOpen={idx === 0} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </>
   );

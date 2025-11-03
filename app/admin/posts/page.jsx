@@ -40,7 +40,7 @@ function parseAdmins() {
 
 export default function AdminPostsPage() {
   const [user, setUser] = useState(null);
-  const [userChecked, setUserChecked] = useState(false); // we’ll wait for this before fetching
+  const [userChecked, setUserChecked] = useState(false);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -68,7 +68,7 @@ export default function AdminPostsPage() {
     });
   }, []);
 
-  // Fetch posts only if we have a user AND they’re allowed
+  // Fetch posts only if allowed
   useEffect(() => {
     async function run() {
       if (!userChecked || !isAdmin) return;
@@ -152,7 +152,6 @@ export default function AdminPostsPage() {
       });
       if (error) throw error;
       resetForm();
-      // refetch
       const { data } = await supabase.from("posts").select("*").order("created_at", { ascending: false }).limit(200);
       setPosts(data || []);
     } catch (err) {
@@ -185,7 +184,6 @@ export default function AdminPostsPage() {
         .eq("id", editing.id);
       if (error) throw error;
       resetForm();
-      // refetch
       const { data } = await supabase.from("posts").select("*").order("created_at", { ascending: false }).limit(200);
       setPosts(data || []);
     } catch (err) {
@@ -223,206 +221,224 @@ export default function AdminPostsPage() {
   // ---------- gated renders ----------
   if (!userChecked) {
     return (
-      <main className="max-w-xl mx-auto px-4 py-10">
-        <p>Checking access…</p>
-      </main>
+      <section className="section">
+        <div className="container-site max-w-xl">
+          <div className="card p-6">Checking access…</div>
+        </div>
+      </section>
     );
   }
 
   if (!user) {
     return (
-      <main className="max-w-xl mx-auto px-4 py-10 text-center">
-        <h1 className="text-2xl font-bold mb-2">Access required</h1>
-        <p className="text-gray-600 dark:text-gray-300">
-          Sorry, you do not have access to this page. Only admins have access here.
-          If this is a mistake, please contact the site developer.
-        </p>
-        <a href="/admin/login" className="inline-block mt-6 btn btn-primary">Go to Login</a>
-      </main>
+      <section className="section">
+        <div className="container-site max-w-xl text-center">
+          <h1 className="h2 mb-2">Access required</h1>
+          <p className="text-muted">
+            Only admins have access here. If this is a mistake, please contact the site developer.
+          </p>
+          <a href="/admin/login" className="btn btn-primary mt-6">Go to Login</a>
+        </div>
+      </section>
     );
   }
 
   if (!isAdmin) {
     return (
-      <main className="max-w-xl mx-auto px-4 py-10 text-center">
-        <h1 className="text-2xl font-bold mb-2">No access</h1>
-        <p className="text-gray-600 dark:text-gray-300">
-          Sorry, you do not have access to this page. Only admins have access here.
-          If this is a mistake, please contact the site developer.
-        </p>
-        <button
-          className="inline-block mt-6 btn btn-ghost"
-          onClick={async () => {
-            const supabase = getSupabase();
-            if (supabase) await supabase.auth.signOut();
-            location.href = "/admin/login";
-          }}
-        >
-          Sign out
-        </button>
-      </main>
+      <section className="section">
+        <div className="container-site max-w-xl text-center">
+          <h1 className="h2 mb-2">No access</h1>
+          <p className="text-muted">
+            Sorry, you do not have access to this page.
+          </p>
+          <button
+            className="btn btn-outline mt-6"
+            onClick={async () => {
+              const supabase = getSupabase();
+              if (supabase) await supabase.auth.signOut();
+              location.href = "/admin/login";
+            }}
+          >
+            Sign out
+          </button>
+        </div>
+      </section>
     );
   }
 
   // ---------- admin UI ----------
   return (
-    <main className="max-w-5xl mx-auto px-4 py-10">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl text-primary font-bold">Posts / Coupons</h1>
-        <button
-          className="btn btn-ghost"
-          onClick={async () => {
-            const supabase = getSupabase();
-            if (supabase) await supabase.auth.signOut();
-            location.href = "/admin/login";
-          }}
-        >
-          Sign out
-        </button>
-      </div>
+    <section className="section">
+      <div className="container-site max-w-5xl">
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="h2">Posts / Coupons</h1>
+          <button
+            className="btn btn-outline"
+            onClick={async () => {
+              const supabase = getSupabase();
+              if (supabase) await supabase.auth.signOut();
+              location.href = "/admin/login";
+            }}
+          >
+            Sign out
+          </button>
+        </div>
 
-      {/* Create / Edit form */}
-      <section className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow space-y-4 mb-8">
-        <h2 className="text-xl font-semibold mb-4">{editing ? "Edit Post" : "Create New"}</h2>
-        <form onSubmit={editing ? handleUpdate : handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <label className="block">
-            <span className="text-gray-600 dark:text-gray-300 text-sm">Title *</span>
-            <input
-              className="mt-1 w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent px-3 py-2"
-              required
-              value={form.title}
-              onChange={(e) => setForm({ ...form, title: e.target.value })}
-            />
-          </label>
+        {/* Create / Edit form */}
+        <section className="card p-6 space-y-4 mb-8">
+          <h2 className="text-xl font-semibold">{editing ? "Edit Post" : "Create New"}</h2>
+          <form onSubmit={editing ? handleUpdate : handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <label className="block">
+              <span className="text-sm text-muted">Title *</span>
+              <input
+                className="mt-1 w-full rounded-lg border border-subtle bg-transparent px-3 py-2"
+                required
+                value={form.title}
+                onChange={(e) => setForm({ ...form, title: e.target.value })}
+              />
+            </label>
 
-          <label className="block md:col-span-2">
-            <span className=" text-gray-600 dark:text-gray-300 text-sm">Body</span>
-            <textarea
-              className="mt-1 w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent px-3 py-2"
-              value={form.body}
-              onChange={(e) => setForm({ ...form, body: e.target.value })}
-            />
-          </label>
+            <label className="block md:col-span-2">
+              <span className="text-sm text-muted">Body</span>
+              <textarea
+                className="mt-1 w-full rounded-lg border border-subtle bg-transparent px-3 py-2"
+                value={form.body}
+                onChange={(e) => setForm({ ...form, body: e.target.value })}
+              />
+            </label>
 
-          <label className="block">
-            <span className="text-gray-600 dark:text-gray-300 text-sm">Image (optional)</span>
-            <input
-              className="mt-1 w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent px-3 py-2"
-              type="file"
-              accept="image/*"
-              onChange={(e) => setForm({ ...form, imageFile: e.target.files?.[0] || null })}
-            />
-          </label>
+            <label className="block">
+              <span className="text-sm text-muted">Image (optional)</span>
+              <input
+                className="mt-1 w-full rounded-lg border border-subtle bg-transparent px-3 py-2"
+                type="file"
+                accept="image/*"
+                onChange={(e) => setForm({ ...form, imageFile: e.target.files?.[0] || null })}
+              />
+            </label>
 
-          <div className="flex items-center gap-3">
-            <input
-              id="is_coupon"
-              type="checkbox"
-              checked={form.is_coupon}
-              onChange={(e) => setForm({ ...form, is_coupon: e.target.checked })}
-            />
-            <label htmlFor="is_coupon">This is a coupon</label>
-          </div>
+            <div className="flex items-center gap-3">
+              <input
+                id="is_coupon"
+                type="checkbox"
+                checked={form.is_coupon}
+                onChange={(e) => setForm({ ...form, is_coupon: e.target.checked })}
+              />
+              <label htmlFor="is_coupon">This is a coupon</label>
+            </div>
 
-          <label className="block">
-            <span className="text-gray-600 dark:text-gray-300 text-sm">Expires At (optional)</span>
-            <input
-              type="datetime-local"
-              className="mt-1 w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent px-3 py-2"
-              value={form.expires_at}
-              onChange={(e) => setForm({ ...form, expires_at: e.target.value })}
-            />
-          </label>
+            <label className="block">
+              <span className="text-sm text-muted">Expires At (optional)</span>
+              <input
+                type="datetime-local"
+                className="mt-1 w-full rounded-lg border border-subtle bg-transparent px-3 py-2"
+                value={form.expires_at}
+                onChange={(e) => setForm({ ...form, expires_at: e.target.value })}
+              />
+            </label>
 
-          <label className="block md:col-span-2">
-            <span className="text-gray-600 dark:text-gray-300 text-sm">Tags (comma-separated)</span>
-            <input
-              className="mt-1 w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent px-3 py-2"
-              placeholder="Announcement, Event, Coupon"
-              value={form.tags}
-              onChange={(e) => setForm({ ...form, tags: e.target.value })}
-            />
-            {!!form.is_coupon && (
-              <p className="text-xs text-gray-500 mt-1">Tip: “Coupon” will be added automatically.</p>
-            )}
-          </label>
+            <label className="block md:col-span-2">
+              <span className="text-sm text-muted">Tags (comma-separated)</span>
+              <input
+                className="mt-1 w-full rounded-lg border border-subtle bg-transparent px-3 py-2"
+                placeholder="Announcement, Event, Coupon"
+                value={form.tags}
+                onChange={(e) => setForm({ ...form, tags: e.target.value })}
+              />
+              {!!form.is_coupon && (
+                <p className="text-xs text-muted mt-1">Tip: “Coupon” will be added automatically.</p>
+              )}
+            </label>
 
-          <div className="md:col-span-2 flex gap-3">
-            <button className="btn btn-primary" type="submit">
-              {editing ? "Save Changes" : "Publish"}
-            </button>
-            {editing && (
-              <button className="btn btn-ghost" type="button" onClick={resetForm}>
-                Cancel
+            <div className="md:col-span-2 flex gap-3">
+              <button className="btn btn-primary" type="submit">
+                {editing ? "Save Changes" : "Publish"}
               </button>
-            )}
-          </div>
-        </form>
-      </section>
+              {editing && (
+                <button className="btn btn-outline" type="button" onClick={resetForm}>
+                  Cancel
+                </button>
+              )}
+            </div>
+          </form>
+        </section>
 
-      {/* List */}
-      <section className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow space-y-4">
-        <h2 className="text-xl font-semibold mb-4">Recent Posts</h2>
-        {loading ? (
-          <p>Loading…</p>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-separate border-spacing-y-2">
-              <thead className="text-sm text-gray-500">
-                <tr>
-                  <th className="px-3 text-gray-600 dark:text-gray-300">Title</th>
-                  <th className="px-3 text-gray-600 dark:text-gray-300">Type</th>
-                  <th className="px-3 text-gray-600 dark:text-gray-300">Tags</th>
-                  <th className="px-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">Expires</th>
-                  <th className="px-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">Created</th>
-                  <th className="px-3 text-gray-600 dark:text-gray-300">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {display.map((p) => {
-                  const isExpired = p.is_coupon && p.expires_at && new Date(p.expires_at) < new Date();
-                  return (
-                    <tr key={p.id} className="align-top">
-                      <td className="px-3 font-medium">{p.title}</td>
-                      <td className="px-3">
-                        {p.is_coupon ? (
-                          <span className={`text-xs px-2 py-1 rounded ${isExpired ? "bg-gray-300 text-gray-700" : "bg-green-200 text-green-900"}`}>
-                            {isExpired ? "Coupon (Expired)" : "Coupon"}
-                          </span>
-                        ) : (
-                          <span className="text-xs px-2 py-1 rounded bg-blue-200 text-blue-900">Post</span>
-                        )}
-                      </td>
-                      <td className="px-3 text-sm">
-                        {[...(p.tags || []), ...(isExpired ? ["Coupon (Expired)"] : [])].join(", ") || "—"}
-                      </td>
-                      <td className="px-3 text-sm">
-                        {p.is_coupon && p.expires_at ? new Date(p.expires_at).toLocaleString() : "—"}
-                      </td>
-                      <td className="px-3 text-sm">{new Date(p.created_at).toLocaleString()}</td>
-                      <td className="px-3">
-                        <div className="flex items-center gap-2">
-                          <button className="text-primary underline underline-offset-4" onClick={() => beginEdit(p)}>
-                            Edit
-                          </button>
-                          <button className="text-red-600 underline underline-offset-4" onClick={() => handleDelete(p.id)}>
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-                {!posts.length && (
+        {/* List */}
+        <section className="card p-6 space-y-4">
+          <h2 className="text-xl font-semibold">Recent Posts</h2>
+          {loading ? (
+            <div>Loading…</div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-separate border-spacing-y-2">
+                <thead className="text-sm text-muted">
                   <tr>
-                    <td colSpan={6} className="px-3 py-6 text-center text-gray-500">No posts yet.</td>
+                    <th className="px-3">Title</th>
+                    <th className="px-3">Type</th>
+                    <th className="px-3">Tags</th>
+                    <th className="px-3 whitespace-nowrap">Expires</th>
+                    <th className="px-3 whitespace-nowrap">Created</th>
+                    <th className="px-3">Actions</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </section>
-    </main>
+                </thead>
+                <tbody>
+                  {display.map((p) => {
+                    const isExpired =
+                      p.is_coupon && p.expires_at && new Date(p.expires_at) < new Date();
+                    return (
+                      <tr key={p.id} className="align-top">
+                        <td className="px-3 font-medium">{p.title}</td>
+                        <td className="px-3">
+                          {p.is_coupon ? (
+                            <span
+                              className="badge"
+                              style={
+                                isExpired
+                                  ? undefined
+                                  : {
+                                      background:
+                                        "color-mix(in oklab, var(--color-success) 18%, transparent)",
+                                      color: "var(--color-success)",
+                                    }
+                              }
+                            >
+                              {isExpired ? "Coupon (Expired)" : "Coupon"}
+                            </span>
+                          ) : (
+                            <span className="badge">Post</span>
+                          )}
+                        </td>
+                        <td className="px-3 text-sm">
+                          {[...(p.tags || []), ...(isExpired ? ["Coupon (Expired)"] : [])].join(", ") || "—"}
+                        </td>
+                        <td className="px-3 text-sm">
+                          {p.is_coupon && p.expires_at ? new Date(p.expires_at).toLocaleString() : "—"}
+                        </td>
+                        <td className="px-3 text-sm">{new Date(p.created_at).toLocaleString()}</td>
+                        <td className="px-3">
+                          <div className="flex items-center gap-2">
+                            <button className="text-primary underline underline-offset-4" onClick={() => beginEdit(p)}>
+                              Edit
+                            </button>
+                            <button className="text-danger underline underline-offset-4" onClick={() => handleDelete(p.id)}>
+                              Delete
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                  {!posts.length && (
+                    <tr>
+                      <td colSpan={6} className="px-3 py-6 text-center text-muted">No posts yet.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
+      </div>
+    </section>
   );
 }
