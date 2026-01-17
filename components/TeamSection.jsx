@@ -27,7 +27,7 @@ function FounderCard() {
       {/* Header row */}
       <div className="p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-8 items-start">
         <img
-          src="/photos/amanda.jpg"
+          src="/photos/amanda_v2.jpg"
           alt="Dr. Amanda Pickworth-Chrusciel"
           className="w-32 h-32 md:w-40 md:h-40 rounded-xl object-cover border border-subtle"
           loading="lazy"

@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "git": "git add . && git commit -m \"Schedule_Image\" && git push origin master"
+    "git": "git add . && git commit -m \"ImageUpdate\" && git push origin master"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.78.0",
