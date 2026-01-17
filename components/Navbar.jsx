@@ -123,7 +123,7 @@ export default function Navbar() {
           <div className="flex items-center flex-1 min-w-0">
             <Link href="/" className="flex items-center flex-shrink-0">
               <img
-                src="/logo_noBG.png"
+                src="/logo_navbar.png"
                 alt="Stay in Motion Physical Therapy"
                 width={scrolled ? 24 : 32}
                 height={scrolled ? 24 : 32}
