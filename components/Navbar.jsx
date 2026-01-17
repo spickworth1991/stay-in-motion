@@ -15,12 +15,14 @@ import {
   FiPhone,
   FiSun,
   FiMoon,
-  FiMapPin
+  FiMapPin,
+  FiCalendar,
 } from "react-icons/fi";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 const NAV_ITEMS = [
   { name: "Home", to: "/", icon: FiHome },
+  { name: "Schedule", to: "/schedule", icon: FiCalendar },
   { name: "About", to: "/about", icon: FiUsers },
   { name: "Services", to: "/services", icon: FiBriefcase },
   { name: "FAQ", to: "/faq", icon: FiHelpCircle },
