@@ -17,6 +17,7 @@ import {
   FiMoon,
   FiMapPin,
   FiCalendar,
+  FiShield
 } from "react-icons/fi";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
@@ -30,7 +31,8 @@ const NAV_ITEMS = [
   { name: "Resources", to: "/resources", icon: FiBookOpen },
   { name: "Location", to: "/location", icon: FiMapPin },
   // { name: "Careers", to: "/careers", icon: FiBriefcase },
-  { name: "Contact", to: "/contact", icon: FiPhone }
+  { name: "Contact", to: "/contact", icon: FiPhone },
+  { name: "Privacy", to: "/privacy", icon: FiShield },
 ];
 
 export default function Navbar() {
@@ -41,6 +43,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [visibleLinks, setVisibleLinks] = useState(NAV_ITEMS.length);
+  const [callbarPad, setCallbarPad] = useState(0);
+
 
   const containerRef = useRef(null);
   const linksRef = useRef([]);
@@ -65,6 +69,62 @@ export default function Navbar() {
       localStorage.setItem("theme", dark ? "dark" : "light");
     } catch {}
   }, [dark]);
+
+  useEffect(() => {
+    const measure = () => {
+      // Only apply on small screens (same range where callbar matters)
+      const isSmall = window.matchMedia("(max-width: 768px)").matches;
+      if (!isSmall) {
+        setCallbarPad(0);
+        return;
+      }
+
+      const vh = window.innerHeight;
+      const candidates = Array.from(document.body.querySelectorAll("*"));
+
+      let maxBottomFixedHeight = 0;
+
+      for (const el of candidates) {
+        // Skip elements that can’t possibly be the callbar
+        if (!(el instanceof HTMLElement)) continue;
+
+        const style = window.getComputedStyle(el);
+        if (style.position !== "fixed") continue;
+        if (style.display === "none" || style.visibility === "hidden") continue;
+
+        const rect = el.getBoundingClientRect();
+        if (rect.height < 30) continue; // ignore tiny fixed things
+
+        // Is it sitting at (or very near) the bottom of the viewport?
+        const touchesBottom = rect.bottom >= vh - 2;
+        const nearBottom = rect.top >= vh - rect.height - 2;
+
+        if (touchesBottom && nearBottom) {
+          maxBottomFixedHeight = Math.max(maxBottomFixedHeight, Math.round(rect.height));
+        }
+      }
+
+      setCallbarPad(maxBottomFixedHeight);
+    };
+
+    measure();
+
+    window.addEventListener("resize", measure);
+    window.addEventListener("scroll", measure, { passive: true });
+
+    // catch late renders (callbar mounts after navbar)
+    const t1 = setTimeout(measure, 250);
+    const t2 = setTimeout(measure, 800);
+
+    return () => {
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("scroll", measure);
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, []);
+
+
 
   // shrink on scroll
   useLayoutEffect(() => {
@@ -251,7 +311,13 @@ export default function Navbar() {
           </nav>
         </div>
 
-        <div className="px-6 pb-8 flex space-x-4">
+        <div
+          className="px-8 py-5 pb-8 flex space-x-4"
+          style={{
+            paddingBottom: `calc(2rem + ${callbarPad}px + env(safe-area-inset-bottom))`,
+          }}
+        >
+
           {/* <a
             href="#"
             aria-label="Facebook"
