@@ -28,19 +28,66 @@ export default function Footer() {
           <div>
             <h2 className="h3 mb-4">Quick Links</h2>
             <ul className="space-y-2">
-              <li><a href="/" className="hover:text-primary">Home</a></li>
-              <li><a href="/about" className="hover:text-primary">About</a></li>
-              <li><a href="/faq" className="hover:text-primary">FAQ</a></li>
-              <li><a href="/services" className="hover:text-primary">Services</a></li>
-              <li><a href="/contact" className="hover:text-primary">Contact</a></li>
-              <li><a href="/privacy" className="hover:text-primary">Privacy Policy</a></li>
+              <li>
+                <a href="/" className="hover:text-primary">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="/about" className="hover:text-primary">
+                  About
+                </a>
+              </li>
+              <li>
+                <a href="/faq" className="hover:text-primary">
+                  FAQ
+                </a>
+              </li>
+              <li>
+                <a href="/services" className="hover:text-primary">
+                  Services
+                </a>
+              </li>
+              <li>
+                <a href="/contact" className="hover:text-primary">
+                  Contact
+                </a>
+              </li>
             </ul>
+
+            {/* Privacy & Legal */}
+            <div className="mt-6">
+              <h3 className="text-sm font-semibold text-muted uppercase tracking-wide">
+                Privacy &amp; Legal
+              </h3>
+              <ul className="mt-3 space-y-2">
+                <li>
+                  <a href="/privacy" className="hover:text-primary">
+                    SMS &amp; Email Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/privacy.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-primary"
+                  >
+                    View Policy PDF
+                    <span className="text-muted"> (opens in new tab)</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Map */}
           <div>
             <h2 className="h3 mb-4">
-              <a href="/location" className="hover:text-primary underline decoration-accent underline-offset-4">
+              <a
+                href="/location"
+                className="hover:text-primary underline decoration-accent underline-offset-4"
+              >
                 Our Location
               </a>
             </h2>
@@ -82,7 +129,10 @@ export default function Footer() {
             </div>
 
             <p className="mt-2 text-sm text-muted">
-              <a href="/location" className="underline decoration-accent hover:text-primary">
+              <a
+                href="/location"
+                className="underline decoration-accent hover:text-primary"
+              >
                 View directions &amp; parking →
               </a>
             </p>
@@ -91,7 +141,9 @@ export default function Footer() {
             <noscript>
               <p className="mt-2">
                 <a
-                  href={`https://maps.google.com/?q=${encodeURIComponent(address)}`}
+                  href={`https://maps.google.com/?q=${encodeURIComponent(
+                    address
+                  )}`}
                   target="_blank"
                   rel="noopener"
                   className="underline"
@@ -152,7 +204,8 @@ export default function Footer() {
 
         <div className="container-site">
           <p className="mt-10 text-center text-sm text-muted">
-            © {new Date().getFullYear()} Stay in Motion Physical Therapy. All rights reserved.
+            © {new Date().getFullYear()} Stay in Motion Physical Therapy. All
+            rights reserved.
             <br />
             <span>
               Developed by{" "}
