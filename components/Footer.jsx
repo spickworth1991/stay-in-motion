@@ -68,7 +68,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="/privacy.pdf"
+                    href="/docs/privacy.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-primary"
