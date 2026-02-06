@@ -83,6 +83,35 @@ export default function Page() {
             </p>
           </div>
 
+          {/* NEW: Premium clinic photo card */}
+          <div className="card overflow-hidden mb-6">
+            <div className="relative">
+              <img
+                src="/photos/clinicPhoto.jpeg"
+                alt="Stay in Motion Physical Therapy clinic exterior in Wixom, Michigan"
+                className="w-full h-56 sm:h-72 lg:h-80 object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+
+              {/* subtle premium overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+              {/* caption */}
+              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="badge">Wixom, MI</span>
+                  <span className="text-white/90 font-semibold">
+                    {street} • {city}, {region} {postal}
+                  </span>
+                </div>
+                <p className="mt-2 text-white/80 text-sm">
+                  Look for the main lot directly in front of the entrance — free parking.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Info card */}
@@ -145,12 +174,17 @@ export default function Page() {
           <div className="card p-6 mt-6">
             <h3 className="h3 mb-2">Driving Directions</h3>
             <ul className="list-disc list-inside space-y-1 text-muted">
-              <li>From I-96: Exit Wixom Rd, head north ~1.4 mi; clinic on right.</li>
+              <li>
+                From I-96: Exit Wixom Rd, head north ~1.4 mi; clinic on right.
+              </li>
               <li>From Pontiac Trail: Turn south on Wixom Rd, continue 0.6 mi.</li>
             </ul>
 
             <p className="mt-4">
-              <Link href="/contact" className="underline decoration-accent hover:text-primary">
+              <Link
+                href="/contact"
+                className="underline decoration-accent hover:text-primary"
+              >
                 Questions? Contact us →
               </Link>
             </p>
