@@ -191,13 +191,13 @@ export default function Navbar() {
                 height={scrolled ? 24 : 32}
                 className={`${scrolled ? "h-8 w-8" : "h-14 w-14"} transition-all`}
               />
-              <span
+              {/* <span
                 className={`ml-2 font-bold transition-all ${
                   scrolled ? "text-lg" : "text-xl"
                 } text-primary dark:text-fg`}
               >
                 Stay in Motion
-              </span>
+              </span> */}
             </Link>
 
             <ul className="flex items-center space-x-4 ml-6 overflow-hidden flex-nowrap relative">

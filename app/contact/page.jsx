@@ -1,5 +1,6 @@
 // app/contact/page.jsx
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaShield } from "react-icons/fa";
+import {FiShield} from "react-icons/fi";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata = {
@@ -39,7 +40,7 @@ export default function ContactPage() {
             <div className="mt-6 space-y-4">
               <p className="flex items-center gap-3">
                 <FaPhoneAlt className="text-primary" />
-                <a href="tel:+17342513046" className="underline decoration-accent">
+                <a href="tel:+17342513046" className="hover:text-primary underline decoration-accent">
                   (734) 251-3046
                 </a>
               </p>
@@ -47,15 +48,20 @@ export default function ContactPage() {
                 <FaEnvelope className="text-primary" />
                 <a
                   href="mailto:info@stayinmotionpt.com"
-                  className="underline decoration-accent"
+                  className="hover:text-primary underline decoration-accent"
                 >
                   info@stayinmotionpt.com
                 </a>
               </p>
               <p className="flex items-center gap-3">
-                <FaMapMarkerAlt className="text-primary" />
+                
                 <span>30990 S Wixom Rd, Wixom MI, 48393</span>
               </p>
+               <p className="flex items-center gap-3">
+                  <a href="/privacy" className="hover:text-primary">
+                   <FiShield className="inline mr-2" /> SMS &amp; Email Privacy Policy
+                  </a>
+                </p>
             </div>
 
             <div className="divider-subtle mt-6 pt-6">
@@ -63,6 +69,7 @@ export default function ContactPage() {
                 New patients: please arrive 10 minutes early to complete intake
                 forms, or fill them out online before your visit.
               </p>
+              
             </div>
           </div>
 

@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "git": "git add . && git commit -m \"PrivacyPolicy\" && git push origin master"
+    "git": "git add . && git commit -m \"ContactLocation\" && git push origin master"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.78.0",
