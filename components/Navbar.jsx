@@ -160,7 +160,7 @@ export default function Navbar() {
   const updateVisibleLinks = () => {
     if (!containerRef.current) return;
     const containerWidth = containerRef.current.offsetWidth;
-    const buffer = 320; // space for theme + menu buttons
+    const buffer = 170; // space for theme + menu buttons
     let used = buffer;
     let count = 0;
 
